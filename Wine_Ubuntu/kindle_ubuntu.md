@@ -37,3 +37,18 @@
         を実行．
     - 何故かアプリケーションが立ち上がらなかった．
         - 原因がわからないが，Ubuntu18はwineでエラーがかなり出るっぽいです．
+4. Ubuntuのアップデート
+    - Ubuntu20にアップデートしたらいける可能性があったので，アップデートしました．
+        ```
+        sudo apt update
+        sudo apt install update-manager
+        sudo apt dist-upgrade
+        sudo do-release update -d
+        ```
+5. Wineの再インストール
+    - 上記シェルの実行
+    - さらに，winetrickを入れたあとに```winetricks cjkfonts```を入れる．
+6. Kindleダウンロード
+    - 古いものではうまくいかない可能性があるので，拾えるもので最も新しいバージョンにする．
+    - https://kindle-for-pc.jp.uptodown.com/windows
+    - 最新版をインストール

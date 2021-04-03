@@ -1,0 +1,1253 @@
+<!DOCTYPE html><html><head>
+      <title>Chap4</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////home/tcbn/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.5.17/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="4-docker%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">4. Docker&#x306E;&#x57FA;&#x672C;&#x64CD;&#x4F5C;</h1>
+
+<h2 class="mume-header" id="41-docker%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">4.1 Docker&#x306E;&#x57FA;&#x672C;&#x30B3;&#x30DE;&#x30F3;&#x30C9;</h2>
+
+<ul>
+<li>
+<p>Docker&#x306F;docker&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3067;&#x64CD;&#x4F5C;&#x3059;&#x308B;&#xFF0E;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>docker [commands] [operations] [option]
+</code></pre><ul>
+<li>&#x30B3;&#x30DE;&#x30F3;&#x30C9;
+<ul>
+<li><code>run</code>, <code>start</code>, <code>stop</code>&#x306A;&#x3069;</li>
+</ul>
+</li>
+<li>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;
+<ul>
+<li>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>&#x53C2;&#x8003;</p>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/docker/">https://docs.docker.com/engine/reference/commandline/docker/</a></li>
+</ul>
+</li>
+<li>
+<p>&#x57FA;&#x672C;&#x7684;&#x306A;&#x30B3;&#x30DE;&#x30F3;&#x30C9;</p>
+<table>
+<thead>
+<tr>
+<th>&#x30B3;&#x30DE;&#x30F3;&#x30C9;</th>
+<th>&#x64CD;&#x4F5C;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>attach</code></td>
+<td>&#x30BF;&#x30FC;&#x30DF;&#x30CA;&#x30EB;&#x3092;&#x30A2;&#x30BF;&#x30C3;&#x30C1;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>build</code></td>
+<td>Dockerfile&#x304B;&#x3089;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;&#x30D3;&#x30EB;&#x30C9;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>container</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x64CD;&#x4F5C;&#x3092;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>cp</code></td>
+<td>&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30B3;&#x30D4;&#x30FC;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>create</code></td>
+<td>&#x65B0;&#x3057;&#x3044;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>exec</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5185;&#x3067;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>history</code></td>
+<td>Docker&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306E;&#x5C65;&#x6B74;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x64CD;&#x4F5C;&#x3092;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>inspect</code></td>
+<td>Docker&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306B;&#x95A2;&#x3059;&#x308B;&#x8A73;&#x7D30;&#x60C5;&#x5831;&#x3092;&#x5F97;&#x308B;</td>
+</tr>
+<tr>
+<td><code>kill</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x5F37;&#x5236;&#x7D42;&#x4E86;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>load</code></td>
+<td>export&#x3057;&#x305F;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;&#x8AAD;&#x307F;&#x8FBC;&#x3080;</td>
+</tr>
+<tr>
+<td><code>login</code></td>
+<td>Docker&#x30EC;&#x30B8;&#x30B9;&#x30C8;&#x30EA;&#x306B;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>logout</code></td>
+<td>Docker&#x30EC;&#x30B8;&#x30B9;&#x30C8;&#x30EA;&#x304B;&#x3089;&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>logs</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x30ED;&#x30B0;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>network</code></td>
+<td>&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>pause</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x4E00;&#x6642;&#x505C;&#x6B62;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>&#x30DD;&#x30FC;&#x30C8;&#x306E;&#x30DE;&#x30C3;&#x30D4;&#x30F3;&#x30B0;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>ps</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x4E00;&#x89A7;&#x3092;&#x53C2;&#x7167;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>pull</code></td>
+<td>Docker&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x304B;&#x3089;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>push</code></td>
+<td>Docker&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x306B;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;&#x767B;&#x9332;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>rename</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x540D;&#x3092;&#x5909;&#x66F4;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>save</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;tar&#x5F62;&#x5F0F;&#x306B;&#x30A2;&#x30FC;&#x30AB;&#x30A4;&#x30D6;&#x3057;&#x3066;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x5316;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x8D77;&#x52D5;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>stop</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x505C;&#x6B62;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>tag</code></td>
+<td>&#x30BF;&#x30B0;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>top</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3067;&#x5B9F;&#x884C;&#x4E2D;&#x306E;&#x30D7;&#x30ED;&#x30BB;&#x30B9;&#x4E00;&#x89A7;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>unpause</code></td>
+<td>pause&#x3067;&#x4E00;&#x6642;&#x505C;&#x6B62;&#x3057;&#x305F;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x518D;&#x958B;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Docker&#x30A8;&#x30F3;&#x30B8;&#x30F3;&#x306E;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>volume</code></td>
+<td>&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30E0;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>wait</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x505C;&#x6B62;&#x3059;&#x308B;&#x307E;&#x3067;&#x5F85;&#x3064;</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2 class="mume-header" id="42-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E8%B5%B7%E5%8B%95%E3%81%8B%E3%82%89%E7%B5%82%E4%BA%86%E3%81%BE%E3%81%A7%E3%81%AE%E6%B5%81%E3%82%8C">4.2 &#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x8D77;&#x52D5;&#x304B;&#x3089;&#x7D42;&#x4E86;&#x307E;&#x3067;&#x306E;&#x6D41;&#x308C;</h2>
+
+<ul>
+<li>3&#x7AE0;&#x3067;&#x306F;<code>docker run</code>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#xFF0C;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x8D77;&#x52D5;&#x3057;&#x305F;&#xFF0E;<pre data-role="codeBlock" data-info class="language-"><code>docker run -dit --name my-apache-app -p 8080:80 -v &quot;$PWD&quot;:/usr/local/apache2/htdocs/ httpd:2.4
+</code></pre></li>
+<li><code>docker run</code>&#x306F;&#xFF0C;<code>docker pull</code>, <code>docker create</code>, <code>docker start</code>&#x3068;&#x3044;&#x3046;3&#x3064;&#x306E;&#x4E00;&#x9023;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x307E;&#x3068;&#x3081;&#x3066;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x5229;&#x4FBF;&#x6027;&#x3092;&#x91CD;&#x8996;&#x3057;&#x305F;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3067;&#x3042;&#x308B;&#xFF0E;<pre data-role="codeBlock" data-info class="language-"><code>docker pull httpd:2.4
+docker create --name my-apache-app -p 8080:80 -v &quot;$PWD&quot;:/usr/local/apache2/htdocs/ httpd:2.4
+docker start my-apache-app
+</code></pre></li>
+</ul>
+<p><img src="data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjM3LjYwMTk5cHQiIGhlaWdodD0iMjg2LjEzMzg1cHQiIHZpZXdCb3g9IjAgMCA2MzcuNjAxOTkgMjg2LjEzMzg1IiB2ZXJzaW9uPSIxLjEiPgo8ZGVmcz4KPGc+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDAtMCI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMC40MDYyNSAxLjQyMTg3NSBMIDAuNDA2MjUgLTUuNjQwNjI1IEwgNC40MDYyNSAtNS42NDA2MjUgTCA0LjQwNjI1IDEuNDIxODc1IFogTSAwLjg0Mzc1IDAuOTY4NzUgTCAzLjk1MzEyNSAwLjk2ODc1IEwgMy45NTMxMjUgLTUuMTg3NSBMIDAuODQzNzUgLTUuMTg3NSBaIE0gMC44NDM3NSAwLjk2ODc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMC0xIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAxLjU3ODEyNSAtNS4xODc1IEwgMS41NzgxMjUgLTAuNjU2MjUgTCAyLjUzMTI1IC0wLjY1NjI1IEMgMy4zMzIwMzEgLTAuNjU2MjUgMy45MjE4NzUgLTAuODM1OTM4IDQuMjk2ODc1IC0xLjIwMzEyNSBDIDQuNjcxODc1IC0xLjU2NjQwNiA0Ljg1OTM3NSAtMi4xNDA2MjUgNC44NTkzNzUgLTIuOTIxODc1IEMgNC44NTkzNzUgLTMuNzAzMTI1IDQuNjcxODc1IC00LjI3MzQzOCA0LjI5Njg3NSAtNC42NDA2MjUgQyAzLjkyMTg3NSAtNS4wMDM5MDYgMy4zMzIwMzEgLTUuMTg3NSAyLjUzMTI1IC01LjE4NzUgWiBNIDAuNzgxMjUgLTUuODI4MTI1IEwgMi40MDYyNSAtNS44MjgxMjUgQyAzLjUzOTA2MiAtNS44MjgxMjUgNC4zNjcxODggLTUuNTkzNzUgNC44OTA2MjUgLTUuMTI1IEMgNS40MjE4NzUgLTQuNjU2MjUgNS42ODc1IC0zLjkyMTg3NSA1LjY4NzUgLTIuOTIxODc1IEMgNS42ODc1IC0xLjkyMTg3NSA1LjQyMTg3NSAtMS4xNzk2ODggNC44OTA2MjUgLTAuNzAzMTI1IEMgNC4zNTkzNzUgLTAuMjM0Mzc1IDMuNTMxMjUgMCAyLjQwNjI1IDAgTCAwLjc4MTI1IDAgWiBNIDAuNzgxMjUgLTUuODI4MTI1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMC0yIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAyLjQ1MzEyNSAtMy44NzUgQyAyLjA2NjQwNiAtMy44NzUgMS43NTc4MTIgLTMuNzIyNjU2IDEuNTMxMjUgLTMuNDIxODc1IEMgMS4zMTI1IC0zLjExNzE4OCAxLjIwMzEyNSAtMi43MDcwMzEgMS4yMDMxMjUgLTIuMTg3NSBDIDEuMjAzMTI1IC0xLjY2NDA2MiAxLjMxMjUgLTEuMjUzOTA2IDEuNTMxMjUgLTAuOTUzMTI1IEMgMS43NTc4MTIgLTAuNjQ4NDM4IDIuMDY2NDA2IC0wLjUgMi40NTMxMjUgLTAuNSBDIDIuODM1OTM4IC0wLjUgMy4xNDA2MjUgLTAuNjQ4NDM4IDMuMzU5Mzc1IC0wLjk1MzEyNSBDIDMuNTg1OTM4IC0xLjI1MzkwNiAzLjcwMzEyNSAtMS42NjQwNjIgMy43MDMxMjUgLTIuMTg3NSBDIDMuNzAzMTI1IC0yLjcwNzAzMSAzLjU4NTkzOCAtMy4xMTcxODggMy4zNTkzNzUgLTMuNDIxODc1IEMgMy4xNDA2MjUgLTMuNzIyNjU2IDIuODM1OTM4IC0zLjg3NSAyLjQ1MzEyNSAtMy44NzUgWiBNIDIuNDUzMTI1IC00LjQ4NDM3NSBDIDMuMDc4MTI1IC00LjQ4NDM3NSAzLjU2NjQwNiAtNC4yODEyNSAzLjkyMTg3NSAtMy44NzUgQyA0LjI3MzQzOCAtMy40Njg3NSA0LjQ1MzEyNSAtMi45MDYyNSA0LjQ1MzEyNSAtMi4xODc1IEMgNC40NTMxMjUgLTEuNDY4NzUgNC4yNzM0MzggLTAuOTA2MjUgMy45MjE4NzUgLTAuNSBDIDMuNTY2NDA2IC0wLjA5Mzc1IDMuMDc4MTI1IDAuMTA5Mzc1IDIuNDUzMTI1IDAuMTA5Mzc1IEMgMS44MjgxMjUgMC4xMDkzNzUgMS4zMzIwMzEgLTAuMDkzNzUgMC45Njg3NSAtMC41IEMgMC42MTMyODEgLTAuOTA2MjUgMC40Mzc1IC0xLjQ2ODc1IDAuNDM3NSAtMi4xODc1IEMgMC40Mzc1IC0yLjkwNjI1IDAuNjEzMjgxIC0zLjQ2ODc1IDAuOTY4NzUgLTMuODc1IEMgMS4zMzIwMzEgLTQuMjgxMjUgMS44MjgxMjUgLTQuNDg0Mzc1IDIuNDUzMTI1IC00LjQ4NDM3NSBaIE0gMi40NTMxMjUgLTQuNDg0Mzc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMC0zIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAzLjkwNjI1IC00LjIwMzEyNSBMIDMuOTA2MjUgLTMuNTMxMjUgQyAzLjY5NTMxMiAtMy42NDQ1MzEgMy40ODgyODEgLTMuNzI2NTYyIDMuMjgxMjUgLTMuNzgxMjUgQyAzLjA4MjAzMSAtMy44NDM3NSAyLjg3ODkwNiAtMy44NzUgMi42NzE4NzUgLTMuODc1IEMgMi4yMDMxMjUgLTMuODc1IDEuODM1OTM4IC0zLjcyMjY1NiAxLjU3ODEyNSAtMy40MjE4NzUgQyAxLjMyODEyNSAtMy4xMjg5MDYgMS4yMDMxMjUgLTIuNzE4NzUgMS4yMDMxMjUgLTIuMTg3NSBDIDEuMjAzMTI1IC0xLjY1NjI1IDEuMzI4MTI1IC0xLjIzODI4MSAxLjU3ODEyNSAtMC45Mzc1IEMgMS44MzU5MzggLTAuNjQ0NTMxIDIuMjAzMTI1IC0wLjUgMi42NzE4NzUgLTAuNSBDIDIuODc4OTA2IC0wLjUgMy4wODIwMzEgLTAuNTIzNDM4IDMuMjgxMjUgLTAuNTc4MTI1IEMgMy40ODgyODEgLTAuNjQwNjI1IDMuNjk1MzEyIC0wLjcyMjY1NiAzLjkwNjI1IC0wLjgyODEyNSBMIDMuOTA2MjUgLTAuMTcxODc1IEMgMy43MDcwMzEgLTAuMDc4MTI1IDMuNSAtMC4wMDc4MTI1IDMuMjgxMjUgMC4wMzEyNSBDIDMuMDYyNSAwLjA4MjAzMTIgMi44MzIwMzEgMC4xMDkzNzUgMi41OTM3NSAwLjEwOTM3NSBDIDEuOTM3NSAwLjEwOTM3NSAxLjQxMDE1NiAtMC4wOTM3NSAxLjAxNTYyNSAtMC41IEMgMC42Mjg5MDYgLTAuOTE0MDYyIDAuNDM3NSAtMS40NzY1NjIgMC40Mzc1IC0yLjE4NzUgQyAwLjQzNzUgLTIuODk0NTMxIDAuNjMyODEyIC0zLjQ1MzEyNSAxLjAzMTI1IC0zLjg1OTM3NSBDIDEuNDI1NzgxIC00LjI3MzQzOCAxLjk2MDkzOCAtNC40ODQzNzUgMi42NDA2MjUgLTQuNDg0Mzc1IEMgMi44NTkzNzUgLTQuNDg0Mzc1IDMuMDcwMzEyIC00LjQ1NzAzMSAzLjI4MTI1IC00LjQwNjI1IEMgMy41IC00LjM2MzI4MSAzLjcwNzAzMSAtNC4yOTY4NzUgMy45MDYyNSAtNC4yMDMxMjUgWiBNIDMuOTA2MjUgLTQuMjAzMTI1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMC00Ij4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAwLjczNDM3NSAtNi4wNzgxMjUgTCAxLjQ1MzEyNSAtNi4wNzgxMjUgTCAxLjQ1MzEyNSAtMi40ODQzNzUgTCAzLjU5Mzc1IC00LjM3NSBMIDQuNTE1NjI1IC00LjM3NSBMIDIuMTg3NSAtMi4zMjgxMjUgTCA0LjYwOTM3NSAwIEwgMy42NzE4NzUgMCBMIDEuNDUzMTI1IC0yLjE0MDYyNSBMIDEuNDUzMTI1IDAgTCAwLjczNDM3NSAwIFogTSAwLjczNDM3NSAtNi4wNzgxMjUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgwLTUiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDQuNSAtMi4zNzUgTCA0LjUgLTIuMDE1NjI1IEwgMS4xODc1IC0yLjAxNTYyNSBDIDEuMjE4NzUgLTEuNTIzNDM4IDEuMzY3MTg4IC0xLjE0ODQzOCAxLjY0MDYyNSAtMC44OTA2MjUgQyAxLjkxMDE1NiAtMC42Mjg5MDYgMi4yODEyNSAtMC41IDIuNzUgLTAuNSBDIDMuMDMxMjUgLTAuNSAzLjMwMDc4MSAtMC41MzEyNSAzLjU2MjUgLTAuNTkzNzUgQyAzLjgyMDMxMiAtMC42NjQwNjIgNC4wNzgxMjUgLTAuNzY5NTMxIDQuMzI4MTI1IC0wLjkwNjI1IEwgNC4zMjgxMjUgLTAuMjE4NzUgQyA0LjA2NjQwNiAtMC4xMTMyODEgMy44MDA3ODEgLTAuMDM1MTU2MiAzLjUzMTI1IDAuMDE1NjI1IEMgMy4yNTc4MTIgMC4wNzgxMjUgMi45ODgyODEgMC4xMDkzNzUgMi43MTg3NSAwLjEwOTM3NSBDIDIuMDE5NTMxIDAuMTA5Mzc1IDEuNDYwOTM4IC0wLjA5Mzc1IDEuMDQ2ODc1IC0wLjUgQyAwLjY0MDYyNSAtMC45MDYyNSAwLjQzNzUgLTEuNDUzMTI1IDAuNDM3NSAtMi4xNDA2MjUgQyAwLjQzNzUgLTIuODU5Mzc1IDAuNjI4OTA2IC0zLjQyNTc4MSAxLjAxNTYyNSAtMy44NDM3NSBDIDEuNDEwMTU2IC00LjI2OTUzMSAxLjkzNzUgLTQuNDg0Mzc1IDIuNTkzNzUgLTQuNDg0Mzc1IEMgMy4xNzU3ODEgLTQuNDg0Mzc1IDMuNjQwNjI1IC00LjI4OTA2MiAzLjk4NDM3NSAtMy45MDYyNSBDIDQuMzI4MTI1IC0zLjUzMTI1IDQuNSAtMy4wMTk1MzEgNC41IC0yLjM3NSBaIE0gMy43ODEyNSAtMi41NzgxMjUgQyAzLjc2OTUzMSAtMi45NzI2NTYgMy42NTYyNSAtMy4yODUxNTYgMy40Mzc1IC0zLjUxNTYyNSBDIDMuMjI2NTYyIC0zLjc1MzkwNiAyLjk0NTMxMiAtMy44NzUgMi41OTM3NSAtMy44NzUgQyAyLjE5NTMxMiAtMy44NzUgMS44NzUgLTMuNzU3ODEyIDEuNjI1IC0zLjUzMTI1IEMgMS4zODI4MTIgLTMuMzAwNzgxIDEuMjUgLTIuOTg0Mzc1IDEuMjE4NzUgLTIuNTc4MTI1IFogTSAzLjc4MTI1IC0yLjU3ODEyNSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDAtNiI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMy4yOTY4NzUgLTMuNzAzMTI1IEMgMy4yMTA5MzggLTMuNzUzOTA2IDMuMTI1IC0zLjc4OTA2MiAzLjAzMTI1IC0zLjgxMjUgQyAyLjkzNzUgLTMuODMyMDMxIDIuODMyMDMxIC0zLjg0Mzc1IDIuNzE4NzUgLTMuODQzNzUgQyAyLjMxMjUgLTMuODQzNzUgMiAtMy43MDcwMzEgMS43ODEyNSAtMy40Mzc1IEMgMS41NjI1IC0zLjE3NTc4MSAxLjQ1MzEyNSAtMi44MDA3ODEgMS40NTMxMjUgLTIuMzEyNSBMIDEuNDUzMTI1IDAgTCAwLjczNDM3NSAwIEwgMC43MzQzNzUgLTQuMzc1IEwgMS40NTMxMjUgLTQuMzc1IEwgMS40NTMxMjUgLTMuNzAzMTI1IEMgMS41OTc2NTYgLTMuOTYwOTM4IDEuNzg5MDYyIC00LjE1NjI1IDIuMDMxMjUgLTQuMjgxMjUgQyAyLjI4MTI1IC00LjQxNDA2MiAyLjU3ODEyNSAtNC40ODQzNzUgMi45MjE4NzUgLTQuNDg0Mzc1IEMgMi45NzI2NTYgLTQuNDg0Mzc1IDMuMDIzNDM4IC00LjQ3NjU2MiAzLjA3ODEyNSAtNC40Njg3NSBDIDMuMTQwNjI1IC00LjQ2ODc1IDMuMjA3MDMxIC00LjQ1NzAzMSAzLjI4MTI1IC00LjQzNzUgWiBNIDMuMjk2ODc1IC0zLjcwMzEyNSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDAtNyI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9IiIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMC04Ij4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAzLjU0Njg3NSAtMi43MzQzNzUgQyAzLjcyMjY1NiAtMi42Nzk2ODggMy44OTA2MjUgLTIuNTYyNSA0LjA0Njg3NSAtMi4zNzUgQyA0LjIwMzEyNSAtMi4xODc1IDQuMzYzMjgxIC0xLjkyNTc4MSA0LjUzMTI1IC0xLjU5Mzc1IEwgNS4zMjgxMjUgMCBMIDQuNDg0Mzc1IDAgTCAzLjczNDM3NSAtMS41IEMgMy41NDY4NzUgLTEuODgyODEyIDMuMzU5Mzc1IC0yLjE0MDYyNSAzLjE3MTg3NSAtMi4yNjU2MjUgQyAyLjk5MjE4OCAtMi4zOTg0MzggMi43NSAtMi40Njg3NSAyLjQzNzUgLTIuNDY4NzUgTCAxLjU3ODEyNSAtMi40Njg3NSBMIDEuNTc4MTI1IDAgTCAwLjc4MTI1IDAgTCAwLjc4MTI1IC01LjgyODEyNSBMIDIuNTYyNSAtNS44MjgxMjUgQyAzLjIyNjU2MiAtNS44MjgxMjUgMy43MjI2NTYgLTUuNjg3NSA0LjA0Njg3NSAtNS40MDYyNSBDIDQuMzc4OTA2IC01LjEzMjgxMiA0LjU0Njg3NSAtNC43MTg3NSA0LjU0Njg3NSAtNC4xNTYyNSBDIDQuNTQ2ODc1IC0zLjc4OTA2MiA0LjQ2MDkzOCAtMy40ODQzNzUgNC4yOTY4NzUgLTMuMjM0Mzc1IEMgNC4xMjg5MDYgLTIuOTkyMTg4IDMuODc4OTA2IC0yLjgyODEyNSAzLjU0Njg3NSAtMi43MzQzNzUgWiBNIDEuNTc4MTI1IC01LjE4NzUgTCAxLjU3ODEyNSAtMy4xMDkzNzUgTCAyLjU2MjUgLTMuMTA5Mzc1IEMgMi45NDUzMTIgLTMuMTA5Mzc1IDMuMjM0Mzc1IC0zLjE5NTMxMiAzLjQyMTg3NSAtMy4zNzUgQyAzLjYxNzE4OCAtMy41NTA3ODEgMy43MTg3NSAtMy44MTI1IDMuNzE4NzUgLTQuMTU2MjUgQyAzLjcxODc1IC00LjUgMy42MTcxODggLTQuNzUzOTA2IDMuNDIxODc1IC00LjkyMTg3NSBDIDMuMjM0Mzc1IC01LjA5NzY1NiAyLjk0NTMxMiAtNS4xODc1IDIuNTYyNSAtNS4xODc1IFogTSAxLjU3ODEyNSAtNS4xODc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMC05Ij4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAxLjQ1MzEyNSAtMC42NTYyNSBMIDEuNDUzMTI1IDEuNjcxODc1IEwgMC43MzQzNzUgMS42NzE4NzUgTCAwLjczNDM3NSAtNC4zNzUgTCAxLjQ1MzEyNSAtNC4zNzUgTCAxLjQ1MzEyNSAtMy43MTg3NSBDIDEuNTk3NjU2IC0zLjk3NjU2MiAxLjc4NTE1NiAtNC4xNzE4NzUgMi4wMTU2MjUgLTQuMjk2ODc1IEMgMi4yNTM5MDYgLTQuNDIxODc1IDIuNTMxMjUgLTQuNDg0Mzc1IDIuODQzNzUgLTQuNDg0Mzc1IEMgMy4zNzUgLTQuNDg0Mzc1IDMuODA0Njg4IC00LjI2OTUzMSA0LjE0MDYyNSAtMy44NDM3NSBDIDQuNDcyNjU2IC0zLjQyNTc4MSA0LjY0MDYyNSAtMi44NzUgNC42NDA2MjUgLTIuMTg3NSBDIDQuNjQwNjI1IC0xLjUgNC40NzI2NTYgLTAuOTQxNDA2IDQuMTQwNjI1IC0wLjUxNTYyNSBDIDMuODA0Njg4IC0wLjA5NzY1NjIgMy4zNzUgMC4xMDkzNzUgMi44NDM3NSAwLjEwOTM3NSBDIDIuNTMxMjUgMC4xMDkzNzUgMi4yNTM5MDYgMC4wNDY4NzUgMi4wMTU2MjUgLTAuMDc4MTI1IEMgMS43ODUxNTYgLTAuMjAzMTI1IDEuNTk3NjU2IC0wLjM5NDUzMSAxLjQ1MzEyNSAtMC42NTYyNSBaIE0gMy44OTA2MjUgLTIuMTg3NSBDIDMuODkwNjI1IC0yLjcxODc1IDMuNzgxMjUgLTMuMTI4OTA2IDMuNTYyNSAtMy40MjE4NzUgQyAzLjM1MTU2MiAtMy43MjI2NTYgMy4wNTQ2ODggLTMuODc1IDIuNjcxODc1IC0zLjg3NSBDIDIuMjk2ODc1IC0zLjg3NSAyIC0zLjcyMjY1NiAxLjc4MTI1IC0zLjQyMTg3NSBDIDEuNTYyNSAtMy4xMjg5MDYgMS40NTMxMjUgLTIuNzE4NzUgMS40NTMxMjUgLTIuMTg3NSBDIDEuNDUzMTI1IC0xLjY1NjI1IDEuNTYyNSAtMS4yMzgyODEgMS43ODEyNSAtMC45Mzc1IEMgMiAtMC42MzI4MTIgMi4yOTY4NzUgLTAuNDg0Mzc1IDIuNjcxODc1IC0wLjQ4NDM3NSBDIDMuMDU0Njg4IC0wLjQ4NDM3NSAzLjM1MTU2MiAtMC42MzI4MTIgMy41NjI1IC0wLjkzNzUgQyAzLjc4MTI1IC0xLjIzODI4MSAzLjg5MDYyNSAtMS42NTYyNSAzLjg5MDYyNSAtMi4xODc1IFogTSAzLjg5MDYyNSAtMi4xODc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMC0xMCI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMy41NDY4NzUgLTQuMjUgTCAzLjU0Njg3NSAtMy41NjI1IEMgMy4zMzU5MzggLTMuNjY0MDYyIDMuMTI1IC0zLjc0MjE4OCAyLjkwNjI1IC0zLjc5Njg3NSBDIDIuNjg3NSAtMy44NDc2NTYgMi40NjA5MzggLTMuODc1IDIuMjM0Mzc1IC0zLjg3NSBDIDEuODc4OTA2IC0zLjg3NSAxLjYwOTM3NSAtMy44MTY0MDYgMS40MjE4NzUgLTMuNzAzMTI1IEMgMS4yNDIxODggLTMuNTk3NjU2IDEuMTU2MjUgLTMuNDM3NSAxLjE1NjI1IC0zLjIxODc1IEMgMS4xNTYyNSAtMy4wNTA3ODEgMS4yMTg3NSAtMi45MjE4NzUgMS4zNDM3NSAtMi44MjgxMjUgQyAxLjQ3NjU2MiAtMi43MzQzNzUgMS43MzgyODEgLTIuNjQ0NTMxIDIuMTI1IC0yLjU2MjUgTCAyLjM3NSAtMi41IEMgMi44ODI4MTIgLTIuMzk0NTMxIDMuMjQyMTg4IC0yLjI0MjE4OCAzLjQ1MzEyNSAtMi4wNDY4NzUgQyAzLjY3MTg3NSAtMS44NDc2NTYgMy43ODEyNSAtMS41NjY0MDYgMy43ODEyNSAtMS4yMDMxMjUgQyAzLjc4MTI1IC0wLjc5Njg3NSAzLjYxNzE4OCAtMC40NzI2NTYgMy4yOTY4NzUgLTAuMjM0Mzc1IEMgMi45NzI2NTYgLTAuMDAzOTA2MjUgMi41MzEyNSAwLjEwOTM3NSAxLjk2ODc1IDAuMTA5Mzc1IEMgMS43MzgyODEgMC4xMDkzNzUgMS40OTIxODggMC4wODIwMzEyIDEuMjM0Mzc1IDAuMDMxMjUgQyAwLjk4NDM3NSAtMC4wMDc4MTI1IDAuNzE4NzUgLTAuMDcwMzEyNSAwLjQzNzUgLTAuMTU2MjUgTCAwLjQzNzUgLTAuOTA2MjUgQyAwLjY5NTMxMiAtMC43Njk1MzEgMC45NTcwMzEgLTAuNjY0MDYyIDEuMjE4NzUgLTAuNTkzNzUgQyAxLjQ3NjU2MiAtMC41MTk1MzEgMS43MzQzNzUgLTAuNDg0Mzc1IDEuOTg0Mzc1IC0wLjQ4NDM3NSBDIDIuMzI4MTI1IC0wLjQ4NDM3NSAyLjU4NTkzOCAtMC41MzkwNjIgMi43NjU2MjUgLTAuNjU2MjUgQyAyLjk1MzEyNSAtMC43ODEyNSAzLjA0Njg3NSAtMC45NDUzMTIgMy4wNDY4NzUgLTEuMTU2MjUgQyAzLjA0Njg3NSAtMS4zNTE1NjIgMi45NzY1NjIgLTEuNTAzOTA2IDIuODQzNzUgLTEuNjA5Mzc1IEMgMi43MDcwMzEgLTEuNzEwOTM4IDIuNDIxODc1IC0xLjgxMjUgMS45ODQzNzUgLTEuOTA2MjUgTCAxLjczNDM3NSAtMS45Njg3NSBDIDEuMjg1MTU2IC0yLjA2MjUgMC45NjA5MzggLTIuMjAzMTI1IDAuNzY1NjI1IC0yLjM5MDYyNSBDIDAuNTY2NDA2IC0yLjU4NTkzOCAwLjQ2ODc1IC0yLjg1MTU2MiAwLjQ2ODc1IC0zLjE4NzUgQyAwLjQ2ODc1IC0zLjYwMTU2MiAwLjYxMzI4MSAtMy45MjE4NzUgMC45MDYyNSAtNC4xNDA2MjUgQyAxLjE5NTMxMiAtNC4zNjcxODggMS42MDkzNzUgLTQuNDg0Mzc1IDIuMTQwNjI1IC00LjQ4NDM3NSBDIDIuNDEwMTU2IC00LjQ4NDM3NSAyLjY2MDE1NiAtNC40NjA5MzggMi44OTA2MjUgLTQuNDIxODc1IEMgMy4xMjg5MDYgLTQuMzc4OTA2IDMuMzQ3NjU2IC00LjMyMDMxMiAzLjU0Njg3NSAtNC4yNSBaIE0gMy41NDY4NzUgLTQuMjUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgwLTExIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAwLjc1IC00LjM3NSBMIDEuNDY4NzUgLTQuMzc1IEwgMS40Njg3NSAwIEwgMC43NSAwIFogTSAwLjc1IC02LjA3ODEyNSBMIDEuNDY4NzUgLTYuMDc4MTI1IEwgMS40Njg3NSAtNS4xNzE4NzUgTCAwLjc1IC01LjE3MTg3NSBaIE0gMC43NSAtNi4wNzgxMjUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgwLTEyIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAxLjQ2ODc1IC01LjYyNSBMIDEuNDY4NzUgLTQuMzc1IEwgMi45NTMxMjUgLTQuMzc1IEwgMi45NTMxMjUgLTMuODEyNSBMIDEuNDY4NzUgLTMuODEyNSBMIDEuNDY4NzUgLTEuNDM3NSBDIDEuNDY4NzUgLTEuMDgyMDMxIDEuNTE1NjI1IC0wLjg1MTU2MiAxLjYwOTM3NSAtMC43NSBDIDEuNzEwOTM4IC0wLjY1NjI1IDEuOTEwMTU2IC0wLjYwOTM3NSAyLjIwMzEyNSAtMC42MDkzNzUgTCAyLjk1MzEyNSAtMC42MDkzNzUgTCAyLjk1MzEyNSAwIEwgMi4yMDMxMjUgMCBDIDEuNjQ4NDM4IDAgMS4yNjk1MzEgLTAuMTAxNTYyIDEuMDYyNSAtMC4zMTI1IEMgMC44NTE1NjIgLTAuNTE5NTMxIDAuNzUgLTAuODk0NTMxIDAuNzUgLTEuNDM3NSBMIDAuNzUgLTMuODEyNSBMIDAuMjE4NzUgLTMuODEyNSBMIDAuMjE4NzUgLTQuMzc1IEwgMC43NSAtNC4zNzUgTCAwLjc1IC01LjYyNSBaIE0gMS40Njg3NSAtNS42MjUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgwLTEzIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAyLjU3ODEyNSAwLjQwNjI1IEMgMi4zNjcxODggMC45MjU3ODEgMi4xNjQwNjIgMS4yNjU2MjUgMS45Njg3NSAxLjQyMTg3NSBDIDEuNzgxMjUgMS41ODU5MzggMS41MjM0MzggMS42NzE4NzUgMS4yMDMxMjUgMS42NzE4NzUgTCAwLjY0MDYyNSAxLjY3MTg3NSBMIDAuNjQwNjI1IDEuMDYyNSBMIDEuMDYyNSAxLjA2MjUgQyAxLjI1NzgxMiAxLjA2MjUgMS40MTAxNTYgMS4wMTU2MjUgMS41MTU2MjUgMC45MjE4NzUgQyAxLjYyODkwNiAwLjgyODEyNSAxLjc1IDAuNjA5Mzc1IDEuODc1IDAuMjY1NjI1IEwgMi4wMTU2MjUgLTAuMDc4MTI1IEwgMC4yMzQzNzUgLTQuMzc1IEwgMSAtNC4zNzUgTCAyLjM3NSAtMC45NTMxMjUgTCAzLjczNDM3NSAtNC4zNzUgTCA0LjUgLTQuMzc1IFogTSAyLjU3ODEyNSAwLjQwNjI1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS0wIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAwLjUgMS43NjU2MjUgTCAwLjUgLTcuMDQ2ODc1IEwgNS41IC03LjA0Njg3NSBMIDUuNSAxLjc2NTYyNSBaIE0gMS4wNjI1IDEuMjE4NzUgTCA0LjkzNzUgMS4yMTg3NSBMIDQuOTM3NSAtNi40ODQzNzUgTCAxLjA2MjUgLTYuNDg0Mzc1IFogTSAxLjA2MjUgMS4yMTg3NSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMSI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMS4yMzQzNzUgLTAuODI4MTI1IEwgMi44NTkzNzUgLTAuODI4MTI1IEwgMi44NTkzNzUgLTYuMzkwNjI1IEwgMS4wOTM3NSAtNi4wNDY4NzUgTCAxLjA5Mzc1IC02LjkzNzUgTCAyLjg0Mzc1IC03LjI5Njg3NSBMIDMuODI4MTI1IC03LjI5Njg3NSBMIDMuODI4MTI1IC0wLjgyODEyNSBMIDUuNDM3NSAtMC44MjgxMjUgTCA1LjQzNzUgMCBMIDEuMjM0Mzc1IDAgWiBNIDEuMjM0Mzc1IC0wLjgyODEyNSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMiI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMS4wNjI1IC0xLjIzNDM3NSBMIDIuMDkzNzUgLTEuMjM0Mzc1IEwgMi4wOTM3NSAwIEwgMS4wNjI1IDAgWiBNIDEuMDYyNSAtMS4yMzQzNzUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgxLTMiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSIiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtNCI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gNC41NDY4NzUgLTQuNjQwNjI1IEwgNC41NDY4NzUgLTcuNTkzNzUgTCA1LjQzNzUgLTcuNTkzNzUgTCA1LjQzNzUgMCBMIDQuNTQ2ODc1IDAgTCA0LjU0Njg3NSAtMC44MjgxMjUgQyA0LjM1OTM3NSAtMC40OTIxODggNC4xMTcxODggLTAuMjUgMy44MjgxMjUgLTAuMDkzNzUgQyAzLjUzNTE1NiAwLjA2MjUgMy4xODc1IDAuMTQwNjI1IDIuNzgxMjUgMC4xNDA2MjUgQyAyLjEyNSAwLjE0MDYyNSAxLjU4NTkzOCAtMC4xMTcxODggMS4xNzE4NzUgLTAuNjQwNjI1IEMgMC43NTM5MDYgLTEuMTcxODc1IDAuNTQ2ODc1IC0xLjg2NzE4OCAwLjU0Njg3NSAtMi43MzQzNzUgQyAwLjU0Njg3NSAtMy41ODU5MzggMC43NTM5MDYgLTQuMjczNDM4IDEuMTcxODc1IC00Ljc5Njg3NSBDIDEuNTg1OTM4IC01LjMyODEyNSAyLjEyNSAtNS41OTM3NSAyLjc4MTI1IC01LjU5Mzc1IEMgMy4xODc1IC01LjU5Mzc1IDMuNTM1MTU2IC01LjUxNTYyNSAzLjgyODEyNSAtNS4zNTkzNzUgQyA0LjExNzE4OCAtNS4yMDMxMjUgNC4zNTkzNzUgLTQuOTYwOTM4IDQuNTQ2ODc1IC00LjY0MDYyNSBaIE0gMS40ODQzNzUgLTIuNzM0Mzc1IEMgMS40ODQzNzUgLTIuMDY2NDA2IDEuNjE3MTg4IC0xLjU0Njg3NSAxLjg5MDYyNSAtMS4xNzE4NzUgQyAyLjE2MDE1NiAtMC43OTY4NzUgMi41MzUxNTYgLTAuNjA5Mzc1IDMuMDE1NjI1IC0wLjYwOTM3NSBDIDMuNDg0Mzc1IC0wLjYwOTM3NSAzLjg1MTU2MiAtMC43OTY4NzUgNC4xMjUgLTEuMTcxODc1IEMgNC40MDYyNSAtMS41NDY4NzUgNC41NDY4NzUgLTIuMDY2NDA2IDQuNTQ2ODc1IC0yLjczNDM3NSBDIDQuNTQ2ODc1IC0zLjM5MDYyNSA0LjQwNjI1IC0zLjkwNjI1IDQuMTI1IC00LjI4MTI1IEMgMy44NTE1NjIgLTQuNjU2MjUgMy40ODQzNzUgLTQuODQzNzUgMy4wMTU2MjUgLTQuODQzNzUgQyAyLjUzNTE1NiAtNC44NDM3NSAyLjE2MDE1NiAtNC42NTYyNSAxLjg5MDYyNSAtNC4yODEyNSBDIDEuNjE3MTg4IC0zLjkwNjI1IDEuNDg0Mzc1IC0zLjM5MDYyNSAxLjQ4NDM3NSAtMi43MzQzNzUgWiBNIDEuNDg0Mzc1IC0yLjczNDM3NSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtNSI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMy4wNjI1IC00Ljg0Mzc1IEMgMi41ODIwMzEgLTQuODQzNzUgMi4yMDMxMjUgLTQuNjU2MjUgMS45MjE4NzUgLTQuMjgxMjUgQyAxLjY0MDYyNSAtMy45MDYyNSAxLjUgLTMuMzkwNjI1IDEuNSAtMi43MzQzNzUgQyAxLjUgLTIuMDc4MTI1IDEuNjMyODEyIC0xLjU2MjUgMS45MDYyNSAtMS4xODc1IEMgMi4xODc1IC0wLjgxMjUgMi41NzAzMTIgLTAuNjI1IDMuMDYyNSAtMC42MjUgQyAzLjUzOTA2MiAtMC42MjUgMy45MjE4NzUgLTAuODEyNSA0LjIwMzEyNSAtMS4xODc1IEMgNC40ODQzNzUgLTEuNTYyNSA0LjYyNSAtMi4wNzgxMjUgNC42MjUgLTIuNzM0Mzc1IEMgNC42MjUgLTMuMzc4OTA2IDQuNDg0Mzc1IC0zLjg5MDYyNSA0LjIwMzEyNSAtNC4yNjU2MjUgQyAzLjkyMTg3NSAtNC42NDg0MzggMy41MzkwNjIgLTQuODQzNzUgMy4wNjI1IC00Ljg0Mzc1IFogTSAzLjA2MjUgLTUuNTkzNzUgQyAzLjg0Mzc1IC01LjU5Mzc1IDQuNDU3MDMxIC01LjMzNTkzOCA0LjkwNjI1IC00LjgyODEyNSBDIDUuMzUxNTYyIC00LjMyODEyNSA1LjU3ODEyNSAtMy42Mjg5MDYgNS41NzgxMjUgLTIuNzM0Mzc1IEMgNS41NzgxMjUgLTEuODM1OTM4IDUuMzUxNTYyIC0xLjEzMjgxMiA0LjkwNjI1IC0wLjYyNSBDIDQuNDU3MDMxIC0wLjExMzI4MSAzLjg0Mzc1IDAuMTQwNjI1IDMuMDYyNSAwLjE0MDYyNSBDIDIuMjgxMjUgMC4xNDA2MjUgMS42NjQwNjIgLTAuMTEzMjgxIDEuMjE4NzUgLTAuNjI1IEMgMC43Njk1MzEgLTEuMTMyODEyIDAuNTQ2ODc1IC0xLjgzNTkzOCAwLjU0Njg3NSAtMi43MzQzNzUgQyAwLjU0Njg3NSAtMy42Mjg5MDYgMC43Njk1MzEgLTQuMzI4MTI1IDEuMjE4NzUgLTQuODI4MTI1IEMgMS42NjQwNjIgLTUuMzM1OTM4IDIuMjgxMjUgLTUuNTkzNzUgMy4wNjI1IC01LjU5Mzc1IFogTSAzLjA2MjUgLTUuNTkzNzUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgxLTYiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDQuODc1IC01LjI2NTYyNSBMIDQuODc1IC00LjQyMTg3NSBDIDQuNjI1IC00LjU1NDY4OCA0LjM2NzE4OCAtNC42NjAxNTYgNC4xMDkzNzUgLTQuNzM0Mzc1IEMgMy44NTkzNzUgLTQuODA0Njg4IDMuNjAxNTYyIC00Ljg0Mzc1IDMuMzQzNzUgLTQuODQzNzUgQyAyLjc1NzgxMiAtNC44NDM3NSAyLjMwNDY4OCAtNC42NTYyNSAxLjk4NDM3NSAtNC4yODEyNSBDIDEuNjYwMTU2IC0zLjkxNDA2MiAxLjUgLTMuMzk4NDM4IDEuNSAtMi43MzQzNzUgQyAxLjUgLTIuMDY2NDA2IDEuNjYwMTU2IC0xLjU0Njg3NSAxLjk4NDM3NSAtMS4xNzE4NzUgQyAyLjMwNDY4OCAtMC44MDQ2ODggMi43NTc4MTIgLTAuNjI1IDMuMzQzNzUgLTAuNjI1IEMgMy42MDE1NjIgLTAuNjI1IDMuODU5Mzc1IC0wLjY1NjI1IDQuMTA5Mzc1IC0wLjcxODc1IEMgNC4zNjcxODggLTAuNzg5MDYyIDQuNjI1IC0wLjg5ODQzOCA0Ljg3NSAtMS4wNDY4NzUgTCA0Ljg3NSAtMC4yMDMxMjUgQyA0LjYyNSAtMC4wODU5Mzc1IDQuMzYzMjgxIC0wLjAwMzkwNjI1IDQuMDkzNzUgMC4wNDY4NzUgQyAzLjgzMjAzMSAwLjEwOTM3NSAzLjU1MDc4MSAwLjE0MDYyNSAzLjI1IDAuMTQwNjI1IEMgMi40MTQwNjIgMC4xNDA2MjUgMS43NTM5MDYgLTAuMTEzMjgxIDEuMjY1NjI1IC0wLjYyNSBDIDAuNzg1MTU2IC0xLjE0NDUzMSAwLjU0Njg3NSAtMS44NDc2NTYgMC41NDY4NzUgLTIuNzM0Mzc1IEMgMC41NDY4NzUgLTMuNjE3MTg4IDAuNzg5MDYyIC00LjMxNjQwNiAxLjI4MTI1IC00LjgyODEyNSBDIDEuNzY5NTMxIC01LjMzNTkzOCAyLjQ0MTQwNiAtNS41OTM3NSAzLjI5Njg3NSAtNS41OTM3NSBDIDMuNTc4MTI1IC01LjU5Mzc1IDMuODQ3NjU2IC01LjU2NjQwNiA0LjEwOTM3NSAtNS41MTU2MjUgQyA0LjM2NzE4OCAtNS40NjA5MzggNC42MjUgLTUuMzc4OTA2IDQuODc1IC01LjI2NTYyNSBaIE0gNC44NzUgLTUuMjY1NjI1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS03Ij4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAwLjkwNjI1IC03LjU5Mzc1IEwgMS44MTI1IC03LjU5Mzc1IEwgMS44MTI1IC0zLjEwOTM3NSBMIDQuNSAtNS40Njg3NSBMIDUuNjQwNjI1IC01LjQ2ODc1IEwgMi43MzQzNzUgLTIuOTA2MjUgTCA1Ljc2NTYyNSAwIEwgNC41OTM3NSAwIEwgMS44MTI1IC0yLjY3MTg3NSBMIDEuODEyNSAwIEwgMC45MDYyNSAwIFogTSAwLjkwNjI1IC03LjU5Mzc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS04Ij4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSA1LjYyNSAtMi45NTMxMjUgTCA1LjYyNSAtMi41MTU2MjUgTCAxLjQ4NDM3NSAtMi41MTU2MjUgQyAxLjUyMzQzOCAtMS44OTg0MzggMS43MTA5MzggLTEuNDI5Njg4IDIuMDQ2ODc1IC0xLjEwOTM3NSBDIDIuMzc4OTA2IC0wLjc4NTE1NiAyLjg0Mzc1IC0wLjYyNSAzLjQzNzUgLTAuNjI1IEMgMy43ODEyNSAtMC42MjUgNC4xMTMyODEgLTAuNjY0MDYyIDQuNDM3NSAtMC43NSBDIDQuNzY5NTMxIC0wLjgzMjAzMSA1LjA5Mzc1IC0wLjk1NzAzMSA1LjQwNjI1IC0xLjEyNSBMIDUuNDA2MjUgLTAuMjgxMjUgQyA1LjA4MjAzMSAtMC4xNDQ1MzEgNC43NSAtMC4wMzkwNjI1IDQuNDA2MjUgMC4wMzEyNSBDIDQuMDcwMzEyIDAuMTAxNTYyIDMuNzM0Mzc1IDAuMTQwNjI1IDMuMzkwNjI1IDAuMTQwNjI1IEMgMi41MTU2MjUgMC4xNDA2MjUgMS44MjAzMTIgLTAuMTA5Mzc1IDEuMzEyNSAtMC42MDkzNzUgQyAwLjgwMDc4MSAtMS4xMTcxODggMC41NDY4NzUgLTEuODEyNSAwLjU0Njg3NSAtMi42ODc1IEMgMC41NDY4NzUgLTMuNTgyMDMxIDAuNzg1MTU2IC00LjI4OTA2MiAxLjI2NTYyNSAtNC44MTI1IEMgMS43NTM5MDYgLTUuMzMyMDMxIDIuNDEwMTU2IC01LjU5Mzc1IDMuMjM0Mzc1IC01LjU5Mzc1IEMgMy45NzI2NTYgLTUuNTkzNzUgNC41NTQ2ODggLTUuMzU5Mzc1IDQuOTg0Mzc1IC00Ljg5MDYyNSBDIDUuNDEwMTU2IC00LjQyMTg3NSA1LjYyNSAtMy43NzM0MzggNS42MjUgLTIuOTUzMTI1IFogTSA0LjcxODc1IC0zLjIxODc1IEMgNC43MTg3NSAtMy43MDcwMzEgNC41ODIwMzEgLTQuMDk3NjU2IDQuMzEyNSAtNC4zOTA2MjUgQyA0LjAzOTA2MiAtNC42OTE0MDYgMy42ODc1IC00Ljg0Mzc1IDMuMjUgLTQuODQzNzUgQyAyLjczODI4MSAtNC44NDM3NSAyLjMzMjAzMSAtNC42OTUzMTIgMi4wMzEyNSAtNC40MDYyNSBDIDEuNzM4MjgxIC00LjEyNSAxLjU2NjQwNiAtMy43MjY1NjIgMS41MTU2MjUgLTMuMjE4NzUgWiBNIDQuNzE4NzUgLTMuMjE4NzUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgxLTkiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDQuMTA5Mzc1IC00LjYyNSBDIDQuMDAzOTA2IC00LjY4NzUgMy44OTQ1MzEgLTQuNzI2NTYyIDMuNzgxMjUgLTQuNzUgQyAzLjY2NDA2MiAtNC43ODEyNSAzLjUzNTE1NiAtNC43OTY4NzUgMy4zOTA2MjUgLTQuNzk2ODc1IEMgMi44Nzg5MDYgLTQuNzk2ODc1IDIuNDg4MjgxIC00LjYyODkwNiAyLjIxODc1IC00LjI5Njg3NSBDIDEuOTQ1MzEyIC0zLjk3MjY1NiAxLjgxMjUgLTMuNSAxLjgxMjUgLTIuODc1IEwgMS44MTI1IDAgTCAwLjkwNjI1IDAgTCAwLjkwNjI1IC01LjQ2ODc1IEwgMS44MTI1IC01LjQ2ODc1IEwgMS44MTI1IC00LjYyNSBDIDIgLTQuOTU3MDMxIDIuMjQyMTg4IC01LjIwMzEyNSAyLjU0Njg3NSAtNS4zNTkzNzUgQyAyLjg0NzY1NiAtNS41MTU2MjUgMy4yMTg3NSAtNS41OTM3NSAzLjY1NjI1IC01LjU5Mzc1IEMgMy43MTg3NSAtNS41OTM3NSAzLjc4NTE1NiAtNS41ODU5MzggMy44NTkzNzUgLTUuNTc4MTI1IEMgMy45Mjk2ODggLTUuNTc4MTI1IDQuMDE1NjI1IC01LjU2NjQwNiA0LjEwOTM3NSAtNS41NDY4NzUgWiBNIDQuMTA5Mzc1IC00LjYyNSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMTAiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDEuODEyNSAtMC44MjgxMjUgTCAxLjgxMjUgMi4wNzgxMjUgTCAwLjkwNjI1IDIuMDc4MTI1IEwgMC45MDYyNSAtNS40Njg3NSBMIDEuODEyNSAtNS40Njg3NSBMIDEuODEyNSAtNC42NDA2MjUgQyAyIC00Ljk2MDkzOCAyLjIzNDM3NSAtNS4yMDMxMjUgMi41MTU2MjUgLTUuMzU5Mzc1IEMgMi44MDQ2ODggLTUuNTE1NjI1IDMuMTU2MjUgLTUuNTkzNzUgMy41NjI1IC01LjU5Mzc1IEMgNC4yMjY1NjIgLTUuNTkzNzUgNC43NjU2MjUgLTUuMzI4MTI1IDUuMTcxODc1IC00Ljc5Njg3NSBDIDUuNTg1OTM4IC00LjI3MzQzOCA1Ljc5Njg3NSAtMy41ODU5MzggNS43OTY4NzUgLTIuNzM0Mzc1IEMgNS43OTY4NzUgLTEuODY3MTg4IDUuNTg1OTM4IC0xLjE3MTg3NSA1LjE3MTg3NSAtMC42NDA2MjUgQyA0Ljc2NTYyNSAtMC4xMTcxODggNC4yMjY1NjIgMC4xNDA2MjUgMy41NjI1IDAuMTQwNjI1IEMgMy4xNTYyNSAwLjE0MDYyNSAyLjgwNDY4OCAwLjA2MjUgMi41MTU2MjUgLTAuMDkzNzUgQyAyLjIzNDM3NSAtMC4yNSAyIC0wLjQ5MjE4OCAxLjgxMjUgLTAuODI4MTI1IFogTSA0Ljg3NSAtMi43MzQzNzUgQyA0Ljg3NSAtMy4zOTA2MjUgNC43MzQzNzUgLTMuOTA2MjUgNC40NTMxMjUgLTQuMjgxMjUgQyA0LjE3OTY4OCAtNC42NTYyNSAzLjgxMjUgLTQuODQzNzUgMy4zNDM3NSAtNC44NDM3NSBDIDIuODYzMjgxIC00Ljg0Mzc1IDIuNDg4MjgxIC00LjY1NjI1IDIuMjE4NzUgLTQuMjgxMjUgQyAxLjk0NTMxMiAtMy45MDYyNSAxLjgxMjUgLTMuMzkwNjI1IDEuODEyNSAtMi43MzQzNzUgQyAxLjgxMjUgLTIuMDY2NDA2IDEuOTQ1MzEyIC0xLjU0Njg3NSAyLjIxODc1IC0xLjE3MTg3NSBDIDIuNDg4MjgxIC0wLjc5Njg3NSAyLjg2MzI4MSAtMC42MDkzNzUgMy4zNDM3NSAtMC42MDkzNzUgQyAzLjgxMjUgLTAuNjA5Mzc1IDQuMTc5Njg4IC0wLjc5Njg3NSA0LjQ1MzEyNSAtMS4xNzE4NzUgQyA0LjczNDM3NSAtMS41NDY4NzUgNC44NzUgLTIuMDY2NDA2IDQuODc1IC0yLjczNDM3NSBaIE0gNC44NzUgLTIuNzM0Mzc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS0xMSI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMC44NDM3NSAtMi4xNTYyNSBMIDAuODQzNzUgLTUuNDY4NzUgTCAxLjc1IC01LjQ2ODc1IEwgMS43NSAtMi4xODc1IEMgMS43NSAtMS42NzU3ODEgMS44NDc2NTYgLTEuMjg5MDYyIDIuMDQ2ODc1IC0xLjAzMTI1IEMgMi4yNTM5MDYgLTAuNzY5NTMxIDIuNTU0Njg4IC0wLjY0MDYyNSAyLjk1MzEyNSAtMC42NDA2MjUgQyAzLjQ0MTQwNiAtMC42NDA2MjUgMy44MjgxMjUgLTAuNzg5MDYyIDQuMTA5Mzc1IC0xLjA5Mzc1IEMgNC4zOTA2MjUgLTEuNDA2MjUgNC41MzEyNSAtMS44MzIwMzEgNC41MzEyNSAtMi4zNzUgTCA0LjUzMTI1IC01LjQ2ODc1IEwgNS40Mzc1IC01LjQ2ODc1IEwgNS40Mzc1IDAgTCA0LjUzMTI1IDAgTCA0LjUzMTI1IC0wLjg0Mzc1IEMgNC4zMTI1IC0wLjUwNzgxMiA0LjA1NDY4OCAtMC4yNTc4MTIgMy43NjU2MjUgLTAuMDkzNzUgQyAzLjQ4NDM3NSAwLjA2MjUgMy4xNDg0MzggMC4xNDA2MjUgMi43NjU2MjUgMC4xNDA2MjUgQyAyLjE0MDYyNSAwLjE0MDYyNSAxLjY2MDE1NiAtMC4wNTA3ODEyIDEuMzI4MTI1IC0wLjQzNzUgQyAxLjAwMzkwNiAtMC44MzIwMzEgMC44NDM3NSAtMS40MDYyNSAwLjg0Mzc1IC0yLjE1NjI1IFogTSAzLjEwOTM3NSAtNS41OTM3NSBaIE0gMy4xMDkzNzUgLTUuNTkzNzUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgxLTEyIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAwLjkzNzUgLTcuNTkzNzUgTCAxLjg0Mzc1IC03LjU5Mzc1IEwgMS44NDM3NSAwIEwgMC45Mzc1IDAgWiBNIDAuOTM3NSAtNy41OTM3NSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMTMiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDEuOTIxODc1IC0wLjgyODEyNSBMIDUuMzU5Mzc1IC0wLjgyODEyNSBMIDUuMzU5Mzc1IDAgTCAwLjczNDM3NSAwIEwgMC43MzQzNzUgLTAuODI4MTI1IEMgMS4xMDkzNzUgLTEuMjEwOTM4IDEuNjE3MTg4IC0xLjczNDM3NSAyLjI2NTYyNSAtMi4zOTA2MjUgQyAyLjkxMDE1NiAtMy4wNDY4NzUgMy4zMTY0MDYgLTMuNDY4NzUgMy40ODQzNzUgLTMuNjU2MjUgQyAzLjc5Njg3NSAtNC4wMDc4MTIgNC4wMTU2MjUgLTQuMzA0Njg4IDQuMTQwNjI1IC00LjU0Njg3NSBDIDQuMjY1NjI1IC00Ljc5Njg3NSA0LjMyODEyNSAtNS4wMzkwNjIgNC4zMjgxMjUgLTUuMjgxMjUgQyA0LjMyODEyNSAtNS42NjQwNjIgNC4xOTE0MDYgLTUuOTc2NTYyIDMuOTIxODc1IC02LjIxODc1IEMgMy42NDg0MzggLTYuNDY4NzUgMy4yOTY4NzUgLTYuNTkzNzUgMi44NTkzNzUgLTYuNTkzNzUgQyAyLjU0Njg3NSAtNi41OTM3NSAyLjIxODc1IC02LjUzNTE1NiAxLjg3NSAtNi40MjE4NzUgQyAxLjUzOTA2MiAtNi4zMTY0MDYgMS4xNzU3ODEgLTYuMTU2MjUgMC43ODEyNSAtNS45Mzc1IEwgMC43ODEyNSAtNi45Mzc1IEMgMS4xNzU3ODEgLTcuMDkzNzUgMS41NDY4NzUgLTcuMjEwOTM4IDEuODkwNjI1IC03LjI5Njg3NSBDIDIuMjM0Mzc1IC03LjM3ODkwNiAyLjU1MDc4MSAtNy40MjE4NzUgMi44NDM3NSAtNy40MjE4NzUgQyAzLjU5Mzc1IC03LjQyMTg3NSA0LjE5MTQwNiAtNy4yMzQzNzUgNC42NDA2MjUgLTYuODU5Mzc1IEMgNS4wOTc2NTYgLTYuNDg0Mzc1IDUuMzI4MTI1IC01Ljk3NjU2MiA1LjMyODEyNSAtNS4zNDM3NSBDIDUuMzI4MTI1IC01LjAzOTA2MiA1LjI2OTUzMSAtNC43NTM5MDYgNS4xNTYyNSAtNC40ODQzNzUgQyA1LjAzOTA2MiAtNC4yMjI2NTYgNC44MzU5MzggLTMuOTEwMTU2IDQuNTQ2ODc1IC0zLjU0Njg3NSBDIDQuNDYwOTM4IC0zLjQ1MzEyNSA0LjIwMzEyNSAtMy4xNzU3ODEgMy43NjU2MjUgLTIuNzE4NzUgQyAzLjMyODEyNSAtMi4yNjk1MzEgMi43MTA5MzggLTEuNjQwNjI1IDEuOTIxODc1IC0wLjgyODEyNSBaIE0gMS45MjE4NzUgLTAuODI4MTI1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS0xNCI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMy40MjE4NzUgLTIuNzUgQyAyLjcwMzEyNSAtMi43NSAyLjIwMzEyNSAtMi42NjQwNjIgMS45MjE4NzUgLTIuNSBDIDEuNjQwNjI1IC0yLjMzMjAzMSAxLjUgLTIuMDUwNzgxIDEuNSAtMS42NTYyNSBDIDEuNSAtMS4zMzIwMzEgMS42MDE1NjIgLTEuMDc4MTI1IDEuODEyNSAtMC44OTA2MjUgQyAyLjAxOTUzMSAtMC43MDMxMjUgMi4zMDQ2ODggLTAuNjA5Mzc1IDIuNjcxODc1IC0wLjYwOTM3NSBDIDMuMTcxODc1IC0wLjYwOTM3NSAzLjU3MDMxMiAtMC43ODUxNTYgMy44NzUgLTEuMTQwNjI1IEMgNC4xNzU3ODEgLTEuNDkyMTg4IDQuMzI4MTI1IC0xLjk2MDkzOCA0LjMyODEyNSAtMi41NDY4NzUgTCA0LjMyODEyNSAtMi43NSBaIE0gNS4yMTg3NSAtMy4xMjUgTCA1LjIxODc1IDAgTCA0LjMyODEyNSAwIEwgNC4zMjgxMjUgLTAuODI4MTI1IEMgNC4xMTcxODggLTAuNDkyMTg4IDMuODU5Mzc1IC0wLjI1IDMuNTQ2ODc1IC0wLjA5Mzc1IEMgMy4yNDIxODggMC4wNjI1IDIuODc1IDAuMTQwNjI1IDIuNDM3NSAwLjE0MDYyNSBDIDEuODc1IDAuMTQwNjI1IDEuNDI1NzgxIC0wLjAxNTYyNSAxLjA5Mzc1IC0wLjMyODEyNSBDIDAuNzU3ODEyIC0wLjY0MDYyNSAwLjU5Mzc1IC0xLjA2MjUgMC41OTM3NSAtMS41OTM3NSBDIDAuNTkzNzUgLTIuMjA3MDMxIDAuODAwNzgxIC0yLjY3MTg3NSAxLjIxODc1IC0yLjk4NDM3NSBDIDEuNjMyODEyIC0zLjI5Njg3NSAyLjI1IC0zLjQ1MzEyNSAzLjA2MjUgLTMuNDUzMTI1IEwgNC4zMjgxMjUgLTMuNDUzMTI1IEwgNC4zMjgxMjUgLTMuNTQ2ODc1IEMgNC4zMjgxMjUgLTMuOTUzMTI1IDQuMTg3NSAtNC4yNjk1MzEgMy45MDYyNSAtNC41IEMgMy42MzI4MTIgLTQuNzI2NTYyIDMuMjUzOTA2IC00Ljg0Mzc1IDIuNzY1NjI1IC00Ljg0Mzc1IEMgMi40NTMxMjUgLTQuODQzNzUgMi4xNDQ1MzEgLTQuODAwNzgxIDEuODQzNzUgLTQuNzE4NzUgQyAxLjU1MDc4MSAtNC42NDQ1MzEgMS4yNjk1MzEgLTQuNTM1MTU2IDEgLTQuMzkwNjI1IEwgMSAtNS4yMTg3NSBDIDEuMzMyMDMxIC01LjM0Mzc1IDEuNjQ4NDM4IC01LjQzNzUgMS45NTMxMjUgLTUuNSBDIDIuMjY1NjI1IC01LjU2MjUgMi41NjY0MDYgLTUuNTkzNzUgMi44NTkzNzUgLTUuNTkzNzUgQyAzLjY0ODQzOCAtNS41OTM3NSA0LjIzODI4MSAtNS4zOTA2MjUgNC42MjUgLTQuOTg0Mzc1IEMgNS4wMTk1MzEgLTQuNTc4MTI1IDUuMjE4NzUgLTMuOTU3MDMxIDUuMjE4NzUgLTMuMTI1IFogTSA1LjIxODc1IC0zLjEyNSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMTUiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDEuODI4MTI1IC03LjAxNTYyNSBMIDEuODI4MTI1IC01LjQ2ODc1IEwgMy42ODc1IC01LjQ2ODc1IEwgMy42ODc1IC00Ljc2NTYyNSBMIDEuODI4MTI1IC00Ljc2NTYyNSBMIDEuODI4MTI1IC0xLjc5Njg3NSBDIDEuODI4MTI1IC0xLjM1OTM3NSAxLjg5MDYyNSAtMS4wNzAzMTIgMi4wMTU2MjUgLTAuOTM3NSBDIDIuMTQwNjI1IC0wLjgxMjUgMi4zOTA2MjUgLTAuNzUgMi43NjU2MjUgLTAuNzUgTCAzLjY4NzUgLTAuNzUgTCAzLjY4NzUgMCBMIDIuNzY1NjI1IDAgQyAyLjA2NjQwNiAwIDEuNTgyMDMxIC0wLjEyODkwNiAxLjMxMjUgLTAuMzkwNjI1IEMgMS4wNTA3ODEgLTAuNjQ4NDM4IDAuOTIxODc1IC0xLjExNzE4OCAwLjkyMTg3NSAtMS43OTY4NzUgTCAwLjkyMTg3NSAtNC43NjU2MjUgTCAwLjI2NTYyNSAtNC43NjU2MjUgTCAwLjI2NTYyNSAtNS40Njg3NSBMIDAuOTIxODc1IC01LjQ2ODc1IEwgMC45MjE4NzUgLTcuMDE1NjI1IFogTSAxLjgyODEyNSAtNy4wMTU2MjUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgxLTE2Ij4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAwLjk4NDM3NSAtNy4yOTY4NzUgTCA1LjU5Mzc1IC03LjI5Njg3NSBMIDUuNTkzNzUgLTYuNDUzMTI1IEwgMS45Njg3NSAtNi40NTMxMjUgTCAxLjk2ODc1IC00LjI5Njg3NSBMIDUuNDM3NSAtNC4yOTY4NzUgTCA1LjQzNzUgLTMuNDY4NzUgTCAxLjk2ODc1IC0zLjQ2ODc1IEwgMS45Njg3NSAtMC44MjgxMjUgTCA1LjY3MTg3NSAtMC44MjgxMjUgTCA1LjY3MTg3NSAwIEwgMC45ODQzNzUgMCBaIE0gMC45ODQzNzUgLTcuMjk2ODc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS0xNyI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gNS40ODQzNzUgLTUuNDY4NzUgTCAzLjUxNTYyNSAtMi44MTI1IEwgNS41OTM3NSAwIEwgNC41MzEyNSAwIEwgMi45Mzc1IC0yLjE1NjI1IEwgMS4zNDM3NSAwIEwgMC4yODEyNSAwIEwgMi40MDYyNSAtMi44NTkzNzUgTCAwLjQ2ODc1IC01LjQ2ODc1IEwgMS41MzEyNSAtNS40Njg3NSBMIDIuOTg0Mzc1IC0zLjUxNTYyNSBMIDQuNDIxODc1IC01LjQ2ODc1IFogTSA1LjQ4NDM3NSAtNS40Njg3NSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMTgiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDAuOTM3NSAtNS40Njg3NSBMIDEuODQzNzUgLTUuNDY4NzUgTCAxLjg0Mzc1IDAgTCAwLjkzNzUgMCBaIE0gMC45Mzc1IC03LjU5Mzc1IEwgMS44NDM3NSAtNy41OTM3NSBMIDEuODQzNzUgLTYuNDUzMTI1IEwgMC45Mzc1IC02LjQ1MzEyNSBaIE0gMC45Mzc1IC03LjU5Mzc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS0xOSI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMS45Njg3NSAtNi40ODQzNzUgTCAxLjk2ODc1IC0wLjgxMjUgTCAzLjE1NjI1IC0wLjgxMjUgQyA0LjE2NDA2MiAtMC44MTI1IDQuODk4NDM4IC0xLjAzNTE1NiA1LjM1OTM3NSAtMS40ODQzNzUgQyA1LjgyODEyNSAtMS45NDE0MDYgNi4wNjI1IC0yLjY2NDA2MiA2LjA2MjUgLTMuNjU2MjUgQyA2LjA2MjUgLTQuNjMyODEyIDUuODI4MTI1IC01LjM0NzY1NiA1LjM1OTM3NSAtNS43OTY4NzUgQyA0Ljg5ODQzOCAtNi4yNTM5MDYgNC4xNjQwNjIgLTYuNDg0Mzc1IDMuMTU2MjUgLTYuNDg0Mzc1IFogTSAwLjk4NDM3NSAtNy4yOTY4NzUgTCAzLjAxNTYyNSAtNy4yOTY4NzUgQyA0LjQyMTg3NSAtNy4yOTY4NzUgNS40NTMxMjUgLTcgNi4xMDkzNzUgLTYuNDA2MjUgQyA2Ljc3MzQzOCAtNS44MjAzMTIgNy4xMDkzNzUgLTQuOTA2MjUgNy4xMDkzNzUgLTMuNjU2MjUgQyA3LjEwOTM3NSAtMi4zOTQ1MzEgNi43NzM0MzggLTEuNDY4NzUgNi4xMDkzNzUgLTAuODc1IEMgNS40NTMxMjUgLTAuMjg5MDYyIDQuNDIxODc1IDAgMy4wMTU2MjUgMCBMIDAuOTg0Mzc1IDAgWiBNIDAuOTg0Mzc1IC03LjI5Njg3NSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMjAiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDYuNDM3NSAtNi43MzQzNzUgTCA2LjQzNzUgLTUuNjg3NSBDIDYuMTAxNTYyIC02IDUuNzUgLTYuMjI2NTYyIDUuMzc1IC02LjM3NSBDIDUgLTYuNTMxMjUgNC42MDE1NjIgLTYuNjA5Mzc1IDQuMTg3NSAtNi42MDkzNzUgQyAzLjM1MTU2MiAtNi42MDkzNzUgMi43MTA5MzggLTYuMzUxNTYyIDIuMjY1NjI1IC01Ljg0Mzc1IEMgMS44MjgxMjUgLTUuMzMyMDMxIDEuNjA5Mzc1IC00LjU5NzY1NiAxLjYwOTM3NSAtMy42NDA2MjUgQyAxLjYwOTM3NSAtMi42Nzk2ODggMS44MjgxMjUgLTEuOTQ1MzEyIDIuMjY1NjI1IC0xLjQzNzUgQyAyLjcxMDkzOCAtMC45MjU3ODEgMy4zNTE1NjIgLTAuNjcxODc1IDQuMTg3NSAtMC42NzE4NzUgQyA0LjYwMTU2MiAtMC42NzE4NzUgNSAtMC43NDIxODggNS4zNzUgLTAuODkwNjI1IEMgNS43NSAtMS4wNDY4NzUgNi4xMDE1NjIgLTEuMjgxMjUgNi40Mzc1IC0xLjU5Mzc1IEwgNi40Mzc1IC0wLjU2MjUgQyA2LjA5Mzc1IC0wLjMyMDMxMiA1LjcyNjU2MiAtMC4xNDQ1MzEgNS4zNDM3NSAtMC4wMzEyNSBDIDQuOTU3MDMxIDAuMDgyMDMxMiA0LjU1MDc4MSAwLjE0MDYyNSA0LjEyNSAwLjE0MDYyNSBDIDMuMDE5NTMxIDAuMTQwNjI1IDIuMTQ4NDM4IC0wLjE5NTMxMiAxLjUxNTYyNSAtMC44NzUgQyAwLjg3ODkwNiAtMS41NTA3ODEgMC41NjI1IC0yLjQ3MjY1NiAwLjU2MjUgLTMuNjQwNjI1IEMgMC41NjI1IC00LjgwNDY4OCAwLjg3ODkwNiAtNS43MjY1NjIgMS41MTU2MjUgLTYuNDA2MjUgQyAyLjE0ODQzOCAtNy4wODIwMzEgMy4wMTk1MzEgLTcuNDIxODc1IDQuMTI1IC03LjQyMTg3NSBDIDQuNTYyNSAtNy40MjE4NzUgNC45NzI2NTYgLTcuMzYzMjgxIDUuMzU5Mzc1IC03LjI1IEMgNS43NDIxODggLTcuMTMyODEyIDYuMTAxNTYyIC02Ljk2MDkzOCA2LjQzNzUgLTYuNzM0Mzc1IFogTSA2LjQzNzUgLTYuNzM0Mzc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS0yMSI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gNS40ODQzNzUgLTMuMjk2ODc1IEwgNS40ODQzNzUgMCBMIDQuNTkzNzUgMCBMIDQuNTkzNzUgLTMuMjY1NjI1IEMgNC41OTM3NSAtMy43ODUxNTYgNC40ODgyODEgLTQuMTcxODc1IDQuMjgxMjUgLTQuNDIxODc1IEMgNC4wODIwMzEgLTQuNjc5Njg4IDMuNzgxMjUgLTQuODEyNSAzLjM3NSAtNC44MTI1IEMgMi44OTQ1MzEgLTQuODEyNSAyLjUxNTYyNSAtNC42NTYyNSAyLjIzNDM3NSAtNC4zNDM3NSBDIDEuOTUzMTI1IC00LjAzOTA2MiAxLjgxMjUgLTMuNjI1IDEuODEyNSAtMy4wOTM3NSBMIDEuODEyNSAwIEwgMC45MDYyNSAwIEwgMC45MDYyNSAtNS40Njg3NSBMIDEuODEyNSAtNS40Njg3NSBMIDEuODEyNSAtNC42MjUgQyAyLjAzMTI1IC00Ljk0NTMxMiAyLjI4NTE1NiAtNS4xODc1IDIuNTc4MTI1IC01LjM0Mzc1IEMgMi44NjcxODggLTUuNTA3ODEyIDMuMjAzMTI1IC01LjU5Mzc1IDMuNTc4MTI1IC01LjU5Mzc1IEMgNC4yMDMxMjUgLTUuNTkzNzUgNC42NzU3ODEgLTUuMzk4NDM4IDUgLTUuMDE1NjI1IEMgNS4zMjAzMTIgLTQuNjI4OTA2IDUuNDg0Mzc1IC00LjA1NDY4OCA1LjQ4NDM3NSAtMy4yOTY4NzUgWiBNIDUuNDg0Mzc1IC0zLjI5Njg3NSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMjIiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDAuODc1IC03LjI5Njg3NSBMIDEuODU5Mzc1IC03LjI5Njg3NSBMIDEuODU5Mzc1IC0yLjg1OTM3NSBDIDEuODU5Mzc1IC0yLjA3ODEyNSAyIC0xLjUxNTYyNSAyLjI4MTI1IC0xLjE3MTg3NSBDIDIuNTYyNSAtMC44MjgxMjUgMy4wMTk1MzEgLTAuNjU2MjUgMy42NTYyNSAtMC42NTYyNSBDIDQuMjg5MDYyIC0wLjY1NjI1IDQuNzUgLTAuODI4MTI1IDUuMDMxMjUgLTEuMTcxODc1IEMgNS4zMTI1IC0xLjUxNTYyNSA1LjQ1MzEyNSAtMi4wNzgxMjUgNS40NTMxMjUgLTIuODU5Mzc1IEwgNS40NTMxMjUgLTcuMjk2ODc1IEwgNi40NTMxMjUgLTcuMjk2ODc1IEwgNi40NTMxMjUgLTIuNzM0Mzc1IEMgNi40NTMxMjUgLTEuNzg1MTU2IDYuMjE4NzUgLTEuMDY2NDA2IDUuNzUgLTAuNTc4MTI1IEMgNS4yODEyNSAtMC4wOTc2NTYyIDQuNTgyMDMxIDAuMTQwNjI1IDMuNjU2MjUgMC4xNDA2MjUgQyAyLjczODI4MSAwLjE0MDYyNSAyLjA0Njg3NSAtMC4wOTc2NTYyIDEuNTc4MTI1IC0wLjU3ODEyNSBDIDEuMTA5Mzc1IC0xLjA2NjQwNiAwLjg3NSAtMS43ODUxNTYgMC44NzUgLTIuNzM0Mzc1IFogTSAwLjg3NSAtNy4yOTY4NzUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgxLTIzIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAxLjk2ODc1IC02LjQ4NDM3NSBMIDEuOTY4NzUgLTMuNzM0Mzc1IEwgMy4yMDMxMjUgLTMuNzM0Mzc1IEMgMy42NjAxNTYgLTMuNzM0Mzc1IDQuMDE1NjI1IC0zLjg1MTU2MiA0LjI2NTYyNSAtNC4wOTM3NSBDIDQuNTIzNDM4IC00LjMzMjAzMSA0LjY1NjI1IC00LjY3MTg3NSA0LjY1NjI1IC01LjEwOTM3NSBDIDQuNjU2MjUgLTUuNTQ2ODc1IDQuNTIzNDM4IC01Ljg4MjgxMiA0LjI2NTYyNSAtNi4xMjUgQyA0LjAxNTYyNSAtNi4zNjMyODEgMy42NjAxNTYgLTYuNDg0Mzc1IDMuMjAzMTI1IC02LjQ4NDM3NSBaIE0gMC45ODQzNzUgLTcuMjk2ODc1IEwgMy4yMDMxMjUgLTcuMjk2ODc1IEMgNC4wMjM0MzggLTcuMjk2ODc1IDQuNjQ0NTMxIC03LjEwOTM3NSA1LjA2MjUgLTYuNzM0Mzc1IEMgNS40NzY1NjIgLTYuMzY3MTg4IDUuNjg3NSAtNS44MjgxMjUgNS42ODc1IC01LjEwOTM3NSBDIDUuNjg3NSAtNC4zOTA2MjUgNS40NzY1NjIgLTMuODQ3NjU2IDUuMDYyNSAtMy40ODQzNzUgQyA0LjY0NDUzMSAtMy4xMTcxODggNC4wMjM0MzggLTIuOTM3NSAzLjIwMzEyNSAtMi45Mzc1IEwgMS45Njg3NSAtMi45Mzc1IEwgMS45Njg3NSAwIEwgMC45ODQzNzUgMCBaIE0gMC45ODQzNzUgLTcuMjk2ODc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS0yNCI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gNS4yMDMxMjUgLTQuNDIxODc1IEMgNS40MjE4NzUgLTQuODI4MTI1IDUuNjg3NSAtNS4xMjUgNiAtNS4zMTI1IEMgNi4zMTI1IC01LjUgNi42Nzk2ODggLTUuNTkzNzUgNy4xMDkzNzUgLTUuNTkzNzUgQyA3LjY3OTY4OCAtNS41OTM3NSA4LjExNzE4OCAtNS4zOTQ1MzEgOC40MjE4NzUgLTUgQyA4LjczNDM3NSAtNC42MDE1NjIgOC44OTA2MjUgLTQuMDM1MTU2IDguODkwNjI1IC0zLjI5Njg3NSBMIDguODkwNjI1IDAgTCA3Ljk4NDM3NSAwIEwgNy45ODQzNzUgLTMuMjY1NjI1IEMgNy45ODQzNzUgLTMuNzk2ODc1IDcuODkwNjI1IC00LjE4NzUgNy43MDMxMjUgLTQuNDM3NSBDIDcuNTIzNDM4IC00LjY4NzUgNy4yNDIxODggLTQuODEyNSA2Ljg1OTM3NSAtNC44MTI1IEMgNi4zOTA2MjUgLTQuODEyNSA2LjAxOTUzMSAtNC42NTYyNSA1Ljc1IC00LjM0Mzc1IEMgNS40ODgyODEgLTQuMDM5MDYyIDUuMzU5Mzc1IC0zLjYyNSA1LjM1OTM3NSAtMy4wOTM3NSBMIDUuMzU5Mzc1IDAgTCA0LjQ1MzEyNSAwIEwgNC40NTMxMjUgLTMuMjY1NjI1IEMgNC40NTMxMjUgLTMuNzk2ODc1IDQuMzU5Mzc1IC00LjE4NzUgNC4xNzE4NzUgLTQuNDM3NSBDIDMuOTg0Mzc1IC00LjY4NzUgMy42OTUzMTIgLTQuODEyNSAzLjMxMjUgLTQuODEyNSBDIDIuODUxNTYyIC00LjgxMjUgMi40ODgyODEgLTQuNjU2MjUgMi4yMTg3NSAtNC4zNDM3NSBDIDEuOTQ1MzEyIC00LjAzOTA2MiAxLjgxMjUgLTMuNjI1IDEuODEyNSAtMy4wOTM3NSBMIDEuODEyNSAwIEwgMC45MDYyNSAwIEwgMC45MDYyNSAtNS40Njg3NSBMIDEuODEyNSAtNS40Njg3NSBMIDEuODEyNSAtNC42MjUgQyAyLjAxOTUzMSAtNC45NTcwMzEgMi4yNjU2MjUgLTUuMjAzMTI1IDIuNTQ2ODc1IC01LjM1OTM3NSBDIDIuODM1OTM4IC01LjUxNTYyNSAzLjE3NTc4MSAtNS41OTM3NSAzLjU2MjUgLTUuNTkzNzUgQyAzLjk2ODc1IC01LjU5Mzc1IDQuMzA0Njg4IC01LjQ5MjE4OCA0LjU3ODEyNSAtNS4yOTY4NzUgQyA0Ljg1OTM3NSAtNS4wOTc2NTYgNS4wNjY0MDYgLTQuODA0Njg4IDUuMjAzMTI1IC00LjQyMTg3NSBaIE0gNS4yMDMxMjUgLTQuNDIxODc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS0yNSI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMC4yOTY4NzUgLTUuNDY4NzUgTCAxLjI1IC01LjQ2ODc1IEwgMi45NTMxMjUgLTAuODc1IEwgNC42NzE4NzUgLTUuNDY4NzUgTCA1LjYyNSAtNS40Njg3NSBMIDMuNTYyNSAwIEwgMi4zNDM3NSAwIFogTSAwLjI5Njg3NSAtNS40Njg3NSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMjYiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDEuMDc4MTI1IC03LjI5Njg3NSBMIDQuOTUzMTI1IC03LjI5Njg3NSBMIDQuOTUzMTI1IC02LjQ1MzEyNSBMIDEuOTg0Mzc1IC02LjQ1MzEyNSBMIDEuOTg0Mzc1IC00LjY3MTg3NSBDIDIuMTI4OTA2IC00LjcyMjY1NiAyLjI2OTUzMSAtNC43NTc4MTIgMi40MDYyNSAtNC43ODEyNSBDIDIuNTUwNzgxIC00LjgwMDc4MSAyLjY5NTMxMiAtNC44MTI1IDIuODQzNzUgLTQuODEyNSBDIDMuNjU2MjUgLTQuODEyNSA0LjI5Njg3NSAtNC41ODU5MzggNC43NjU2MjUgLTQuMTQwNjI1IEMgNS4yNDIxODggLTMuNzAzMTI1IDUuNDg0Mzc1IC0zLjEwMTU2MiA1LjQ4NDM3NSAtMi4zNDM3NSBDIDUuNDg0Mzc1IC0xLjU1MDc4MSA1LjIzODI4MSAtMC45Mzc1IDQuNzUgLTAuNSBDIDQuMjY5NTMxIC0wLjA3MDMxMjUgMy41ODIwMzEgMC4xNDA2MjUgMi42ODc1IDAuMTQwNjI1IEMgMi4zODI4MTIgMC4xNDA2MjUgMi4wNzAzMTIgMC4xMTMyODEgMS43NSAwLjA2MjUgQyAxLjQzNzUgMC4wMDc4MTI1IDEuMTA5Mzc1IC0wLjA2NjQwNjIgMC43NjU2MjUgLTAuMTcxODc1IEwgMC43NjU2MjUgLTEuMTU2MjUgQyAxLjA2NjQwNiAtMSAxLjM3NSAtMC44Nzg5MDYgMS42ODc1IC0wLjc5Njg3NSBDIDIgLTAuNzIyNjU2IDIuMzI4MTI1IC0wLjY4NzUgMi42NzE4NzUgLTAuNjg3NSBDIDMuMjM0Mzc1IC0wLjY4NzUgMy42NzU3ODEgLTAuODMyMDMxIDQgLTEuMTI1IEMgNC4zMzIwMzEgLTEuNDI1NzgxIDQuNSAtMS44MzIwMzEgNC41IC0yLjM0Mzc1IEMgNC41IC0yLjg0Mzc1IDQuMzMyMDMxIC0zLjIzODI4MSA0IC0zLjUzMTI1IEMgMy42NzU3ODEgLTMuODMyMDMxIDMuMjM0Mzc1IC0zLjk4NDM3NSAyLjY3MTg3NSAtMy45ODQzNzUgQyAyLjQxMDE1NiAtMy45ODQzNzUgMi4xNDQ1MzEgLTMuOTUzMTI1IDEuODc1IC0zLjg5MDYyNSBDIDEuNjEzMjgxIC0zLjgzNTkzOCAxLjM0NzY1NiAtMy43NSAxLjA3ODEyNSAtMy42MjUgWiBNIDEuMDc4MTI1IC03LjI5Njg3NSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMjciPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDMuNzgxMjUgLTYuNDM3NSBMIDEuMjk2ODc1IC0yLjU0Njg3NSBMIDMuNzgxMjUgLTIuNTQ2ODc1IFogTSAzLjUxNTYyNSAtNy4yOTY4NzUgTCA0Ljc2NTYyNSAtNy4yOTY4NzUgTCA0Ljc2NTYyNSAtMi41NDY4NzUgTCA1Ljc5Njg3NSAtMi41NDY4NzUgTCA1Ljc5Njg3NSAtMS43MTg3NSBMIDQuNzY1NjI1IC0xLjcxODc1IEwgNC43NjU2MjUgMCBMIDMuNzgxMjUgMCBMIDMuNzgxMjUgLTEuNzE4NzUgTCAwLjQ4NDM3NSAtMS43MTg3NSBMIDAuNDg0Mzc1IC0yLjY3MTg3NSBaIE0gMy41MTU2MjUgLTcuMjk2ODc1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS0yOCI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gNC40MjE4NzUgLTUuMzEyNSBMIDQuNDIxODc1IC00LjQ1MzEyNSBDIDQuMTcxODc1IC00LjU4NTkzOCAzLjkxMDE1NiAtNC42ODc1IDMuNjQwNjI1IC00Ljc1IEMgMy4zNjcxODggLTQuODEyNSAzLjA4MjAzMSAtNC44NDM3NSAyLjc4MTI1IC00Ljg0Mzc1IEMgMi4zNDM3NSAtNC44NDM3NSAyLjAwNzgxMiAtNC43NzM0MzggMS43ODEyNSAtNC42NDA2MjUgQyAxLjU2MjUgLTQuNTAzOTA2IDEuNDUzMTI1IC00LjMwMDc4MSAxLjQ1MzEyNSAtNC4wMzEyNSBDIDEuNDUzMTI1IC0zLjgyMDMxMiAxLjUzMTI1IC0zLjY1NjI1IDEuNjg3NSAtMy41MzEyNSBDIDEuODQzNzUgLTMuNDE0MDYyIDIuMTY0MDYyIC0zLjMwNDY4OCAyLjY1NjI1IC0zLjIwMzEyNSBMIDIuOTUzMTI1IC0zLjEyNSBDIDMuNTk3NjU2IC0yLjk4ODI4MSA0LjA1MDc4MSAtMi43OTY4NzUgNC4zMTI1IC0yLjU0Njg3NSBDIDQuNTgyMDMxIC0yLjI5Njg3NSA0LjcxODc1IC0xLjk1MzEyNSA0LjcxODc1IC0xLjUxNTYyNSBDIDQuNzE4NzUgLTEuMDAzOTA2IDQuNTE1NjI1IC0wLjU5NzY1NiA0LjEwOTM3NSAtMC4yOTY4NzUgQyAzLjcxMDkzOCAtMC4wMDM5MDYyNSAzLjE2NDA2MiAwLjE0MDYyNSAyLjQ2ODc1IDAuMTQwNjI1IEMgMi4xNjQwNjIgMC4xNDA2MjUgMS44NTE1NjIgMC4xMDkzNzUgMS41MzEyNSAwLjA0Njg3NSBDIDEuMjE4NzUgLTAuMDAzOTA2MjUgMC44OTA2MjUgLTAuMDg1OTM3NSAwLjU0Njg3NSAtMC4yMDMxMjUgTCAwLjU0Njg3NSAtMS4xMjUgQyAwLjg3ODkwNiAtMC45NTcwMzEgMS4yMDMxMjUgLTAuODI4MTI1IDEuNTE1NjI1IC0wLjczNDM3NSBDIDEuODM1OTM4IC0wLjY0ODQzOCAyLjE2MDE1NiAtMC42MDkzNzUgMi40ODQzNzUgLTAuNjA5Mzc1IEMgMi44OTg0MzggLTAuNjA5Mzc1IDMuMjIyNjU2IC0wLjY3OTY4OCAzLjQ1MzEyNSAtMC44MjgxMjUgQyAzLjY3OTY4OCAtMC45NzI2NTYgMy43OTY4NzUgLTEuMTc1NzgxIDMuNzk2ODc1IC0xLjQzNzUgQyAzLjc5Njg3NSAtMS42ODc1IDMuNzEwOTM4IC0xLjg3NSAzLjU0Njg3NSAtMiBDIDMuMzkwNjI1IC0yLjEzMjgxMiAzLjAzMTI1IC0yLjI1NzgxMiAyLjQ2ODc1IC0yLjM3NSBMIDIuMTU2MjUgLTIuNDUzMTI1IEMgMS42MDE1NjIgLTIuNTY2NDA2IDEuMjAzMTI1IC0yLjc0MjE4OCAwLjk1MzEyNSAtMi45ODQzNzUgQyAwLjcwMzEyNSAtMy4yMzQzNzUgMC41NzgxMjUgLTMuNTY2NDA2IDAuNTc4MTI1IC0zLjk4NDM3NSBDIDAuNTc4MTI1IC00LjUwMzkwNiAwLjc1NzgxMiAtNC44OTg0MzggMS4xMjUgLTUuMTcxODc1IEMgMS40ODgyODEgLTUuNDUzMTI1IDIuMDA3ODEyIC01LjU5Mzc1IDIuNjg3NSAtNS41OTM3NSBDIDMuMDA3ODEyIC01LjU5Mzc1IDMuMzE2NDA2IC01LjU2NjQwNiAzLjYwOTM3NSAtNS41MTU2MjUgQyAzLjkxMDE1NiAtNS40NzI2NTYgNC4xNzk2ODggLTUuNDA2MjUgNC40MjE4NzUgLTUuMzEyNSBaIE0gNC40MjE4NzUgLTUuMzEyNSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMjkiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDQuMDYyNSAtMy45Mzc1IEMgNC41MzEyNSAtMy44MzIwMzEgNC44OTQ1MzEgLTMuNjE3MTg4IDUuMTU2MjUgLTMuMjk2ODc1IEMgNS40MjU3ODEgLTIuOTg0Mzc1IDUuNTYyNSAtMi41OTM3NSA1LjU2MjUgLTIuMTI1IEMgNS41NjI1IC0xLjQwNjI1IDUuMzEyNSAtMC44NDc2NTYgNC44MTI1IC0wLjQ1MzEyNSBDIDQuMzIwMzEyIC0wLjA1NDY4NzUgMy42MTcxODggMC4xNDA2MjUgMi43MDMxMjUgMC4xNDA2MjUgQyAyLjM5ODQzOCAwLjE0MDYyNSAyLjA4NTkzOCAwLjEwOTM3NSAxLjc2NTYyNSAwLjA0Njg3NSBDIDEuNDQxNDA2IC0wLjAxNTYyNSAxLjEwOTM3NSAtMC4xMDE1NjIgMC43NjU2MjUgLTAuMjE4NzUgTCAwLjc2NTYyNSAtMS4xNzE4NzUgQyAxLjAzNTE1NiAtMS4wMTU2MjUgMS4zMzIwMzEgLTAuODk0NTMxIDEuNjU2MjUgLTAuODEyNSBDIDEuOTg4MjgxIC0wLjcyNjU2MiAyLjMzMjAzMSAtMC42ODc1IDIuNjg3NSAtMC42ODc1IEMgMy4zMDA3ODEgLTAuNjg3NSAzLjc2OTUzMSAtMC44MDQ2ODggNC4wOTM3NSAtMS4wNDY4NzUgQyA0LjQxNDA2MiAtMS4yOTY4NzUgNC41NzgxMjUgLTEuNjU2MjUgNC41NzgxMjUgLTIuMTI1IEMgNC41NzgxMjUgLTIuNTUwNzgxIDQuNDI1NzgxIC0yLjg4MjgxMiA0LjEyNSAtMy4xMjUgQyAzLjgyMDMxMiAtMy4zNjMyODEgMy40MDYyNSAtMy40ODQzNzUgMi44NzUgLTMuNDg0Mzc1IEwgMi4wMTU2MjUgLTMuNDg0Mzc1IEwgMi4wMTU2MjUgLTQuMjk2ODc1IEwgMi45MDYyNSAtNC4yOTY4NzUgQyAzLjM5NDUzMSAtNC4yOTY4NzUgMy43NjU2MjUgLTQuMzk0NTMxIDQuMDE1NjI1IC00LjU5Mzc1IEMgNC4yNzM0MzggLTQuNzg5MDYyIDQuNDA2MjUgLTUuMDcwMzEyIDQuNDA2MjUgLTUuNDM3NSBDIDQuNDA2MjUgLTUuODAwNzgxIDQuMjY5NTMxIC02LjA4MjAzMSA0IC02LjI4MTI1IEMgMy43MzgyODEgLTYuNDg4MjgxIDMuMzYzMjgxIC02LjU5Mzc1IDIuODc1IC02LjU5Mzc1IEMgMi42MDE1NjIgLTYuNTkzNzUgMi4zMTI1IC02LjU2MjUgMiAtNi41IEMgMS42ODc1IC02LjQ0NTMxMiAxLjM0NzY1NiAtNi4zNTkzNzUgMC45ODQzNzUgLTYuMjM0Mzc1IEwgMC45ODQzNzUgLTcuMTA5Mzc1IEMgMS4zNTkzNzUgLTcuMjEwOTM4IDEuNzA3MDMxIC03LjI4OTA2MiAyLjAzMTI1IC03LjM0Mzc1IEMgMi4zNjMyODEgLTcuMzk0NTMxIDIuNjcxODc1IC03LjQyMTg3NSAyLjk1MzEyNSAtNy40MjE4NzUgQyAzLjcwMzEyNSAtNy40MjE4NzUgNC4yOTY4NzUgLTcuMjUgNC43MzQzNzUgLTYuOTA2MjUgQyA1LjE3MTg3NSAtNi41NzAzMTIgNS4zOTA2MjUgLTYuMTEzMjgxIDUuMzkwNjI1IC01LjUzMTI1IEMgNS4zOTA2MjUgLTUuMTI1IDUuMjczNDM4IC00Ljc4MTI1IDUuMDQ2ODc1IC00LjUgQyA0LjgxNjQwNiAtNC4yMjY1NjIgNC40ODgyODEgLTQuMDM5MDYyIDQuMDYyNSAtMy45Mzc1IFogTSA0LjA2MjUgLTMuOTM3NSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMzAiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDMuMjk2ODc1IC00LjAzMTI1IEMgMi44NTkzNzUgLTQuMDMxMjUgMi41MDc4MTIgLTMuODc4OTA2IDIuMjUgLTMuNTc4MTI1IEMgMS45ODgyODEgLTMuMjczNDM4IDEuODU5Mzc1IC0yLjg2MzI4MSAxLjg1OTM3NSAtMi4zNDM3NSBDIDEuODU5Mzc1IC0xLjgxMjUgMS45ODgyODEgLTEuMzk0NTMxIDIuMjUgLTEuMDkzNzUgQyAyLjUwNzgxMiAtMC43ODkwNjIgMi44NTkzNzUgLTAuNjQwNjI1IDMuMjk2ODc1IC0wLjY0MDYyNSBDIDMuNzQyMTg4IC0wLjY0MDYyNSA0LjA5Mzc1IC0wLjc4OTA2MiA0LjM0Mzc1IC0xLjA5Mzc1IEMgNC42MDE1NjIgLTEuMzk0NTMxIDQuNzM0Mzc1IC0xLjgxMjUgNC43MzQzNzUgLTIuMzQzNzUgQyA0LjczNDM3NSAtMi44NjMyODEgNC42MDE1NjIgLTMuMjczNDM4IDQuMzQzNzUgLTMuNTc4MTI1IEMgNC4wOTM3NSAtMy44Nzg5MDYgMy43NDIxODggLTQuMDMxMjUgMy4yOTY4NzUgLTQuMDMxMjUgWiBNIDUuMjY1NjI1IC03LjEyNSBMIDUuMjY1NjI1IC02LjIzNDM3NSBDIDUuMDE1NjI1IC02LjM0NzY1NiA0Ljc1NzgxMiAtNi40Mzc1IDQuNSAtNi41IEMgNC4yNSAtNi41NjI1IDQuMDAzOTA2IC02LjU5Mzc1IDMuNzY1NjI1IC02LjU5Mzc1IEMgMy4xMDkzNzUgLTYuNTkzNzUgMi42MDkzNzUgLTYuMzc1IDIuMjY1NjI1IC01LjkzNzUgQyAxLjkyMTg3NSAtNS41IDEuNzI2NTYyIC00LjgzMjAzMSAxLjY4NzUgLTMuOTM3NSBDIDEuODc1IC00LjIxODc1IDIuMTEzMjgxIC00LjQyOTY4OCAyLjQwNjI1IC00LjU3ODEyNSBDIDIuNjk1MzEyIC00LjczNDM3NSAzLjAxNTYyNSAtNC44MTI1IDMuMzU5Mzc1IC00LjgxMjUgQyA0LjA4NTkzOCAtNC44MTI1IDQuNjY0MDYyIC00LjU4NTkzOCA1LjA5Mzc1IC00LjE0MDYyNSBDIDUuNTE5NTMxIC0zLjcwMzEyNSA1LjczNDM3NSAtMy4xMDE1NjIgNS43MzQzNzUgLTIuMzQzNzUgQyA1LjczNDM3NSAtMS41OTM3NSA1LjUwNzgxMiAtMC45ODgyODEgNS4wNjI1IC0wLjUzMTI1IEMgNC42MjUgLTAuMDgyMDMxMiA0LjAzNTE1NiAwLjE0MDYyNSAzLjI5Njg3NSAwLjE0MDYyNSBDIDIuNDUzMTI1IDAuMTQwNjI1IDEuODA0Njg4IC0wLjE3OTY4OCAxLjM1OTM3NSAtMC44MjgxMjUgQyAwLjkyMTg3NSAtMS40NzI2NTYgMC43MDMxMjUgLTIuNDEwMTU2IDAuNzAzMTI1IC0zLjY0MDYyNSBDIDAuNzAzMTI1IC00Ljc4NTE1NiAwLjk3MjY1NiAtNS43MDMxMjUgMS41MTU2MjUgLTYuMzkwNjI1IEMgMi4wNjY0MDYgLTcuMDc4MTI1IDIuODAwNzgxIC03LjQyMTg3NSAzLjcxODc1IC03LjQyMTg3NSBDIDMuOTY4NzUgLTcuNDIxODc1IDQuMjE4NzUgLTcuMzk0NTMxIDQuNDY4NzUgLTcuMzQzNzUgQyA0LjcxODc1IC03LjMwMDc4MSA0Ljk4NDM3NSAtNy4yMjY1NjIgNS4yNjU2MjUgLTcuMTI1IFogTSA1LjI2NTYyNSAtNy4xMjUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgxLTMxIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSA0LjU0Njg3NSAtMi43OTY4NzUgQyA0LjU0Njg3NSAtMy40NTMxMjUgNC40MTAxNTYgLTMuOTU3MDMxIDQuMTQwNjI1IC00LjMxMjUgQyAzLjg2NzE4OCAtNC42NjQwNjIgMy40OTIxODggLTQuODQzNzUgMy4wMTU2MjUgLTQuODQzNzUgQyAyLjUyMzQzOCAtNC44NDM3NSAyLjE0NDUzMSAtNC42NjQwNjIgMS44NzUgLTQuMzEyNSBDIDEuNjEzMjgxIC0zLjk1NzAzMSAxLjQ4NDM3NSAtMy40NTMxMjUgMS40ODQzNzUgLTIuNzk2ODc1IEMgMS40ODQzNzUgLTIuMTQ4NDM4IDEuNjEzMjgxIC0xLjY0NDUzMSAxLjg3NSAtMS4yODEyNSBDIDIuMTQ0NTMxIC0wLjkyNTc4MSAyLjUyMzQzOCAtMC43NSAzLjAxNTYyNSAtMC43NSBDIDMuNDkyMTg4IC0wLjc1IDMuODY3MTg4IC0wLjkyNTc4MSA0LjE0MDYyNSAtMS4yODEyNSBDIDQuNDEwMTU2IC0xLjY0NDUzMSA0LjU0Njg3NSAtMi4xNDg0MzggNC41NDY4NzUgLTIuNzk2ODc1IFogTSA1LjQzNzUgLTAuNjcxODc1IEMgNS40Mzc1IDAuMjUzOTA2IDUuMjI2NTYyIDAuOTQxNDA2IDQuODEyNSAxLjM5MDYyNSBDIDQuNDA2MjUgMS44NDc2NTYgMy43NzM0MzggMi4wNzgxMjUgMi45MjE4NzUgMi4wNzgxMjUgQyAyLjYwOTM3NSAyLjA3ODEyNSAyLjMxMjUgMi4wNTA3ODEgMi4wMzEyNSAyIEMgMS43NSAxLjk1NzAzMSAxLjQ3NjU2MiAxLjg5MDYyNSAxLjIxODc1IDEuNzk2ODc1IEwgMS4yMTg3NSAwLjkyMTg3NSBDIDEuNDc2NTYyIDEuMDY2NDA2IDEuNzM0Mzc1IDEuMTcxODc1IDEuOTg0Mzc1IDEuMjM0Mzc1IEMgMi4yNDIxODggMS4zMDQ2ODggMi41MDc4MTIgMS4zNDM3NSAyLjc4MTI1IDEuMzQzNzUgQyAzLjM2MzI4MSAxLjM0Mzc1IDMuODAwNzgxIDEuMTg3NSA0LjA5Mzc1IDAuODc1IEMgNC4zOTQ1MzEgMC41NzAzMTIgNC41NDY4NzUgMC4xMDkzNzUgNC41NDY4NzUgLTAuNTE1NjI1IEwgNC41NDY4NzUgLTAuOTY4NzUgQyA0LjM1OTM3NSAtMC42NDQ1MzEgNC4xMTcxODggLTAuMzk4NDM4IDMuODI4MTI1IC0wLjIzNDM3NSBDIDMuNTM1MTU2IC0wLjA3ODEyNSAzLjE4NzUgMCAyLjc4MTI1IDAgQyAyLjExMzI4MSAwIDEuNTcwMzEyIC0wLjI1MzkwNiAxLjE1NjI1IC0wLjc2NTYyNSBDIDAuNzUgLTEuMjczNDM4IDAuNTQ2ODc1IC0xLjk1MzEyNSAwLjU0Njg3NSAtMi43OTY4NzUgQyAwLjU0Njg3NSAtMy42NDA2MjUgMC43NSAtNC4zMTY0MDYgMS4xNTYyNSAtNC44MjgxMjUgQyAxLjU3MDMxMiAtNS4zMzU5MzggMi4xMTMyODEgLTUuNTkzNzUgMi43ODEyNSAtNS41OTM3NSBDIDMuMTg3NSAtNS41OTM3NSAzLjUzNTE1NiAtNS41MTU2MjUgMy44MjgxMjUgLTUuMzU5Mzc1IEMgNC4xMTcxODggLTUuMjAzMTI1IDQuMzU5Mzc1IC00Ljk2MDkzOCA0LjU0Njg3NSAtNC42NDA2MjUgTCA0LjU0Njg3NSAtNS40Njg3NSBMIDUuNDM3NSAtNS40Njg3NSBaIE0gNS40Mzc1IC0wLjY3MTg3NSAiLz4KPC9zeW1ib2w+CjwvZz4KPGNsaXBQYXRoIGlkPSJjbGlwMSI+CiAgPHBhdGggZD0iTSAxNzAgMTkgTCA2MzcuNjAxNTYyIDE5IEwgNjM3LjYwMTU2MiAyODYuMTMyODEyIEwgMTcwIDI4Ni4xMzI4MTIgWiBNIDE3MCAxOSAiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8ZyBpZD0ic3VyZmFjZTEiPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDEpIiBjbGlwLXJ1bGU9Im5vbnplcm8iPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjgyMzIyNDtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDE3MC43NSAxOS43MTQ4NDQgTCA2MzcuMTkxNDA2IDE5LjcxNDg0NCBMIDYzNy4xOTE0MDYgMjg1LjcyMjY1NiBMIDE3MC43NSAyODUuNzIyNjU2IFogTSAxNzAuNzUgMTkuNzE0ODQ0ICIvPgo8L2c+CjxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6bm9uemVybztmaWxsOnJnYig1OS45OTkwODQlLDU5Ljk5OTA4NCUsNTkuOTk5MDg0JSk7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOjAuNDk2ODU3O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZTpyZ2IoNTkuOTk5MDg0JSw1OS45OTkwODQlLDU5Ljk5OTA4NCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gMTUyLjY5OTIxOSAwLjI1IEwgMTc5LjI3MzQzOCAwLjI1IEwgMTc5LjI3MzQzOCAzNy4zNjMyODEgTCAxNTIuNjk5MjE5IDM3LjM2MzI4MSBaIE0gMTUyLjY5OTIxOSAwLjI1ICIvPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjkzNzQ2OTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDEwMCUsMTAwJSwxMDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDE1Ny41ODk4NDQgNC41ODk4NDQgTCAxNzQuMzgyODEyIDQuNTg5ODQ0ICIvPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjkzNzQ2OTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDEwMCUsMTAwJSwxMDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDE1Ny41ODk4NDQgNi45NjQ4NDQgTCAxNzQuMzgyODEyIDYuOTY0ODQ0ICIvPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjkzNzQ2OTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDEwMCUsMTAwJSwxMDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDE1Ny41ODk4NDQgOS4zNDM3NSBMIDE3NC4zODI4MTIgOS4zNDM3NSAiLz4KPHBhdGggc3R5bGU9ImZpbGwtcnVsZTpub256ZXJvO2ZpbGw6cmdiKDEwMCUsMTAwJSwxMDAlKTtmaWxsLW9wYWNpdHk6MTtzdHJva2Utd2lkdGg6MC40OTYwNjM7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSAxOTkuODMyMDMxIDgzLjU0Mjk2OSBMIDIyNC42MDE1NjIgODMuNTQyOTY5IEwgMjI0LjYwMTU2MiAxMTQuNjQ4NDM4IEwgMTk5LjgzMjAzMSAxMTQuNjQ4NDM4IFogTSAxOTkuODMyMDMxIDgzLjU0Mjk2OSAiLz4KPHBhdGggc3R5bGU9ImZpbGw6bm9uZTtzdHJva2Utd2lkdGg6MC45Mzc0Njg7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSAyMDMuODIwMzEyIDkwLjIzNDM3NSBMIDIyMC42MTMyODEgOTAuMjM0Mzc1ICIvPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjkzNzQ2ODtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDIwMy44MjAzMTIgOTMuNzgxMjUgTCAyMjAuNjEzMjgxIDkzLjc4MTI1ICIvPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjkzNzQ2ODtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDIwMy44MjAzMTIgOTcuMzI0MjE5IEwgMjIwLjYxMzI4MSA5Ny4zMjQyMTkgIi8+CjxwYXRoIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlLXdpZHRoOjAuOTM3NDY4O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZTpyZ2IoMCUsMCUsMCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gMjAzLjgyMDMxMiAxMDAuODcxMDk0IEwgMjIwLjYxMzI4MSAxMDAuODcxMDk0ICIvPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjkzNzQ2ODtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDIwMy44MjAzMTIgMTA3Ljk2MDkzOCBMIDIyMC42MTMyODEgMTA3Ljk2MDkzOCAiLz4KPHBhdGggc3R5bGU9ImZpbGw6bm9uZTtzdHJva2Utd2lkdGg6MC45Mzc0Njg7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSAyMDMuODIwMzEyIDEwNC40MTQwNjIgTCAyMjAuNjEzMjgxIDEwNC40MTQwNjIgIi8+CjxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6bm9uemVybztmaWxsOnJnYigxMDAlLDEwMCUsMTAwJSk7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOjAuNzUxMTgxO3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZTpyZ2IoMCUsMCUsMCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gNjIuMTc5Njg4IDEwMS4wNzAzMTIgTCA2Mi4yMzA0NjkgMTE1LjQyNTc4MSBDIDYyLjIzMDQ2OSAxMTguNzMwNDY5IDU0LjcxODc1IDEyMS40MTAxNTYgNDUuNDYwOTM4IDEyMS40MTAxNTYgQyAzNi4yMDMxMjUgMTIxLjQxMDE1NiAyOC42OTE0MDYgMTE4LjczMDQ2OSAyOC42OTE0MDYgMTE1LjQyNTc4MSBMIDI4LjU4MjAzMSAxMDEuMjE0ODQ0IEMgMjguNTgyMDMxIDEwNC41MTU2MjUgMzYuNjIxMDk0IDEwNi43NzM0MzggNDUuODc4OTA2IDEwNi43NzM0MzggQyA1NS4xMzY3MTkgMTA2Ljc3MzQzOCA2Mi4xNzk2ODggMTA0LjM3NSA2Mi4xNzk2ODggMTAxLjA3MDMxMiBaIE0gNjIuMTc5Njg4IDEwMS4wNzAzMTIgIi8+CjxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6bm9uemVybztmaWxsOnJnYigxMDAlLDEwMCUsMTAwJSk7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOjAuNzUxMTgxO3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZTpyZ2IoMCUsMCUsMCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gNjIuMTIxMDk0IDEwMS4xODc1IEMgNjIuMTIxMDk0IDEwNC40OTYwOTQgNTQuNjEzMjgxIDEwNy4xNzU3ODEgNDUuMzU1NDY5IDEwNy4xNzU3ODEgQyAzNi4wOTM3NSAxMDcuMTc1NzgxIDI4LjU4NTkzOCAxMDQuNDk2MDk0IDI4LjU4NTkzOCAxMDEuMTg3NSBDIDI4LjU4NTkzOCA5Ny44ODI4MTIgMzYuMDkzNzUgOTUuMjAzMTI1IDQ1LjM1NTQ2OSA5NS4yMDMxMjUgQyA1NC42MTMyODEgOTUuMjAzMTI1IDYyLjEyMTA5NCA5Ny44ODI4MTIgNjIuMTIxMDk0IDEwMS4xODc1IFogTSA2Mi4xMjEwOTQgMTAxLjE4NzUgIi8+CjxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6bm9uemVybztmaWxsOnJnYigxMDAlLDEwMCUsMTAwJSk7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOjAuNDk2MDYzO3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZTpyZ2IoMCUsMCUsMCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gNTguMTkxNDA2IDc2LjY1NjI1IEwgODIuOTYwOTM4IDc2LjY1NjI1IEwgODIuOTYwOTM4IDEwNy43NTc4MTIgTCA1OC4xOTE0MDYgMTA3Ljc1NzgxMiBaIE0gNTguMTkxNDA2IDc2LjY1NjI1ICIvPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjkzNzQ2ODtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDYyLjE3OTY4OCA4My4zNDM3NSBMIDc4Ljk3MjY1NiA4My4zNDM3NSAiLz4KPHBhdGggc3R5bGU9ImZpbGw6bm9uZTtzdHJva2Utd2lkdGg6MC45Mzc0Njg7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSA2Mi4xNzk2ODggODYuODkwNjI1IEwgNzguOTcyNjU2IDg2Ljg5MDYyNSAiLz4KPHBhdGggc3R5bGU9ImZpbGw6bm9uZTtzdHJva2Utd2lkdGg6MC45Mzc0Njg7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSA2Mi4xNzk2ODggOTAuNDMzNTk0IEwgNzguOTcyNjU2IDkwLjQzMzU5NCAiLz4KPHBhdGggc3R5bGU9ImZpbGw6bm9uZTtzdHJva2Utd2lkdGg6MC45Mzc0Njg7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSA2Mi4xNzk2ODggOTMuOTgwNDY5IEwgNzguOTcyNjU2IDkzLjk4MDQ2OSAiLz4KPHBhdGggc3R5bGU9ImZpbGw6bm9uZTtzdHJva2Utd2lkdGg6MC45Mzc0Njg7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSA2Mi4xNzk2ODggMTAxLjA3MDMxMiBMIDc4Ljk3MjY1NiAxMDEuMDcwMzEyICIvPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjkzNzQ2ODtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDYyLjE3OTY4OCA5Ny41MjM0MzggTCA3OC45NzI2NTYgOTcuNTIzNDM4ICIvPgo8ZyBzdHlsZT0iZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxOyI+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgwLTEiIHg9Ii0wLjc4NTE1NiIgeT0iODMuMDkyMTA1Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgwLTIiIHg9IjUuMzc0ODM5IiB5PSI4My4wOTIxMDUiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDAtMyIgeD0iMTAuMjYyODM2IiB5PSI4My4wOTIxMDUiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDAtNCIgeD0iMTQuNjU0ODMyIiB5PSI4My4wOTIxMDUiLz4KPC9nPgo8ZyBzdHlsZT0iZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxOyI+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgwLTUiIHg9IjE4Ljk5ODgyOSIgeT0iODMuMDkyMTA1Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgwLTYiIHg9IjIzLjkxODgyNSIgeT0iODMuMDkyMTA1Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgwLTciIHg9IjI3LjIwNjgyMyIgeT0iODMuMDkyMTA1Ii8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMC04IiB4PSItMC43ODUxNTYiIHk9IjkxLjQ5MjEwNyIvPgo8L2c+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDAtNSIgeD0iNC40MDY4NCIgeT0iOTEuNDkyMTA3Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgwLTkiIHg9IjkuMzI2ODM2IiB5PSI5MS40OTIxMDciLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDAtMiIgeD0iMTQuMzk4ODMzIiB5PSI5MS40OTIxMDciLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDAtMTAiIHg9IjE5LjI4NjgyOSIgeT0iOTEuNDkyMTA3Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgwLTExIiB4PSIyMy40NDY4MjYiIHk9IjkxLjQ5MjEwNyIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMC0xMiIgeD0iMjUuNjYyODI0IiB5PSI5MS40OTIxMDciLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDAtMiIgeD0iMjguNzk4ODIyIiB5PSI5MS40OTIxMDciLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDAtNiIgeD0iMzMuNjg2ODE4IiB5PSI5MS40OTIxMDciLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDAtMTMiIHg9IjM2Ljk3NDgxNiIgeT0iOTEuNDkyMTA3Ii8+CjwvZz4KPHBhdGggc3R5bGU9ImZpbGw6bm9uZTtzdHJva2Utd2lkdGg6NC4yNTE5Njk7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSA5MS41MjczNDQgOTkuMTE3MTg4IEwgMTg5LjY0NDUzMSA5OS4xMTcxODggIi8+CjxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOjAuNzk3MjQ0O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZTpyZ2IoMCUsMCUsMCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gLTE4MS40NTcwMzEgLTkzLjk3MjY1NiBMIC0xOTUuMzk0NTMxIC05OS4wOTc2NTYgTCAtMTgxLjQ1NzAzMSAtMTA0LjIyMjY1NiBDIC0xODMuNjgzNTk0IC0xMDEuMTk1MzEyIC0xODMuNjcxODc1IC05Ny4wNTQ2ODggLTE4MS40NTcwMzEgLTkzLjk3MjY1NiBaIE0gLTE4MS40NTcwMzEgLTkzLjk3MjY1NiAiIHRyYW5zZm9ybT0ibWF0cml4KC0xLDAsMCwtMSwwLDApIi8+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMSIgeD0iOTAuNDI4MTIxIiB5PSI5Mi41ODYyNjUiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMiIgeD0iOTYuNzg4MTI1IiB5PSI5Mi41ODYyNjUiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMyIgeD0iOTkuOTU4MTI3IiB5PSI5Mi41ODYyNjUiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNCIgeD0iMTAzLjEyODEyOSIgeT0iOTIuNTg2MjY1Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTUiIHg9IjEwOS40NjgxMzIiIHk9IjkyLjU4NjI2NSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS02IiB4PSIxMTUuNTc4MTM2IiB5PSI5Mi41ODYyNjUiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNyIgeD0iMTIxLjA2ODEzOSIgeT0iOTIuNTg2MjY1Ii8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSIxMjYuNDk4MTQzIiB5PSI5Mi41ODYyNjUiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtOSIgeD0iMTMyLjY0ODE0NiIgeT0iOTIuNTg2MjY1Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTMiIHg9IjEzNi43NTgxNDkiIHk9IjkyLjU4NjI2NSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xMCIgeD0iMTM5LjkyODE1MSIgeT0iOTIuNTg2MjY1Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTExIiB4PSIxNDYuMjY4MTU1IiB5PSI5Mi41ODYyNjUiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMTIiIHg9IjE1Mi41OTgxNTgiIHk9IjkyLjU4NjI2NSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xMiIgeD0iMTU1LjM2ODE2IiB5PSI5Mi41ODYyNjUiLz4KPC9nPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDo0LjI1MTk2OTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDIzMi42MTMyODEgOTkuMTE3MTg4IEwgMzMwLjczMDQ2OSA5OS4xMTcxODggIi8+CjxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOjAuNzk3MjQ0O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZTpyZ2IoMCUsMCUsMCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gLTMyMi41NDI5NjkgLTkzLjk3MjY1NiBMIC0zMzYuNDgwNDY5IC05OS4wOTc2NTYgTCAtMzIyLjU0Mjk2OSAtMTA0LjIyMjY1NiBDIC0zMjQuNzY5NTMxIC0xMDEuMTk1MzEyIC0zMjQuNzU3ODEyIC05Ny4wNTQ2ODggLTMyMi41NDI5NjkgLTkzLjk3MjY1NiBaIE0gLTMyMi41NDI5NjkgLTkzLjk3MjY1NiAiIHRyYW5zZm9ybT0ibWF0cml4KC0xLDAsMCwtMSwwLDApIi8+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMTMiIHg9IjIzMS44ODE0MTMiIHk9IjkzLjU1NTUwMSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yIiB4PSIyMzguMjQxNDE3IiB5PSI5My41NTU1MDEiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMyIgeD0iMjQxLjQxMTQxOSIgeT0iOTMuNTU1NTAxIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTQiIHg9IjI0NC41ODE0MjEiIHk9IjkzLjU1NTUwMSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS01IiB4PSIyNTAuOTIxNDI0IiB5PSI5My41NTU1MDEiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNiIgeD0iMjU3LjAzMTQyOCIgeT0iOTMuNTU1NTAxIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTciIHg9IjI2Mi41MjE0MzEiIHk9IjkzLjU1NTUwMSIvPgo8L2c+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtOCIgeD0iMjY3Ljk1MTQzNSIgeT0iOTMuNTU1NTAxIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjI3NC4xMDE0MzgiIHk9IjkzLjU1NTUwMSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0zIiB4PSIyNzguMjExNDQxIiB5PSI5My41NTU1MDEiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNiIgeD0iMjgxLjM4MTQ0MyIgeT0iOTMuNTU1NTAxIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjI4Ni44NzE0NDYiIHk9IjkzLjU1NTUwMSIvPgo8L2c+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtOCIgeD0iMjkwLjc2MTQ0OCIgeT0iOTMuNTU1NTAxIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTE0IiB4PSIyOTYuOTExNDUyIiB5PSI5My41NTU1MDEiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMTUiIHg9IjMwMy4wMzE0NTYiIHk9IjkzLjU1NTUwMSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSIzMDYuOTUxNDU4IiB5PSI5My41NTU1MDEiLz4KPC9nPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjc1MTE4MTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1kYXNoYXJyYXk6MC43NTExODEsMC43NTExODE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gMzQ5LjEyMTA5NCAzOC4yMTA5MzggTCA0NDMuMDc0MjE5IDM4LjIxMDkzOCBMIDQ0My4wNzQyMTkgMTMzLjM3MTA5NCBMIDM0OS4xMjEwOTQgMTMzLjM3MTA5NCBaIE0gMzQ5LjEyMTA5NCAzOC4yMTA5MzggIi8+CjxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6bm9uemVybztmaWxsOnJnYig5MC4xOTQ3MDIlLDkwLjE5NDcwMiUsOTAuMTk0NzAyJSk7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOjAuNzUxMTgxO3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZTpyZ2IoMCUsMCUsMCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gNDE1LjgyMDMxMiAyNS44OTQ1MzEgTCA0NjUuMzM5ODQ0IDI1Ljg5NDUzMSBMIDQ2NS4zMzk4NDQgNDcuNzg1MTU2IEwgNDE1LjgyMDMxMiA0Ny43ODUxNTYgWiBNIDQxNS44MjAzMTIgMjUuODk0NTMxICIvPgo8ZyBzdHlsZT0iZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxOyI+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTE2IiB4PSI0MjQuODI2MTE0IiB5PSI0MC41Njg2MTIiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMTciIHg9IjQzMS4xMzYxMTgiIHk9IjQwLjU2ODYxMiIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xOCIgeD0iNDM3LjA0NjEyMSIgeT0iNDAuNTY4NjEyIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTE1IiB4PSI0MzkuODE2MTIzIiB5PSI0MC41Njg2MTIiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtOCIgeD0iNDQzLjczNjEyNSIgeT0iNDAuNTY4NjEyIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTQiIHg9IjQ0OS44ODYxMjkiIHk9IjQwLjU2ODYxMiIvPgo8L2c+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMTkiIHg9IjM3MS4zODI1NDIiIHk9IjgzLjc2ODIyOCIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS01IiB4PSIzNzkuMDgyNTQ3IiB5PSI4My43NjgyMjgiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNiIgeD0iMzg1LjE5MjU1IiB5PSI4My43NjgyMjgiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNyIgeD0iMzkwLjY4MjU1NCIgeT0iODMuNzY4MjI4Ii8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSIzOTYuMTEyNTU3IiB5PSI4My43NjgyMjgiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtOSIgeD0iNDAyLjI2MjU2IiB5PSI4My43NjgyMjgiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMyIgeD0iNDA2LjM3MjU2MyIgeT0iODMuNzY4MjI4Ii8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yMCIgeD0iMzcxLjM4MjU0MiIgeT0iOTUuMjY4MjM1Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTUiIHg9IjM3OC4zNjI1NDYiIHk9Ijk1LjI2ODIzNSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yMSIgeD0iMzg0LjQ3MjU1IiB5PSI5NS4yNjgyMzUiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMTUiIHg9IjM5MC44MDI1NTQiIHk9Ijk1LjI2ODIzNSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xNCIgeD0iMzk0LjcyMjU1NiIgeT0iOTUuMjY4MjM1Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTE4IiB4PSI0MDAuODQyNTYiIHk9Ijk1LjI2ODIzNSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yMSIgeD0iNDAzLjYxMjU2MSIgeT0iOTUuMjY4MjM1Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTgiIHg9IjQwOS45NDI1NjUiIHk9Ijk1LjI2ODIzNSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS05IiB4PSI0MTYuMDkyNTY5IiB5PSI5NS4yNjgyMzUiLz4KPC9nPgo8cGF0aCBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7ZmlsbDpyZ2IoNzAuMTk1MDA3JSw3MC4xOTUwMDclLDcwLjE5NTAwNyUpO2ZpbGwtb3BhY2l0eToxO3N0cm9rZS13aWR0aDowLjc1MTE4MTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDM0OS4xMjEwOTQgMTgzLjM1OTM3NSBMIDQ0My4wNzQyMTkgMTgzLjM1OTM3NSBMIDQ0My4wNzQyMTkgMjc4LjUxOTUzMSBMIDM0OS4xMjEwOTQgMjc4LjUxOTUzMSBaIE0gMzQ5LjEyMTA5NCAxODMuMzU5Mzc1ICIvPgo8cGF0aCBzdHlsZT0iZmlsbC1ydWxlOm5vbnplcm87ZmlsbDpyZ2IoOTAuMTk0NzAyJSw5MC4xOTQ3MDIlLDkwLjE5NDcwMiUpO2ZpbGwtb3BhY2l0eToxO3N0cm9rZS13aWR0aDowLjc1MTE4MTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDQxNS44MjAzMTIgMTcxLjA0Mjk2OSBMIDQ2NS4zMzk4NDQgMTcxLjA0Mjk2OSBMIDQ2NS4zMzk4NDQgMTkyLjkzNzUgTCA0MTUuODIwMzEyIDE5Mi45Mzc1IFogTSA0MTUuODIwMzEyIDE3MS4wNDI5NjkgIi8+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMjIiIHg9IjQzMy42NDIwNjEiIHk9IjE4NS41NjQ5MTEiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMjMiIHg9IjQ0MC45NTIwNjUiIHk9IjE4NS41NjQ5MTEiLz4KPC9nPgo8ZyBzdHlsZT0iZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxOyI+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTE5IiB4PSIzNzEuMzgyNTI0IiB5PSIyMjguOTE4MzI3Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTUiIHg9IjM3OS4wODI1MjgiIHk9IjIyOC45MTgzMjciLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNiIgeD0iMzg1LjE5MjUzMiIgeT0iMjI4LjkxODMyNyIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS03IiB4PSIzOTAuNjgyNTM1IiB5PSIyMjguOTE4MzI3Ii8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSIzOTYuMTEyNTM4IiB5PSIyMjguOTE4MzI3Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjQwMi4yNjI1NDIiIHk9IjIyOC45MTgzMjciLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMyIgeD0iNDA2LjM3MjU0NSIgeT0iMjI4LjkxODMyNyIvPgo8L2c+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMjAiIHg9IjM3MS4zODI1MjQiIHk9IjI0MC40MTgzMzQiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNSIgeD0iMzc4LjM2MjUyOCIgeT0iMjQwLjQxODMzNCIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yMSIgeD0iMzg0LjQ3MjUzMSIgeT0iMjQwLjQxODMzNCIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xNSIgeD0iMzkwLjgwMjUzNSIgeT0iMjQwLjQxODMzNCIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xNCIgeD0iMzk0LjcyMjUzOCIgeT0iMjQwLjQxODMzNCIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xOCIgeD0iNDAwLjg0MjU0MSIgeT0iMjQwLjQxODMzNCIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yMSIgeD0iNDAzLjYxMjU0MyIgeT0iMjQwLjQxODMzNCIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSI0MDkuOTQyNTQ3IiB5PSIyNDAuNDE4MzM0Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjQxNi4wOTI1NSIgeT0iMjQwLjQxODMzNCIvPgo8L2c+CjxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6bm9uemVybztmaWxsOnJnYig5MC4xOTQ3MDIlLDkwLjE5NDcwMiUsOTAuMTk0NzAyJSk7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOjAuNzUxMTgxO3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZTpyZ2IoMCUsMCUsMCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gMjUzLjU4NTkzOCAzOS42Nzk2ODggTCAzMDMuMTA1NDY5IDM5LjY3OTY4OCBMIDMwMy4xMDU0NjkgNjEuNTcwMzEyIEwgMjUzLjU4NTkzOCA2MS41NzAzMTIgWiBNIDI1My41ODU5MzggMzkuNjc5Njg4ICIvPgo8ZyBzdHlsZT0iZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxOyI+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjI1OS4xNzA4OCIgeT0iNTMuMzU1MDA4Ii8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSIyNjMuMDYwODgyIiB5PSI1My4zNTUwMDgiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMjQiIHg9IjI2OS4yMTA4ODYiIHk9IjUzLjM1NTAwOCIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS01IiB4PSIyNzguOTUwODkyIiB5PSI1My4zNTUwMDgiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMjUiIHg9IjI4NS4wNjA4OTYiIHk9IjUzLjM1NTAwOCIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSIyOTAuOTcwODk5IiB5PSI1My4zNTUwMDgiLz4KPC9nPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDo0LjI1MTk2OTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDQ1Mi4yNSA5OS4xMTcxODggTCA1NTAuMzY3MTg4IDk5LjExNzE4OCAiLz4KPHBhdGggc3R5bGU9ImZpbGwtcnVsZTpldmVub2RkO2ZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTtzdHJva2Utd2lkdGg6MC43OTcyNDQ7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSAtNTQyLjE3OTY4OCAtOTMuOTcyNjU2IEwgLTU1Ni4xMTcxODggLTk5LjA5NzY1NiBMIC01NDIuMTc5Njg4IC0xMDQuMjIyNjU2IEMgLTU0NC40MDYyNSAtMTAxLjE5NTMxMiAtNTQ0LjM5NDUzMSAtOTcuMDU0Njg4IC01NDIuMTc5Njg4IC05My45NzI2NTYgWiBNIC01NDIuMTc5Njg4IC05My45NzI2NTYgIiB0cmFuc2Zvcm09Im1hdHJpeCgtMSwwLDAsLTEsMCwwKSIvPgo8cGF0aCBzdHlsZT0iZmlsbC1ydWxlOm5vbnplcm87ZmlsbDpyZ2IoOTAuMTk0NzAyJSw5MC4xOTQ3MDIlLDkwLjE5NDcwMiUpO2ZpbGwtb3BhY2l0eToxO3N0cm9rZS13aWR0aDowLjc1MTE4MTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDU2NS4zOTQ1MzEgODguMTUyMzQ0IEwgNjE0LjkxNDA2MiA4OC4xNTIzNDQgTCA2MTQuOTE0MDYyIDExMC4wNDI5NjkgTCA1NjUuMzk0NTMxIDExMC4wNDI5NjkgWiBNIDU2NS4zOTQ1MzEgODguMTUyMzQ0ICIvPgo8ZyBzdHlsZT0iZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxOyI+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjU3MC45NzgzNjQiIHk9IjEwMS44MjYzNTQiLz4KPC9nPgo8ZyBzdHlsZT0iZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxOyI+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTgiIHg9IjU3NC44NjgzNjYiIHk9IjEwMS44MjYzNTQiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMjQiIHg9IjU4MS4wMTgzNyIgeT0iMTAxLjgyNjM1NCIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS01IiB4PSI1OTAuNzU4Mzc2IiB5PSIxMDEuODI2MzU0Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTI1IiB4PSI1OTYuODY4MzgiIHk9IjEwMS44MjYzNTQiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtOCIgeD0iNjAyLjc3ODM4MyIgeT0iMTAxLjgyNjM1NCIvPgo8L2c+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMjYiIHg9IjQ1MS40Nzc2MzIiIHk9IjkzLjU1NTQ5OSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yIiB4PSI0NTcuODM3NjM2IiB5PSI5My41NTU0OTkiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMyIgeD0iNDYxLjAwNzYzOCIgeT0iOTMuNTU1NDk5Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTQiIHg9IjQ2NC4xNzc2NCIgeT0iOTMuNTU1NDk5Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTUiIHg9IjQ3MC41MTc2NDQiIHk9IjkzLjU1NTQ5OSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS02IiB4PSI0NzYuNjI3NjQ3IiB5PSI5My41NTU0OTkiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNyIgeD0iNDgyLjExNzY1MSIgeT0iOTMuNTU1NDk5Ii8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSI0ODcuNTQ3NjU0IiB5PSI5My41NTU0OTkiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtOSIgeD0iNDkzLjY5NzY1OCIgeT0iOTMuNTU1NDk5Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTMiIHg9IjQ5Ny44MDc2NiIgeT0iOTMuNTU1NDk5Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjUwMC45Nzc2NjIiIHk9IjkzLjU1NTQ5OSIvPgo8L2c+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMjQiIHg9IjUwNC45MTc2NjQiIHk9IjkzLjU1NTQ5OSIvPgo8L2c+CjxwYXRoIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlLXdpZHRoOjQuMjUxOTY5O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZTpyZ2IoMCUsMCUsMCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gMjExLjEyMTA5NCA3Ny42MjUgTCAyMTEuMTIxMDk0IDUwLjE4MzU5NCBMIDI0NS4zMDQ2ODggNTAuMTgzNTk0ICIvPgo8cGF0aCBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7ZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxO3N0cm9rZS13aWR0aDowLjc5NzI0NDtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIC0yMzcuMTE3MTg4IC00NS4wMzkwNjIgTCAtMjUxLjA1NDY4OCAtNTAuMTY0MDYyIEwgLTIzNy4xMTcxODggLTU1LjI4OTA2MiBDIC0yMzkuMzQzNzUgLTUyLjI2MTcxOSAtMjM5LjMzMjAzMSAtNDguMTI1IC0yMzcuMTE3MTg4IC00NS4wMzkwNjIgWiBNIC0yMzcuMTE3MTg4IC00NS4wMzkwNjIgIiB0cmFuc2Zvcm09Im1hdHJpeCgtMSwwLDAsLTEsMCwwKSIvPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDo0LjI1MTk2OTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDM3My41NjY0MDYgMTM2LjczNDM3NSBMIDM3My41NjY0MDYgMTczLjg0NzY1NiAiLz4KPHBhdGggc3R5bGU9ImZpbGwtcnVsZTpldmVub2RkO2ZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTtzdHJva2Utd2lkdGg6MC43OTcyNDQ7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSAtMTY1LjY2MDE1NiAzNzguNzEwOTM4IEwgLTE3OS41OTc2NTYgMzczLjU4OTg0NCBMIC0xNjUuNjYwMTU2IDM2OC40NjQ4NDQgQyAtMTY3Ljg4NjcxOSAzNzEuNDg4MjgxIC0xNjcuODc1IDM3NS42Mjg5MDYgLTE2NS42NjAxNTYgMzc4LjcxMDkzOCBaIE0gLTE2NS42NjAxNTYgMzc4LjcxMDkzOCAiIHRyYW5zZm9ybT0ibWF0cml4KDAsLTEsMSwwLDAsMCkiLz4KPHBhdGggc3R5bGU9ImZpbGw6bm9uZTtzdHJva2Utd2lkdGg6NC4yNTE5Njk7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSA0MDQuNDc2NTYyIDE3OS45OTYwOTQgTCA0MDQuNDc2NTYyIDE0Mi44ODI4MTIgIi8+CjxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOjAuNzk3MjQ0O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZTpyZ2IoMCUsMCUsMCUpO3N0cm9rZS1vcGFjaXR5OjE7c3Ryb2tlLW1pdGVybGltaXQ6NDsiIGQ9Ik0gMTUxLjA3MDMxMiAtMzk5LjMzMjAzMSBMIDEzNy4xMzI4MTIgLTQwNC40NTcwMzEgTCAxNTEuMDcwMzEyIC00MDkuNTgyMDMxIEMgMTQ4Ljg0Mzc1IC00MDYuNTU0Njg4IDE0OC44NTU0NjkgLTQwMi40MTc5NjkgMTUxLjA3MDMxMiAtMzk5LjMzMjAzMSBaIE0gMTUxLjA3MDMxMiAtMzk5LjMzMjAzMSAiIHRyYW5zZm9ybT0ibWF0cml4KDAsMSwtMSwwLDAsMCkiLz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yNyIgeD0iNDI3LjAyMjkzNiIgeT0iMTYxLjEyNDA1MSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yIiB4PSI0MzMuMzgyOTQiIHk9IjE2MS4xMjQwNTEiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMyIgeD0iNDM2LjU1Mjk0MiIgeT0iMTYxLjEyNDA1MSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS00IiB4PSI0MzkuNzIyOTQ0IiB5PSIxNjEuMTI0MDUxIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTUiIHg9IjQ0Ni4wNjI5NDciIHk9IjE2MS4xMjQwNTEiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNiIgeD0iNDUyLjE3Mjk1MSIgeT0iMTYxLjEyNDA1MSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS03IiB4PSI0NTcuNjYyOTU0IiB5PSIxNjEuMTI0MDUxIi8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSI0NjMuMDkyOTU4IiB5PSIxNjEuMTI0MDUxIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjQ2OS4yNDI5NjEiIHk9IjE2MS4xMjQwNTEiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMyIgeD0iNDczLjM1Mjk2NCIgeT0iMTYxLjEyNDA1MSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yOCIgeD0iNDc2LjUyMjk2NiIgeT0iMTYxLjEyNDA1MSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xNSIgeD0iNDgxLjcyMjk2OSIgeT0iMTYxLjEyNDA1MSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS01IiB4PSI0ODUuNjQyOTcxIiB5PSIxNjEuMTI0MDUxIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTEwIiB4PSI0OTEuNzUyOTc1IiB5PSIxNjEuMTI0MDUxIi8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yOSIgeD0iMjc5LjEyNDE4NyIgeT0iMTYyLjA5MzI5Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTIiIHg9IjI4NS40ODQxOTEiIHk9IjE2Mi4wOTMyOSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0zIiB4PSIyODguNjU0MTkzIiB5PSIxNjIuMDkzMjkiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNCIgeD0iMjkxLjgyNDE5NSIgeT0iMTYyLjA5MzI5Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTUiIHg9IjI5OC4xNjQxOTkiIHk9IjE2Mi4wOTMyOSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS02IiB4PSIzMDQuMjc0MjAyIiB5PSIxNjIuMDkzMjkiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNyIgeD0iMzA5Ljc2NDIwNiIgeT0iMTYyLjA5MzI5Ii8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSIzMTUuMTk0MjA5IiB5PSIxNjIuMDkzMjkiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtOSIgeD0iMzIxLjM0NDIxMyIgeT0iMTYyLjA5MzI5Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTMiIHg9IjMyNS40NTQyMTUiIHk9IjE2Mi4wOTMyOSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0yOCIgeD0iMzI4LjYyNDIxNyIgeT0iMTYyLjA5MzI5Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTE1IiB4PSIzMzMuODI0MjIiIHk9IjE2Mi4wOTMyOSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xNCIgeD0iMzM3Ljc0NDIyMiIgeT0iMTYyLjA5MzI5Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjM0My44NjQyMjYiIHk9IjE2Mi4wOTMyOSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xNSIgeD0iMzQ3Ljk3NDIyOSIgeT0iMTYyLjA5MzI5Ii8+CjwvZz4KPHBhdGggc3R5bGU9ImZpbGw6bm9uZTtzdHJva2Utd2lkdGg6MC43NDk5OTk7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSA4OS4yNzM0MzggMTcxLjU1NDY4OCBMIDM1OS4yNTM5MDYgMTcxLjU1NDY4OCAiLz4KPHBhdGggc3R5bGU9ImZpbGw6bm9uZTtzdHJva2Utd2lkdGg6MC43NDk5OTk7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlOnJnYigwJSwwJSwwJSk7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtbWl0ZXJsaW1pdDo0OyIgZD0iTSA4OS4yNzM0MzggMTcxLjU1NDY4OCBMIDg5LjI3MzQzOCAxNTEuMTI4OTA2ICIvPgo8cGF0aCBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjc0OTk5OTtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2U6cmdiKDAlLDAlLDAlKTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjQ7IiBkPSJNIDM1OS4yNTM5MDYgMTcxLjU1NDY4OCBMIDM1OS4yNTM5MDYgMTUxLjEyODkwNiAiLz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS00IiB4PSIxOTcuNTk4ODM3IiB5PSIxODMuODIyNTMzIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTUiIHg9IjIwMy45Mzg4NDEiIHk9IjE4My44MjI1MzMiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNiIgeD0iMjEwLjA0ODg0NCIgeT0iMTgzLjgyMjUzMyIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS03IiB4PSIyMTUuNTM4ODQ4IiB5PSIxODMuODIyNTMzIi8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS04IiB4PSIyMjAuOTY4ODUxIiB5PSIxODMuODIyNTMzIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjIyNy4xMTg4NTUiIHk9IjE4My44MjI1MzMiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMyIgeD0iMjMxLjIyODg1NyIgeT0iMTgzLjgyMjUzMyIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS05IiB4PSIyMzQuMzk4ODU5IiB5PSIxODMuODIyNTMzIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTExIiB4PSIyMzguNTA4ODYyIiB5PSIxODMuODIyNTMzIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTIxIiB4PSIyNDQuODM4ODY1IiB5PSIxODMuODIyNTMzIi8+CjwvZz4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0zMCIgeD0iMjIxLjMwMzIwMSIgeT0iMzEuOTM2MDUyIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTIiIHg9IjIyNy42NjMyMDUiIHk9IjMxLjkzNjA1MiIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0zIiB4PSIyMzAuODMzMjA3IiB5PSIzMS45MzYwNTIiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNCIgeD0iMjM0LjAwMzIwOSIgeT0iMzEuOTM2MDUyIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTUiIHg9IjI0MC4zNDMyMTMiIHk9IjMxLjkzNjA1MiIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS02IiB4PSIyNDYuNDUzMjE2IiB5PSIzMS45MzYwNTIiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtNyIgeD0iMjUxLjk0MzIyIiB5PSIzMS45MzYwNTIiLz4KPC9nPgo8ZyBzdHlsZT0iZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxOyI+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTgiIHg9IjI1Ny4zNzMyMjMiIHk9IjMxLjkzNjA1MiIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS05IiB4PSIyNjMuNTIzMjI3IiB5PSIzMS45MzYwNTIiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMyIgeD0iMjY3LjYzMzIyOSIgeT0iMzEuOTM2MDUyIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTE4IiB4PSIyNzAuODAzMjMxIiB5PSIzMS45MzYwNTIiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMjQiIHg9IjI3My41NzMyMzMiIHk9IjMxLjkzNjA1MiIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMS0xNCIgeD0iMjgzLjMxMzIzOCIgeT0iMzEuOTM2MDUyIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTMxIiB4PSIyODkuNDMzMjQyIiB5PSIzMS45MzYwNTIiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtOCIgeD0iMjk1Ljc3MzI0NiIgeT0iMzEuOTM2MDUyIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTMiIHg9IjMwMS45MjMyNSIgeT0iMzEuOTM2MDUyIi8+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTkiIHg9IjMwNS4wOTMyNTEiIHk9IjMxLjkzNjA1MiIvPgo8L2c+CjxnIHN0eWxlPSJmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7Ij4KICA8dXNlIHhsaW5rOmhyZWY9IiNnbHlwaDEtMjQiIHg9IjMwOS4wMzMyNTQiIHk9IjMxLjkzNjA1MiIvPgo8L2c+CjwvZz4KPC9zdmc+Cg==" alt="the_process_of_container" title="The process of container"></p>
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x8D77;&#x52D5;&#x304B;&#x3089;&#x7D42;&#x4E86;&#x307E;&#x3067;&#x306E;&#x6D41;&#x308C;</li>
+</ul>
+<h3 class="mume-header" id="421-docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%81%AE%E5%8F%96%E5%BE%97">4.2.1 Docker&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306E;&#x53D6;&#x5F97;</h3>
+
+<ul>
+<li>Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x8D77;&#x52D5;&#x3059;&#x308B;&#x306B;&#x306F;&#xFF0C;&#x5143;&#x3068;&#x306A;&#x308B;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x304C;&#x5FC5;&#x8981;&#xFF0E;
+<ul>
+<li>&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306F;<code>docker pull</code>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x4F7F;&#x3046;&#x3053;&#x3068;&#x3067;&#xFF0C;Docker&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x304B;&#x3089;&#x53D6;&#x5F97;&#x3059;&#x308B;</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E5%90%8D%E3%81%A8%E3%82%BF%E3%82%B0">&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x540D;&#x3068;&#x30BF;&#x30B0;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>docker pull [imange name or image ID]
+</code></pre><ul>
+<li>&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x540D;
+<ul>
+<li>Docker Hub&#x3067;&#x691C;&#x7D22;</li>
+<li>&#x30BF;&#x30B0;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3053;&#x3068;&#x3082;&#x3067;&#x304D;&#x308B;
+<ul>
+<li>Docker&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306E;&#x88FD;&#x4F5C;&#x8005;&#x304C;&#x540D;&#x4ED8;&#x3051;&#x305F;&#x5206;&#x985E;&#x540D;</li>
+<li>&#x30EA;&#x30EA;&#x30FC;&#x30B9;&#x7248;&#xFF0C;&#x958B;&#x767A;&#x7248;&#xFF0C;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x756A;&#x53F7;&#x306A;&#x3069;&#x3092;&#x793A;&#x3059;&#x306E;&#x306B;&#x4F7F;&#x308F;&#x308C;&#x308B;&#xFF0E;</li>
+<li>&#x30BF;&#x30B0;&#x540D;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3068;&#x304D;&#x306F;&#xFF0C;&#x534A;&#x89D2;&#x306E;&#x30B3;&#x30ED;&#x30F3; &quot;:&quot; &#x3067;&#x533A;&#x5207;&#x308B;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="%E6%9C%80%E6%96%B0%E7%89%88%E3%82%92%E7%A4%BA%E3%81%99latest">&#x6700;&#x65B0;&#x7248;&#x3092;&#x793A;&#x3059;&quot;latest&quot;</h4>
+
+<ul>
+<li>&#x30BF;&#x30B0;&#x540D;&#x3092;&#x7701;&#x7565;&#x3057;&#x305F;&#x3068;&#x304D;&#x306F;&#xFF0C;&#x6700;&#x65B0;&#x7248;&#x3092;&#x8868;&#x3059;&quot;latest&quot;&#x3068;&#x3044;&#x3046;&#x7279;&#x6B8A;&#x306A;&#x30BF;&#x30B0;&#x304C;&#x6307;&#x5B9A;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3068;&#x307F;&#x306A;&#x3055;&#x308C;&#x308B;&#xFF0E;</li>
+<li>&#x672C;&#x756A;&#x74B0;&#x5883;&#x3067;&#x306F;&#xFF0C;&#x660E;&#x793A;&#x7684;&#x306B;&#x30BF;&#x30B0;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x306E;&#x304C;&#x597D;&#x307E;&#x3057;&#x3044;&#xFF0E;</li>
+</ul>
+<h4 class="mume-header" id="%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%81%97%E3%81%9F%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%81%AE%E4%BF%9D%E5%AD%98%E3%81%A8%E7%A0%B4%E6%A3%84">&#x30C0;&#x30A6;&#x30F3;&#x30ED;&#x30FC;&#x30C9;&#x3057;&#x305F;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306E;&#x4FDD;&#x5B58;&#x3068;&#x7834;&#x68C4;</h4>
+
+<ul>
+<li><code>docker pull</code>&#x3067;&#x5165;&#x624B;&#x3057;&#x305F;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306F;&#xFF0C;Docker&#x30DB;&#x30B9;&#x30C8;&#x306B;&#x4FDD;&#x5B58;&#x3055;&#x308C;&#x308B;&#xFF0E;
+<ul>
+<li>&#x3082;&#x3046;&#x4E00;&#x5EA6;&#x540C;&#x3058;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;<code>docker pull</code>&#x3057;&#x3066;&#x3082;&#xFF0C;&#x30C0;&#x30A6;&#x30F3;&#x30ED;&#x30FC;&#x30C9;&#x3057;&#x76F4;&#x3055;&#x308C;&#x308B;&#x3053;&#x3068;&#x306F;&#x306A;&#x3044;&#xFF0E;</li>
+<li>&#x4FDD;&#x6301;&#x3057;&#x3066;&#x3044;&#x308B;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306F;&#xFF0C;<code>docker image ls</code>&#x3067;&#x78BA;&#x8A8D;&#x3067;&#x304D;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+<li>&#x4FDD;&#x6301;&#x3057;&#x3066;&#x3044;&#x308B;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;&#x524A;&#x9664;&#x3059;&#x308B;&#x306B;&#x306F;&#xFF0C;<code>docker image rm</code>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x4F7F;&#x3046;&#xFF0E;</li>
+</ul>
+<h4 class="mume-header" id="%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8id%E3%81%A7%E3%81%AE%E6%8C%87%E5%AE%9A">&#x30A4;&#x30E1;&#x30FC;&#x30B8;ID&#x3067;&#x306E;&#x6307;&#x5B9A;</h4>
+
+<ul>
+<li>&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306B;&#x306F;&#xFF0C;&#x4E00;&#x610F;&#x306E;&quot;&#x30A4;&#x30E1;&#x30FC;&#x30B8;ID&quot;&#x3082;&#x3064;&#x3044;&#x3066;&#x3044;&#x308B;&#xFF0E;
+<ul>
+<li>&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;&#x4F5C;&#x308B;&#x305F;&#x3073;&#x306B;&#x66F4;&#x65B0;&#x3055;&#x308C;&#x308B;&#x30E6;&#x30CB;&#x30FC;&#x30AF;&#x306A;&#x5024;</li>
+<li><code>docker image ls</code>&#x3067;&#x78BA;&#x8A8D;&#x3067;&#x304D;&#x308B;</li>
+<li>&#x30A4;&#x30E1;&#x30FC;&#x30B8;ID&#x3067;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3053;&#x3068;&#x3082;&#x53EF;&#x80FD;
+<ul>
+<li>&#x30BF;&#x30B0;&#x540D;&#x304C;&#x660E;&#x793A;&#x7684;&#x306B;&#x3064;&#x3051;&#x3089;&#x308C;&#x3066;&#x3044;&#x306A;&#x3044;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x3092;&#x4F7F;&#x3044;&#x305F;&#x3044;&#x3068;&#x304D;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="422-docker%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AE%E4%BD%9C%E6%88%90">4.2.2 Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x4F5C;&#x6210;</h3>
+
+<ul>
+<li><code>docker create</code>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x4F7F;&#x3046;
+<ul>
+<li>&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3082;&#x306E;
+<ul>
+<li>&#x5143;&#x3068;&#x306A;&#x308B;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x540D; (&#x30BF;&#x30B0;&#x540D;&#x542B;) / &#x30A4;&#x30E1;&#x30FC;&#x30B8;ID</li>
+<li>&#x5404;&#x7A2E;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;</li>
+<li>&#x5B9F;&#x884C;&#x3057;&#x305F;&#x3044;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x540D;
+<ul>
+<li>&#x7701;&#x7565;&#x53EF;&#xFF0E;&#x7701;&#x7565;&#x3057;&#x305F;&#x3068;&#x304D;&#x306F;&#xFF0C;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306E;&#x88FD;&#x4F5C;&#x8005;&#x304C;&#x8A2D;&#x5B9A;&#x3057;&#x305F;&#x65E2;&#x5B9A;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x304C;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="%E8%B5%B7%E5%8B%95%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3">&#x8D77;&#x52D5;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;</h4>
+
+<ul>
+<li>&#x53C2;&#x8003;
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/create/">https://docs.docker.com/engine/reference/commandline/create/</a></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;</th>
+<th>&#x610F;&#x5473;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--add-host</code></td>
+<td>&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x901A;&#x4FE1;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30AB;&#x30B9;&#x30BF;&#x30E0;&#x30DB;&#x30B9;&#x30C8;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--attach</code>, <code>-a</code></td>
+<td>&#x6A19;&#x6E96;&#x5165;&#x51FA;&#x529B;&#xFF0C;&#x6A19;&#x6E96;&#x30A8;&#x30E9;&#x30FC;&#x51FA;&#x529B;&#x3092;&#x30A2;&#x30BF;&#x30C3;&#x30C1;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--dns</code></td>
+<td>&#x30AB;&#x30B9;&#x30BF;&#x30E0;DNS&#x30B5;&#x30FC;&#x30D0;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--entrypoint</code></td>
+<td>Docker&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306E;&#x65E2;&#x5B9A;&#x306E;ENTRYPOINT&#x3092;&#x4E0A;&#x66F8;&#x304D;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--env</code>, <code>-e</code></td>
+<td>&#x74B0;&#x5883;&#x5909;&#x6570;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--env-file</code></td>
+<td>&#x74B0;&#x5883;&#x5909;&#x6570;&#x3092;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x304B;&#x3089;&#x8AAD;&#x307F;&#x8FBC;&#x3093;&#x3067;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--hostname</code>, <code>-h</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x30DB;&#x30B9;&#x30C8;&#x540D;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--interactive</code>, <code>-i</code></td>
+<td>&#x30A4;&#x30F3;&#x30BF;&#x30E9;&#x30AF;&#x30C6;&#x30A3;&#x30D6;&#x30E2;&#x30FC;&#x30C9;&#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;&#xFF0E;&#x30A2;&#x30BF;&#x30C3;&#x30C1;&#x3055;&#x308C;&#x3066;&#x3044;&#x306A;&#x304F;&#x3066;&#x3082;&#x6A19;&#x6E96;&#x5165;&#x529B;&#x3092;&#x958B;&#x3044;&#x305F;&#x307E;&#x307E;&#x306B;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--ip</code></td>
+<td>IPv4&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--ip6</code></td>
+<td>IPv6&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--link</code></td>
+<td>&#x4ED6;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3078;&#x306E;&#x30EA;&#x30F3;&#x30AF;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--mac-address</code></td>
+<td>MAC&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--mount</code></td>
+<td>&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3092;&#x30DE;&#x30A6;&#x30F3;&#x30C8;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--name</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x540D;&#x3092;&#x4ED8;&#x3051;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--net</code></td>
+<td>Docker&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x3092;&#x660E;&#x793A;&#x7684;&#x306B;&#x6307;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--net-alias</code></td>
+<td>&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x306E;&#x30A8;&#x30A4;&#x30EA;&#x30A2;&#x30B9; (&#x5225;&#x540D;) &#x3092;&#x4ED8;&#x3051;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--publish</code>, <code>-p</code></td>
+<td>&#x30DD;&#x30FC;&#x30C8;&#x30DE;&#x30C3;&#x30D4;&#x30F3;&#x30B0;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--publish-all</code>, <code>-P</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3059;&#x3079;&#x3066;&#x306E;&#x30DD;&#x30FC;&#x30C8;&#x3092;&#x305D;&#x306E;&#x307E;&#x307E;Docker&#x30DB;&#x30B9;&#x30C8;&#x306B;&#x30DE;&#x30C3;&#x30D4;&#x30F3;&#x30B0;&#x3059;&#x308B;&#xFF0E;</td>
+</tr>
+<tr>
+<td><code>--read-only</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x30EB;&#x30FC;&#x30C8;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3092;&#x8AAD;&#x307F;&#x53D6;&#x308A;&#x5C02;&#x7528;&#x306B;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--rm</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x7D42;&#x4E86;&#x3057;&#x305F;&#x3068;&#x304D;&#xFF0C;&#x81EA;&#x52D5;&#x7684;&#x306B;&#x524A;&#x9664;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--tmpfs</code></td>
+<td>&#x4E00;&#x6642;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3092;&#x30DE;&#x30A6;&#x30F3;&#x30C8;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--tty</code>, <code>-t</code></td>
+<td>&#x7591;&#x4F3C;&#x7AEF;&#x672B; (pseudo-tty) &#x3092;&#x5272;&#x308A;&#x5F53;&#x3066;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--user</code>, <code>-u</code></td>
+<td>&#x6307;&#x5B9A;&#x3057;&#x305F;UID (&#x3082;&#x3057;&#x304F;&#x306F;uid:gid) &#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--volume</code>, <code>-v</code></td>
+<td>&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30E0;&#x3092;&#x30DE;&#x30A6;&#x30F3;&#x30C8;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--volumes-from</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x30DC;&#x30EA;&#x30E5;&#x30FC;&#x30E0;&#x3092;&#x305D;&#x306E;&#x307E;&#x307E;&#x30DE;&#x30A6;&#x30F3;&#x30C8;&#x3059;&#x308B;</td>
+</tr>
+<tr>
+<td><code>--workdir</code>, <code>-w</code></td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5185;&#x90E8;&#x306E;&#x4F5C;&#x696D;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x5909;&#x66F4;&#x3059;&#x308B;</td>
+</tr>
+</tbody>
+</table>
+<h4 class="mume-header" id="name%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AB%E3%82%88%E3%82%8B%E5%90%8D%E5%89%8D%E4%BB%98%E3%81%91">name&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306B;&#x3088;&#x308B;&#x540D;&#x524D;&#x4ED8;&#x3051;</h4>
+
+<ul>
+<li><code>--name</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;
+<ul>
+<li>&#x307B;&#x307C;&#x9593;&#x9055;&#x3044;&#x306A;&#x304F;&#x6307;&#x5B9A;&#x3059;&#x308B;</li>
+<li>&#x6307;&#x5B9A;&#x3057;&#x306A;&#x3044;&#x3068;&#x30E9;&#x30F3;&#x30C0;&#x30E0;&#x306A;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x540D;&#x304C;&#x4ED8;&#x3051;&#x3089;&#x308C;&#x308B;&#x306E;&#x3067;&#xFF0C;&#x7BA1;&#x7406;&#x304C;&#x3057;&#x3065;&#x3089;&#x304F;&#x306A;&#x308B;</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="p%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AB%E3%82%88%E3%82%8B%E3%83%9D%E3%83%BC%E3%83%88%E8%A8%AD%E5%AE%9A">p&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306B;&#x3088;&#x308B;&#x30DD;&#x30FC;&#x30C8;&#x8A2D;&#x5B9A;</h4>
+
+<ul>
+<li><code>-p</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;
+<ul>
+<li>&#x30DD;&#x30FC;&#x30C8;&#x756A;&#x53F7;&#x3092;&#x30DE;&#x30C3;&#x30D4;&#x30F3;&#x30B0;</li>
+</ul>
+</li>
+<li>&#x66F8;&#x5F0F;<pre data-role="codeBlock" data-info class="language-"><code>-p [port number (host)]:[port number (container)]
+</code></pre></li>
+<li>&#x4F8B;<pre data-role="codeBlock" data-info class="language-"><code>-p 8080:80
+</code></pre><ul>
+<li>Docker&#x30DB;&#x30B9;&#x30C8;&#x306E;TCP&#x30DD;&#x30FC;&#x30C8;8080&#x756A;&#x3092;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;80&#x756A;&#x306B;&#x7D50;&#x3073;&#x3064;&#x3051;&#x308B;
+<ul>
+<li>&#x30DD;&#x30FC;&#x30C8;8080&#x306B;&#x63A5;&#x7D9A;&#x3059;&#x308B;&#x3068;&#xFF0C;Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;80&#x306B;&#x3064;&#x306A;&#x304C;&#x308B;&#xFF0E;</li>
+<li>&#x305D;&#x3053;&#x3067;&#x306F;Apache&#x304C;&#x5F85;&#x3061;&#x53D7;&#x3051;&#x3066;&#x3044;&#x3066;&#xFF0C;&#x516C;&#x958B;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;Web&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x3092;&#x53C2;&#x7167;&#x3067;&#x304D;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x88DC;&#x8DB3;
+<ul>
+<li>UDP&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x306B;&#x306F;&#xFF0C;&#x30DD;&#x30FC;&#x30C8;&#x756A;&#x53F7;&#x3092;&quot;&#x30DD;&#x30FC;&#x30C8;&#x756A;&#x53F7;/udp&quot;&#x306E;&#x3088;&#x3046;&#x306B;&#x8A18;&#x8FF0;&#x3059;&#x308B;</li>
+</ul>
+</li>
+<li>Docker&#x3067;&#x306F;p&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x6307;&#x5B9A;&#x3057;&#x306A;&#x3044;&#x9650;&#x308A;&#xFF0C;Docker&#x30DB;&#x30B9;&#x30C8;&#x3068;Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3068;&#x306E;&#x901A;&#x4FE1;&#x306F;&#x3064;&#x306A;&#x304C;&#x3089;&#x306A;&#x3044;&#xFF0E;
+<ul>
+<li>Docker&#x30DB;&#x30B9;&#x30C8;&#x3092;&#x901A;&#x3058;&#x3066;Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5185;&#x3067;&#x52D5;&#x3044;&#x3066;&#x3044;&#x308B;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30E0;&#x3068;&#x901A;&#x4FE1;&#x3059;&#x308B;&#x306B;&#x306F;&#xFF0C;&#x660E;&#x793A;&#x7684;&#x306A;p&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x8A2D;&#x5B9A;&#x304C;&#x5FC5;&#x8981;&#xFF0E;</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="v%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AB%E3%82%88%E3%82%8B%E3%83%9E%E3%82%A6%E3%83%B3%E3%83%88%E8%A8%AD%E5%AE%9A">v&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306B;&#x3088;&#x308B;&#x30DE;&#x30A6;&#x30F3;&#x30C8;&#x8A2D;&#x5B9A;</h4>
+
+<ul>
+<li><code>-v</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x7279;&#x5B9A;&#x306E;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x30DB;&#x30B9;&#x30C8;&#x306E;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x30DE;&#x30A6;&#x30F3;&#x30C8;&#x3059;&#x308B;&#x8A2D;&#x5B9A;</li>
+</ul>
+</li>
+<li>&#x66F8;&#x5F0F;<pre data-role="codeBlock" data-info class="language-"><code>-v [host directory]:[container directory]
+</code></pre></li>
+<li>&#x4F8B;<pre data-role="codeBlock" data-info class="language-"><code>-v &quot;$PWD&quot;:/usr/local/apache2/htdocs/
+</code></pre><ul>
+<li><code>$PWD</code> &#x306E;&#x5024;&#x3092;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;<code>/usr/local/apache2/htdocs/</code> &#x306B;&#x5272;&#x308A;&#x5F53;&#x3066;&#x308B;
+<ul>
+<li><code>$PWD</code>
+<ul>
+<li>docker&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5165;&#x529B;&#x3057;&#x305F;&#x77AC;&#x9593;&#x306E;&#xFF0C;&#x30DB;&#x30B9;&#x30C8;&#x5074;&#x306E;&#x30AB;&#x30EC;&#x30F3;&#x30C8;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x793A;&#x3059;&#x74B0;&#x5883;&#x5909;&#x6570;</li>
+</ul>
+</li>
+<li><code>/usr/local/apache2/htdocs/</code>
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5074;&#x306E;&#x30DE;&#x30A6;&#x30F3;&#x30C8;&#x5148;&#x306E;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;</li>
+<li>httpd&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306E;&#x5236;&#x4F5C;&#x8005;&#x306F;&#x3053;&#x306E;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;Web&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4; (&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x30EB;&#x30FC;&#x30C8;) &#x3068;&#x3057;&#x3066;&#x516C;&#x958B;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x69CB;&#x6210;&#x3057;&#x3066;&#x3044;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x30DE;&#x30A6;&#x30F3;&#x30C8;&#x306B;&#x3088;&#x3063;&#x3066;&#xFF0C;<code>/usr/local/apache2/htdocs/</code> &#x304B;&#x3089;&#x306F;&#x30DB;&#x30B9;&#x30C8;&#x306E;<code>$PWD</code> &#x304C;&#x898B;&#x3048;&#x308B;&#xFF0E;</li>
+<li><code>$PWD</code> &#x306B;index.html&#x3092;&#x7F6E;&#x3051;&#x3070;&#xFF0C;&#x305D;&#x308C;&#x304C;Apache&#x304B;&#x3089;&#x516C;&#x958B;&#x3055;&#x308C;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="423-docker%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AE%E9%96%8B%E5%A7%8B%E3%81%A8%E5%81%9C%E6%AD%A2">4.2.3 Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x958B;&#x59CB;&#x3068;&#x505C;&#x6B62;</h3>
+
+<ul>
+<li><code>docker create</code>&#x306F;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x306E;&#x307F;&#x3067;&#xFF0C;&#x307E;&#x3060;&#x505C;&#x6B62;&#x3057;&#x3066;&#x3044;&#x308B;&#xFF0E;</li>
+<li><code>docker start</code>
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x958B;&#x59CB;&#x3059;&#x308B;</li>
+<li>&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306E;&#x5236;&#x4F5C;&#x8005;&#x304C;&#x8A2D;&#x5B9A;&#x3057;&#x305F;&#x65E2;&#x5B9A;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#xFF0C;&#x3082;&#x3057;&#x304F;&#x306F;&#xFF0C;<code>docker create</code>&#x306E;&#x5F15;&#x6570;&#x3067;&#x660E;&#x793A;&#x7684;&#x306B;&#x6307;&#x5B9A;&#x3057;&#x305F;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x304C;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x308B;&#xFF0E;</li>
+<li>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x306E;&#x5B9F;&#x884C;&#x304C;&#x5B8C;&#x4E86;&#x3059;&#x308B;&#x3068;&#xFF0C;Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306F;&#x505C;&#x6B62;&#x3059;&#x308B;&#xFF0E;
+<ul>
+<li>httpd&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x65E2;&#x5B9A;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x306F;&#x7D42;&#x4E86;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B;&#x4F5C;&#x3089;&#x308C;&#x3066;&#x3044;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>docker stop</code>
+<ul>
+<li>&#x5B9F;&#x884C;&#x4E2D;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x505C;&#x6B62;&#x3059;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+<li>&#x88DC;&#x8DB3;
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x66B4;&#x8D70;&#x3057;&#x3066;&#x3044;&#x308B;&#x3068;&#x304D;&#x306F;&#xFF0C;<code>docker stop</code>&#x304C;&#x52B9;&#x304B;&#x306A;&#x3044;&#x3053;&#x3068;&#x304C;&#x3042;&#x308B;&#xFF0E;
+<ul>
+<li><code>docker kill</code>&#x3092;&#x4F7F;&#x3046;&#x3053;&#x3068;&#x3067;&#x5F37;&#x5236;&#x505C;&#x6B62;&#x3067;&#x304D;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="424-pull-create-run%E3%82%92%E3%81%BE%E3%81%A8%E3%82%81%E3%81%A6%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8Bdocker-run">4.2.4 pull, create, run&#x3092;&#x307E;&#x3068;&#x3081;&#x3066;&#x5B9F;&#x884C;&#x3059;&#x308B;docker run</h3>
+
+<ul>
+<li><code>docker run</code>
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x4F5C;&#x3063;&#x3066;&#x5B9F;&#x884C;&#x3059;&#x308B;</li>
+</ul>
+</li>
+<li>&#x5225;&#x3005;&#x306B;&#x5B9F;&#x884C;&#x3057;&#x305F;&#x3044;&#xFF0C;&#x3044;&#x304F;&#x3064;&#x304B;&#x306E;&#x5834;&#x9762;
+<ul>
+<li><code>docker run</code>&#x306F;&quot;<code>docker create</code> + <code>docker start</code>&#x306E;&#x6A5F;&#x80FD;&#x3067;&#x3042;&#x308A;&#xFF0C;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x304C;&#x306A;&#x3051;&#x308C;&#x3070;<code>docker pull</code>&#x3059;&#x308B;&quot;&#x3068;&#x3044;&#x3046;&#x30CB;&#x30E5;&#x30A2;&#x30F3;&#x30B9;</li>
+<li><code>docker create</code>&#x3092;&#x5358;&#x4F53;&#x3067;&#x4F7F;&#x3044;&#x305F;&#x3044;&#x7406;&#x7531;
+<ul>
+<li>&#x8907;&#x6570;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x9023;&#x643A;&#x3057;&#x3066;&#x8D77;&#x52D5;&#x3057;&#x305F;&#x3044;&#x5834;&#x5408;</li>
+<li>&#x5225;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306B;&#x5BFE;&#x3057;&#x3066;&#xFF0C;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5B9F;&#x884C;&#x524D;&#x306B;&#x305D;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;ID&#x3092;&#x6E21;&#x3057;&#x305F;&#x3044;&#x3068;&#x304D; (&#x505C;&#x6B62;&#x72B6;&#x614B;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x4F5C;&#x308A;&#x305F;&#x3044;&#x3068;&#x304D;)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="43-%E3%83%87%E3%82%BF%E3%83%83%E3%83%81%E3%81%A8%E3%82%A2%E3%82%BF%E3%83%83%E3%83%81">4.3 &#x30C7;&#x30BF;&#x30C3;&#x30C1;&#x3068;&#x30A2;&#x30BF;&#x30C3;&#x30C1;</h2>
+
+<ul>
+<li>&#x7A3C;&#x50CD;&#x4E2D;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306F;&#x4F55;&#x304B;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x304C;&#x5B9F;&#x884C;&#x3057;&#x305F;&#x307E;&#x307E;
+<ul>
+<li>&#x7D42;&#x4E86;&#x3059;&#x308B;&#x307E;&#x3067;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x3055;&#x3089;&#x306B;&#x5165;&#x529B;&#x3067;&#x304D;&#x306A;&#x3044;</li>
+</ul>
+</li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x30D0;&#x30C3;&#x30AF;&#x30B0;&#x30E9;&#x30A6;&#x30F3;&#x30C9;&#x3067;&#x52D5;&#x304F;&#x3068;&#x304D;&#x306F;&#xFF0C;&#x6B21;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x306E;&#x5165;&#x529B;&#x304C;&#x3067;&#x304D;&#x308B;</li>
+</ul>
+<h3 class="mume-header" id="431-dit%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E6%8C%87%E5%AE%9A%E3%82%92%E3%81%9B%E3%81%9A%E3%81%AB%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B">4.3.1 -dit&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x6307;&#x5B9A;&#x3092;&#x305B;&#x305A;&#x306B;&#x5B9F;&#x884C;&#x3059;&#x308B;</h3>
+
+<ul>
+<li><code>-dit</code>
+<ul>
+<li>&#x30D0;&#x30C3;&#x30AF;&#x30B0;&#x30E9;&#x30A6;&#x30F3;&#x30C9;&#x3067;&#x52D5;&#x304B;&#x3059;&#x305F;&#x3081;&#x306E;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;</li>
+<li>&#x6307;&#x5B9A;&#x3057;&#x306A;&#x3051;&#x308C;&#x3070;&#xFF0C;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x30D5;&#x30A9;&#x30A2;&#x30B0;&#x30E9;&#x30A6;&#x30F3;&#x30C9; (&#x524D;&#x9762;) &#x3067;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x3066;&#x3057;&#x307E;&#x3046;</li>
+<li>httpd&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x3088;&#x3046;&#x306B;&#xFF0C;&#x305A;&#x3063;&#x3068;&#x30D0;&#x30C3;&#x30AF;&#x30B0;&#x30E9;&#x30A6;&#x30F3;&#x30C9;&#x3067;&#x52D5;&#x304B;&#x3057;&#x3063;&#x3071;&#x306A;&#x3057;&#x306B;&#x3057;&#x305F;&#x3044;&#x3068;&#x304D;&#x306F;&#xFF0C;<code>-dit</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x304C;&#x5FC5;&#x9808;&#xFF0E;</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="432-dit%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%BD%B9%E5%89%B2">4.3.2 -dit&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x5F79;&#x5272;</h3>
+
+<ul>
+<li><code>-dit</code>&#x306F;&#xFF0C;<code>-d</code>, <code>-i</code>, <code>-t</code>&#x306E;3&#x3064;&#x306E;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#xFF0E;
+<ul>
+<li>&#x9806;&#x4E0D;&#x540C;&#xFF0E;1&#x3064;&#x305A;&#x3064;&#x8A18;&#x8FF0;&#x3057;&#x3066;&#x3082;&#x307E;&#x3068;&#x3081;&#x3066;&#x8A18;&#x8FF0;&#x3057;&#x3066;&#x3082;&#x540C;&#x3058;&#xFF0E;</li>
+</ul>
+</li>
+<li><code>-d</code>
+<ul>
+<li>&#x7AEF;&#x672B;&#x304B;&#x3089;&#x5207;&#x308A;&#x96E2;&#x3057;&#x3066;&#x30D0;&#x30C3;&#x30AF;&#x30B0;&#x30E9;&#x30A6;&#x30F3;&#x30C9;&#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;</li>
+</ul>
+</li>
+<li><code>-i</code>, <code>-t</code>
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x7AEF;&#x672B; (&#x30AD;&#x30FC;&#x30DC;&#x30FC;&#x30C9;&#xFF0C;&#x30C7;&#x30A3;&#x30B9;&#x30D7;&#x30EC;&#x30A4;) &#x304B;&#x3089;&#x64CD;&#x4F5C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;</th>
+<th>&#x610F;&#x5473;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-d</code></td>
+<td>&#x30C7;&#x30BF;&#x30C3;&#x30C1;&#x30E2;&#x30FC;&#x30C9;&#xFF0E;&#x7AEF;&#x672B;&#x3068;&#x5207;&#x308A;&#x96E2;&#x3057;&#x305F;&#x72B6;&#x614B;&#x3067;&#x30D0;&#x30C3;&#x30AF;&#x30B0;&#x30E9;&#x30A6;&#x30F3;&#x30C9;&#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;&#xFF0E;</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>&#x30A4;&#x30F3;&#x30BF;&#x30E9;&#x30AF;&#x30C6;&#x30A3;&#x30D6;&#x30E2;&#x30FC;&#x30C9;&#xFF0E;&#x6A19;&#x6E96;&#x5165;&#x51FA;&#x529B;&#x304A;&#x3088;&#x3073;&#x6A19;&#x6E96;&#x30A8;&#x30E9;&#x30FC;&#x51FA;&#x529B;&#x3092;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306B;&#x9023;&#x7D50;&#x3059;&#x308B;&#xFF0E;</td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>&#x7591;&#x4F3C;&#x7AEF;&#x672B; (pseudo-tty) &#x3092;&#x5272;&#x308A;&#x5F53;&#x3066;&#x308B;&#xFF0E;&#x7591;&#x4F3C;&#x7AEF;&#x672B;&#x3068;&#x306F;&#xFF0C;&#x30AB;&#x30FC;&#x30BD;&#x30EB;&#x306E;&#x79FB;&#x52D5;&#x3084;&#x6587;&#x5B57;&#x306E;&#x524A;&#x9664;&#x306A;&#x3069;&#x306E;&#x6587;&#x5B57;&#x5165;&#x529B;&#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3059;&#x308B;&#x7AEF;&#x672B;&#x306E;&#x3053;&#x3068;&#xFF0E;</td>
+</tr>
+</tbody>
+</table>
+<h3 class="mume-header" id="433-%E3%83%87%E3%82%BF%E3%83%83%E3%83%81%E3%81%A8%E3%82%A2%E3%82%BF%E3%83%83%E3%83%81%E3%81%AE%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88">4.3.3 &#x30C7;&#x30BF;&#x30C3;&#x30C1;&#x3068;&#x30A2;&#x30BF;&#x30C3;&#x30C1;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;</h3>
+
+<ul>
+<li><code>-d</code>
+<ul>
+<li>&#x7AEF;&#x672B;&#x3068;&#x5207;&#x308A;&#x96E2;&#x3057;&#x305F;&#x72B6;&#x614B;&#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;</li>
+<li>&#x3053;&#x306E;&#x72B6;&#x614B;&#x3092;&#x30C7;&#x30BF;&#x30C3;&#x30C1; (detach) &#x3068;&#x3044;&#x3046;&#xFF0E;</li>
+<li><code>-d</code>&#x3092;&#x7701;&#x7565;&#x3057;&#xFF0C;&#x7AEF;&#x672B;&#x3068;&#x63A5;&#x7D9A;&#x3057;&#x305F;&#x72B6;&#x614B;&#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x30A2;&#x30BF;&#x30C3;&#x30C1; (attach) &#x3068;&#x3044;&#x3046;&#xFF0E;</li>
+</ul>
+</li>
+<li>&#x30A2;&#x30BF;&#x30C3;&#x30C1;
+<ul>
+<li>&#x7AEF;&#x672B;&#x3068;&#x63A5;&#x7D9A;&#x3055;&#x308C;&#x305F;&#x72B6;&#x614B;</li>
+<li>&#x7AEF;&#x672B;&#x304B;&#x3089;&#x306E;&#x64CD;&#x4F5C;&#x306F;&#xFF0C;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5185;&#x3067;&#x5B9F;&#x884C;&#x306E;&#x65E2;&#x5B9A;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x306B;&#x6E21;&#x3055;&#x308C;&#x308B;
+<ul>
+<li>ctrl + c&#x3067;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x304C;&#x7D42;&#x4E86;&#x3059;&#x308B;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x30C7;&#x30BF;&#x30C3;&#x30C1;
+<ul>
+<li>&#x7AEF;&#x672B;&#x3068;&#x5207;&#x308A;&#x96E2;&#x3055;&#x308C;&#x305F;&#x72B6;&#x614B;</li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5185;&#x3067;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x306B;&#x5BFE;&#x3057;&#x3066;&#xFF0C;&#x30AD;&#x30FC;&#x64CD;&#x4F5C;&#x3059;&#x308B;&#x3053;&#x3068;&#x306F;&#x3067;&#x304D;&#x306A;&#x3044;&#xFF0E;</li>
+</ul>
+</li>
+<li>&#x30C7;&#x30BF;&#x30C3;&#x30C1;&#x306E;&#x72B6;&#x614B;&#x3068;&#x30A2;&#x30BF;&#x30C3;&#x30C1;&#x306E;&#x72B6;&#x614B;&#x306F;&#x5B9F;&#x884C;&#x4E2D;&#x306B;&#x5207;&#x308A;&#x66FF;&#x3048;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x308B;&#xFF0E;
+<ul>
+<li>&#x30C7;&#x30BF;&#x30C3;&#x30C1;&#x3078;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;
+<ul>
+<li>&#x30A2;&#x30BF;&#x30C3;&#x30C1;&#x72B6;&#x614B;&#x304B;&#x3089;ctrl + p&#xFF0C;ctrl + q&#x3092;&#x9806;&#x306B;&#x62BC;&#x3059;</li>
+</ul>
+</li>
+<li>&#x30A2;&#x30BF;&#x30C3;&#x30C1;&#x3078;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;
+<ul>
+<li>docker attach&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5165;&#x529B;&#x3059;&#x308B;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x30A2;&#x30BF;&#x30C3;&#x30C1;&#x3068;&#x30C7;&#x30BF;&#x30C3;&#x30C1;&#x306E;&#x5207;&#x308A;&#x66FF;&#x3048;&#x306F;&#xFF0C;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x64CD;&#x4F5C;&#x4E2D;&#x306B;&#xFF0C;&#x4E00;&#x6642;&#x7684;&#x306B;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x5207;&#x308A;&#x96E2;&#x3057;&#x3066;&#x30DB;&#x30B9;&#x30C8;&#x5074;&#x306E;&#x64CD;&#x4F5C;&#x3092;&#x3057;&#x305F;&#x3044;&#x3068;&#x304D;&#x306B;&#x4F7F;&#x308F;&#x308C;&#x308B;&#xFF0E;
+<ul>
+<li>&#x30E1;&#x30F3;&#x30C6;&#x30CA;&#x30F3;&#x30B9;&#x3092;&#x3057;&#x305F;&#x3044;&#x5834;&#x5408;&#x306E;&#x64CD;&#x4F5C;</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="434-i-%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A8-t-%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E6%84%8F%E5%91%B3">4.3.4 -i &#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3068;-t &#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x610F;&#x5473;</h3>
+
+<ul>
+<li><code>-i</code>, <code>-t</code>
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306B;&#x5BFE;&#x3057;&#x3066;&#xFF0C;&#x7AEF;&#x672B;&#x304B;&#x3089;&#x64CD;&#x4F5C;&#x3059;&#x308B;&#x969B;&#x306E;&#x6307;&#x5B9A;</li>
+<li>ctrl + p, ctrl + q&#x304C;&#x6A5F;&#x80FD;&#x3059;&#x308B;&#x306E;&#x306F;&#xFF0C;<code>-i</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3068;<code>-t</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x6307;&#x5B9A;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x3089;&#xFF0E;</li>
+</ul>
+</li>
+<li><code>-i</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;
+<ul>
+<li>&#x6A19;&#x6E96;&#x5165;&#x51FA;&#x529B;&#x304A;&#x3088;&#x3073;&#x30A8;&#x30E9;&#x30FC;&#x51FA;&#x529B;&#x3092;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x7D50;&#x3073;&#x3064;&#x3051;&#x308B;</li>
+<li>&#x30AD;&#x30FC;&#x5165;&#x529B;&#x3057;&#x305F;&#x6587;&#x5B57;&#x306F;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306B;&#x6E21;&#x3055;&#x308C;&#xFF0C;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304B;&#x3089;&#x306E;&#x51FA;&#x529B;&#x304C;&#x753B;&#x9762;&#x306B;&#x8868;&#x793A;&#x3055;&#x308C;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+<li><code>-t</code>
+<ul>
+<li>pseudo-tty&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x7591;&#x4F3C;&#x7AEF;&#x672B;&#x3092;&#x6709;&#x52B9;&#x306B;&#x3059;&#x308B;&#x8A2D;&#x5B9A;</li>
+<li>&#x7591;&#x4F3C;&#x7AEF;&#x672B;
+<ul>
+<li>&#x30AB;&#x30FC;&#x30BD;&#x30EB;&#x30AD;&#x30FC;&#x3084;&#x30A8;&#x30B9;&#x30B1;&#x30FC;&#x30D7;&#x30AD;&#x30FC;&#xFF0C;ctrl&#x30AD;&#x30FC;&#x306A;&#x3069;&#x3067;&#x64CD;&#x4F5C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x3082;&#x306E;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x7AEF;&#x672B;&#x304B;&#x3089;&#x64CD;&#x4F5C;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;&#xFF0C;<code>-i</code>&#x3084;<code>-t</code>&#x306E;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306F;&#x5FC5;&#x8981;&#x306A;&#x3044;&#xFF0E;</li>
+</ul>
+<h2 class="mume-header" id="44-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%82%92%E3%83%A1%E3%83%B3%E3%83%86%E3%83%8A%E3%83%B3%E3%82%B9%E3%81%99%E3%82%8B">4.4 &#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x30E1;&#x30F3;&#x30C6;&#x30CA;&#x30F3;&#x30B9;&#x3059;&#x308B;</h2>
+
+<ul>
+<li>&#x52D5;&#x4F5C;&#x4E2D;&#x3082;&#x3057;&#x304F;&#x306F;&#x505C;&#x6B62;&#x4E2D;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306B;&#x5165;&#x308A;&#x8FBC;&#x3093;&#x3067;&#xFF0C;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x78BA;&#x8A8D;&#xFF0C;&#x7DE8;&#x96C6;&#x3092;&#x3059;&#x308B;&#x5834;&#x5408;&#x3084;&#x30BD;&#x30D5;&#x30C8;&#x306E;&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;&#x3092;&#x3059;&#x308B;&#x5834;&#x5408;&#x304C;&#x3042;&#x308B;&#xFF0E;</li>
+</ul>
+<h3 class="mume-header" id="441-%E3%82%B7%E3%82%A7%E3%83%AB%E3%81%A7%E6%93%8D%E4%BD%9C%E3%81%99%E3%82%8B">4.4.1 &#x30B7;&#x30A7;&#x30EB;&#x3067;&#x64CD;&#x4F5C;&#x3059;&#x308B;</h3>
+
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306B;&#x5165;&#x308A;&#x8FBC;&#x3093;&#x3067;&#x306A;&#x306B;&#x304B;&#x64CD;&#x4F5C;&#x3057;&#x305F;&#x3044;&#x3068;&#x304D;
+<ul>
+<li>&#x300C;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x4E2D;&#x3067;&#x30B7;&#x30A7;&#x30EB;&#x3092;&#x5B9F;&#x884C;&#x3057;&#xFF0C;&#x305D;&#x306E;&#x30B7;&#x30A7;&#x30EB;&#x3092;&#x901A;&#x3058;&#x3066;&#xFF0C;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;&#x64CD;&#x4F5C;&#x3092;&#x3059;&#x308B;&#x300D;&#x3068;&#x3044;&#x3046;&#x306E;&#x304C;&#x57FA;&#x672C;&#x7684;&#x306A;&#x8003;&#x3048;&#x65B9;</li>
+</ul>
+</li>
+<li>&#x505C;&#x6B62;&#x4E2D;&#x3082;&#x3057;&#x304F;&#x306F;&#x307E;&#x3060;&#x4F5C;&#x3089;&#x308C;&#x3066;&#x3044;&#x306A;&#x3044;&#x3068;&#x304D;
+<ul>
+<li><code>docker run</code>&#x306E;&#x5F15;&#x6570;&#x306B;&#xFF0C;<code>/bin/sh</code>&#x3084;<code>/bin/bash</code>&#x306A;&#x3069;&#x306E;&#x30B7;&#x30A7;&#x30EB;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30E0;&#x3092;&#x6307;&#x5B9A;&#xFF0E;
+<ul>
+<li>&#x672C;&#x6765;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x308B;&#x65E2;&#x5B9A;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x306E;&#x4EE3;&#x308F;&#x308A;&#x306B;&#xFF0C;&#x3053;&#x308C;&#x3089;&#x306E;&#x30B7;&#x30A7;&#x30EB;&#x304C;&#x8D77;&#x52D5;&#x3055;&#x308C;&#x308B;&#x3088;&#x3046;&#x306B;&#x3059;&#x308B;&#xFF0E;</li>
+<li>&#x30AD;&#x30FC;&#x64CD;&#x4F5C;&#x3092;&#x3059;&#x308B;&#x306E;&#x3067;&#xFF0C;<code>-it</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x5FD8;&#x308C;&#x305A;&#x306B;&#x6307;&#x5B9A;&#x3059;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x52D5;&#x4F5C;&#x4E2D;&#x306E;&#x3068;&#x304D;
+<ul>
+<li><code>docker exec</code>&#x3092;&#x4F7F;&#x3046;&#xFF0E;</li>
+<li><code>docker exec --it [container name] /bin/bash</code>&#x3068;&#x3059;&#x308B;&#x3068;&#xFF0C;&#x73FE;&#x5728;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5185;&#x3067;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3068;&#x306F;&#x5225;&#x306B;&#x30B7;&#x30A7;&#x30EB;&#x304C;&#x8D77;&#x52D5;&#x3059;&#x308B;</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="442-%E5%81%9C%E6%AD%A2%E4%B8%AD%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%A7%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B">4.4.2 &#x505C;&#x6B62;&#x4E2D;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3067;&#x30B7;&#x30A7;&#x30EB;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;</h3>
+
+<ul>
+<li>httpd&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3067;&#x8A66;&#x3059;</li>
+</ul>
+<h4 class="mume-header" id="%E5%81%9C%E6%AD%A2%E4%B8%AD%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%A7%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B">&#x505C;&#x6B62;&#x4E2D;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3067;&#x30B7;&#x30A7;&#x30EB;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;</h4>
+
+<ol>
+<li><code>/bin/bash</code>&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker run --name my-apache-app -it httpd:2.4 /bin/bash
+root@d82a23eec10a:/usr/local/apache2# 
+</code></pre><ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5185;&#x306B;&#x5165;&#x308C;&#x308B;</li>
+</ul>
+</li>
+<li>&#x4EFB;&#x610F;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5165;&#x529B;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>root@d82a23eec10a:/usr/local/apache2# ls
+bin  build  cgi-bin  conf  error  htdocs  icons  include  logs	modules
+</code></pre></li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x4E2D;&#x3068;&#x5916;&#x3092;&#x884C;&#x304D;&#x6765;&#x3059;&#x308B;
+<ul>
+<li>&#x3053;&#x306E;&#x72B6;&#x614B;&#x3067;ctrl + p, ctrl + q&#x3092;&#x62BC;&#x3057;&#x3066;&#x30C7;&#x30BF;&#x30C3;&#x30C1;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>root@d82a23eec10a:/usr/local/apache2# ubuntu@ip-xxx-xxx-xxx-xxx:~$ 
+</code></pre></li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x72B6;&#x614B;&#x306E;&#x78BA;&#x8A8D;<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-172-31-39-72:~$ docker ps
+CONTAINER ID   IMAGE       COMMAND       CREATED         STATUS         PORTS     NAMES
+d82a23eec10a   httpd:2.4   &quot;/bin/bash&quot;   3 minutes ago   Up 3 minutes   80/tcp    my-apache-app
+</code></pre><ul>
+<li>STATUS&#x306F;UP (&#x7A3C;&#x50CD;&#x4E2D;)</li>
+</ul>
+</li>
+<li>&#x518D;&#x5EA6;&#x30A2;&#x30BF;&#x30C3;&#x30C1;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker attach my-apache-app 
+root@d82a23eec10a:/usr/local/apache2# 
+</code></pre></li>
+</ul>
+</li>
+<li>&#x30B7;&#x30A7;&#x30EB;&#x3092;&#x7D42;&#x4E86;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>root@d82a23eec10a:/usr/local/apache2# exit
+exit
+ubuntu@ip-xxx-xxx-xxx-xxx:~$ 
+</code></pre><ul>
+<li><code>/bin/bash</code>&#x306E;&#x7D42;&#x4E86;&#xFF0E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x5916;&#x306B;&#x623B;&#x308B;</li>
+</ul>
+</li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x7D42;&#x4E86;&#x3057;&#x305F;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker ps -a
+CONTAINER ID   IMAGE       COMMAND       CREATED         STATUS                          PORTS     NAMES
+d82a23eec10a   httpd:2.4   &quot;/bin/bash&quot;   7 minutes ago   Exited (0) About a minute ago             my-apache-app
+</code></pre><ul>
+<li>Docker&#x3067;&#x306F;&#xFF0C;<code>docker run</code> or <code>docker create</code>&#x3067;&#x6307;&#x5B9A;&#x3057;&#x305F;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30E0;&#x304C;&#x7D42;&#x4E86;&#x3057;&#x305F;&#x3068;&#x304D;&#x306F;&#xFF0C;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x81EA;&#x4F53;&#x304C;&#x505C;&#x6B62;&#x72B6;&#x614B;&#x306B;&#x306A;&#x308B;&#xFF0E;
+<ul>
+<li>STATUS&#x304C;Exited&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x5F8C;&#x59CB;&#x672B;
+<ul>
+<li><code>docker rm</code>&#x3067;my-apache-app &#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x524A;&#x9664;</li>
+</ul>
+</li>
+</ol>
+<h3 class="mume-header" id="443-%E5%AE%9F%E8%A1%8C%E4%B8%AD%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%A7%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B">4.4.3 &#x5B9F;&#x884C;&#x4E2D;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3067;&#x30B7;&#x30A7;&#x30EB;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;</h3>
+
+<ul>
+<li><code>-d</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3067;&#x6307;&#x5B9A;&#x3057;&#x3066;&#x30C7;&#x30BF;&#x30C3;&#x30C1;&#x72B6;&#x614B;&#x3067;&#x52D5;&#x4F5C;&#x3057;&#x3066;&#x3044;&#x308B;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x30B7;&#x30A7;&#x30EB;&#x64CD;&#x4F5C;&#x3059;&#x308B;&#xFF0E;</li>
+</ul>
+<h4 class="mume-header" id="%E5%AE%9F%E8%A1%8C%E4%B8%AD%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%A7%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B">&#x5B9F;&#x884C;&#x4E2D;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3067;&#x30B7;&#x30A7;&#x30EB;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;</h4>
+
+<ol>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x30C7;&#x30BF;&#x30C3;&#x30C1;&#x30E2;&#x30FC;&#x30C9;&#x3067;&#x8D77;&#x52D5;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker run --name my-apache-app -dit -p 8080:80 -v &quot;$PWD&quot;:/usr/local/apache2/htdocs/ httpd:2.4
+</code></pre></li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x72B6;&#x614B;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker ps
+CONTAINER ID   IMAGE       COMMAND              CREATED          STATUS          PORTS                  NAMES
+ff667d021681   httpd:2.4   &quot;httpd-foreground&quot;   33 seconds ago   Up 32 seconds   0.0.0.0:8080-&gt;80/tcp   my-apache-app
+</code></pre><ul>
+<li>httpd-foreground
+<ul>
+<li>httpd&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306E;&#x5236;&#x4F5C;&#x8005;&#x304C;&#x8A2D;&#x5B9A;&#x3057;&#x305F;&#x65E2;&#x5B9A;&#x306E;&#x5B9F;&#x884C;&#x30B3;&#x30DE;&#x30F3;&#x30C9;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x30B7;&#x30A7;&#x30EB;&#x3092;&#x8D77;&#x52D5;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker exec -it my-apache-app /bin/bash
+root@ff667d021681:/usr/local/apache2# 
+</code></pre></li>
+<li>&#x30B7;&#x30A7;&#x30EB;&#x3092;&#x7D42;&#x4E86;&#x3059;&#x308B;
+<ul>
+<li><code>exit</code>&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;</li>
+</ul>
+</li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x72B6;&#x614B;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-172-31-39-72:~$ docker ps
+CONTAINER ID   IMAGE       COMMAND              CREATED         STATUS         PORTS                  NAMES
+ff667d021681   httpd:2.4   &quot;httpd-foreground&quot;   3 minutes ago   Up 3 minutes   0.0.0.0:8080-&gt;80/tcp   my-apache-app
+</code></pre><ul>
+<li>STATUS&#x306F;Up&#x306E;&#x307E;&#x307E;</li>
+<li>&#x7D42;&#x4E86;&#x3057;&#x305F;&#x306E;&#x306F;&#xFF0C;<code>docker exec</code>&#x3067;&#x5B9F;&#x884C;&#x3057;&#x305F;<code>/bin/bash</code>&#x3067;&#x3042;&#x308A;&#xFF0C;<code>docker run</code>&#x3067; (&#x6697;&#x9ED9;&#x7684;&#x306B;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;) http-foreground &#x304C;&#x7D42;&#x4E86;&#x3057;&#x305F;&#x308F;&#x3051;&#x3067;&#x306F;&#x306A;&#x3044;&#x304B;&#x3089;&#xFF0E;</li>
+</ul>
+</li>
+<li>&#x5F8C;&#x59CB;&#x672B;
+<ul>
+<li><code>docker stop</code>&#x3068;<code>docker rm</code>&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ol>
+<h3 class="mume-header" id="444-docker-run%E3%81%A8docker-exec%E3%81%A8%E3%81%AE%E9%81%95%E3%81%84">4.4.4 docker run&#x3068;docker exec&#x3068;&#x306E;&#x9055;&#x3044;</h3>
+
+<ul>
+<li>
+<p><code>docker exec</code>&#x306F;&#xFF0C;&#x7A3C;&#x50CD;&#x4E2D;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x5F71;&#x97FF;&#x3092;&#x4E0E;&#x3048;&#x308B;&#x3053;&#x3068;&#x306A;&#x304F;&#x4E2D;&#x306B;&#x5165;&#x308A;&#x8FBC;&#x3093;&#x3067;&#x4F5C;&#x696D;&#x3067;&#x304D;&#x308B;</p>
+<table>
+<thead>
+<tr>
+<th>&#x30B3;&#x30DE;&#x30F3;&#x30C9;</th>
+<th>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x72B6;&#x614B;</th>
+<th>&#x30B7;&#x30A7;&#x30EB;&#x7D42;&#x4E86;&#x6642;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker run</code></td>
+<td>&#x505C;&#x6B62;&#x6642;</td>
+<td>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x7D42;&#x4E86;</td>
+</tr>
+<tr>
+<td><code>docker exec</code></td>
+<td>&#x7A3C;&#x50CD;&#x6642;</td>
+<td>&#x7A3C;&#x50CD;&#x306E;&#x307E;&#x307E;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>&#x307B;&#x3068;&#x3093;&#x3069;&#x306E;&#x5834;&#x5408;&#xFF0C;<code>docker exec</code>&#x3092;&#x4F7F;&#x3046;</p>
+</li>
+</ul>
+<h2 class="mume-header" id="45-1%E5%9B%9E%E9%99%90%E3%82%8A%E5%8B%95%E3%81%8B%E3%81%99%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9">4.5 1&#x56DE;&#x9650;&#x308A;&#x52D5;&#x304B;&#x3059;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x4F7F;&#x3044;&#x65B9;</h2>
+
+<ul>
+<li>httpd&#x30B3;&#x30F3;&#x30C6;&#x30CA;
+<ul>
+<li>Web&#x30B5;&#x30FC;&#x30D0;&#x6A5F;&#x80FD;&#x3092;&#x63D0;&#x4F9B;</li>
+<li>&#x52D5;&#x304B;&#x3057;&#x3063;&#x3071;&#x306A;&#x3057;&#x3067;&#x5229;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x524D;&#x63D0;&#x3068;&#x3057;&#x305F;&#x3082;&#x306E;</li>
+</ul>
+</li>
+<li>1&#x56DE;&#x9650;&#x308A;&#x52D5;&#x304B;&#x3059;&#x4F7F;&#x3044;&#x65B9;&#x3082;&#x3042;&#x308B;
+<ul>
+<li>&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30E9;&#x3084;&#x753B;&#x50CF;&#x5909;&#x63DB;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x306A;&#x3069;&#x306E;&#x30C4;&#x30FC;&#x30EB;&#x3092;&#x4F7F;&#x3063;&#x3066;Docker&#x30DB;&#x30B9;&#x30C8;&#x306E;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x51E6;&#x7406;&#x3057;&#x305F;&#x3044;&#x30B1;&#x30FC;&#x30B9;</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="451-go%E8%A8%80%E8%AA%9E%E3%82%92%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB%E3%81%99%E3%82%8B">4.5.1 Go&#x8A00;&#x8A9E;&#x3092;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;&#x3059;&#x308B;</h3>
+
+<ul>
+<li>&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x8A00;&#x8A9E;&#x306E;&#x74B0;&#x5883;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x306E;&#x306F;&#x9762;&#x5012;
+<ul>
+<li>&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;&#x304C;&#x8907;&#x96D1;</li>
+<li>&#x4E00;&#x5EA6;&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;&#x3057;&#x3066;&#x3057;&#x307E;&#x3046;&#x3068;&#x30A2;&#x30F3;&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;&#x304C;&#x56F0;&#x96E3;</li>
+<li>&#x307B;&#x304B;&#x306E;&#x74B0;&#x5883;&#x306B;&#x5F71;&#x97FF;&#x3092;&#x4E0E;&#x3048;&#x308B;&#x3053;&#x3068;&#x3082;&#x3042;&#x308B;</li>
+</ul>
+</li>
+<li>Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x4F7F;&#x3048;&#x3070;&#x624B;&#x8EFD;&#x306B;&#x8A66;&#x305B;&#x308B;
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x7834;&#x68C4;&#x3057;&#x3066;&#x3057;&#x307E;&#x3048;&#x3070;&#xFF0C;&#x5143;&#x306E;&#x72B6;&#x614B;&#x306B;&#x3059;&#x3050;&#x623B;&#x305B;&#x308B;</li>
+</ul>
+</li>
+</ul>
+<h4 class="mume-header" id="go%E8%A8%80%E8%AA%9E%E3%82%92%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB%E3%81%99%E3%82%8B">Go&#x8A00;&#x8A9E;&#x3092;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;&#x3059;&#x308B;</h4>
+
+<ol>
+<li>&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x7528;&#x610F;&#x3059;&#x308B;
+<ul>
+<li>hello.go&#x3092;Docker&#x30DB;&#x30B9;&#x30C8;&#x306E;&#x9069;&#x5F53;&#x306A;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x4FDD;&#x5B58;&#x3059;&#x308B;<pre data-role="codeBlock" data-info="go" class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Hello World\n&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ul>
+</li>
+<li>Go&#x8A00;&#x8A9E;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x8D77;&#x52D5;&#x3057;&#x3066;&#x5B9F;&#x884C;&#x3059;&#x308B;
+<ul>
+<li>hello.go&#x306E;&#x3042;&#x308B;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x79FB;&#x52D5;&#x3059;&#x308B;</li>
+<li>golang
+<ul>
+<li><a href="https://hub.docker.com/_/golang">https://hub.docker.com/_/golang</a></li>
+</ul>
+</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-xxx-xxx-xxx-xxx:~/golang$ docker run --rm -v &quot;$PWD&quot;:/usr/src/myapp -w /usr/src/myapp golang:1.14 go build -v
+Status: Downloaded newer image for golang:1.14
+_/usr/src/myapp
+</code></pre><ul>
+<li>&#x30A4;&#x30E1;&#x30FC;&#x30B8;
+<ul>
+<li>golang:1.14</li>
+</ul>
+</li>
+<li>&#x5B9F;&#x884C;&#x3059;&#x308B;&#x30B3;&#x30DE;&#x30F3;&#x30C9;
+<ul>
+<li><code>go build -v</code>
+<ul>
+<li>Go&#x8A00;&#x8A9E;&#x306E;&#x30D3;&#x30EB;&#x30C9;&#x3092;&#x3059;&#x308B;</li>
+<li>&#x30D3;&#x30EB;&#x30C9;&#x3042;&#x3068;&#x306E;&#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x304C;&#x4F5C;&#x6210;&#x3055;&#x308C;&#x308B;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;
+<ul>
+<li><code>--rm</code>
+<ul>
+<li>&#x5B9F;&#x884C;&#x304C;&#x5B8C;&#x4E86;&#x3057;&#x305F;&#x3068;&#x304D;&#xFF0C;&#x3053;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x7834;&#x68C4;&#x3059;&#x308B;</li>
+</ul>
+</li>
+<li><code>-v &quot;$PWD&quot;:/usr/src/myapp</code>
+<ul>
+<li>&#x30AB;&#x30EC;&#x30F3;&#x30C8;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5185;&#x306E;<code>/usr/src/myapp</code>&#x306B;&#x5272;&#x308A;&#x5F53;&#x3066;&#x308B;</li>
+</ul>
+</li>
+<li><code>-w /usr/src/myapp</code>
+<ul>
+<li><code>-w</code>
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5185;&#x306E;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30E0;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3068;&#x304D;&#x306E;&#x4F5C;&#x696D;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;</li>
+</ul>
+</li>
+<li>Docker&#x30DB;&#x30B9;&#x30C8;&#x306E;&#x30AB;&#x30EC;&#x30F3;&#x30C8;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x5BFE;&#x3057;&#x3066;Go&#x8A00;&#x8A9E;&#x306E;&#x30D3;&#x30EB;&#x30C9;&#x304C;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x308B;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x304C;&#x3067;&#x304D;&#x308B;
+<ul>
+<li>&#x30D3;&#x30EB;&#x30C9;&#x304C;&#x5B8C;&#x4E86;&#x3059;&#x308B;&#x3068;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306F;&#x7D42;&#x4E86;&#x3059;&#x308B;&#xFF0E;</li>
+<li>&#x30D3;&#x30EB;&#x30C9;&#x5F8C;&#x306E;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30E0;&#x304C;myapp&#x3068;&#x3044;&#x3046;&#x540D;&#x524D;&#x3067;&#x751F;&#x6210;&#x3055;&#x308C;&#x308B;&#xFF0E;
+<ul>
+<li>root&#x30E6;&#x30FC;&#x30B6;&#x306E;&#x6A29;&#x9650;&#x3067;&#x4F5C;&#x3089;&#x308C;&#x308B;</li>
+<li>&#x524A;&#x9664;&#x306B;&#x306F;sudo&#x6A29;&#x9650;&#x304C;&#x5FC5;&#x8981;</li>
+</ul>
+</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-xxx-xxx-xxx-xxx:~/golang$ ls -l
+total 2044
+-rw-rw-r-- 1 ubuntu ubuntu      72 Apr  3 12:19 hello.go
+-rwxr-xr-x 1 root   root   2085150 Apr  3 12:22 myapp
+</code></pre></li>
+<li>&#x5B9F;&#x884C;&#x3059;&#x308B;<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-xxx-xxx-xxx-xxx:~/golang$ ./myapp 
+Hello World
+</code></pre></li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x72B6;&#x614B;&#x3092;&#x78BA;&#x8A8D;<pre data-role="codeBlock" data-info class="language-"><code>ubuntu@ip-172-31-39-72:~/golang$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+</code></pre><ul>
+<li><code>docker run</code>&#x306E;&#x3068;&#x304D;&#x306B;<code>--rm</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4ED8;&#x3051;&#x3066;&#x3044;&#x308B;&#x306E;&#x3067;&#xFF0C;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x306E;&#x5B9F;&#x884C;&#x304C;&#x7D42;&#x308F;&#x3063;&#x305F;&#x3068;&#x304D;&#x306B;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x7834;&#x68C4;&#x3055;&#x308C;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ol>
+<h3 class="mume-header" id="452-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%8C%E3%81%9F%E3%81%8F%E3%81%95%E3%82%93%E4%BD%9C%E3%82%89%E3%82%8C%E3%81%AA%E3%81%84%E3%82%88%E3%81%86%E3%81%AB%E6%B3%A8%E6%84%8F%E3%81%99%E3%82%8B">4.5.2 &#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x305F;&#x304F;&#x3055;&#x3093;&#x4F5C;&#x3089;&#x308C;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B;&#x6CE8;&#x610F;&#x3059;&#x308B;</h3>
+
+<ul>
+<li>Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306F;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;&#x7528;&#x9014;&#x3067;&#x4F7F;&#x308F;&#x308C;&#x308B;</li>
+<li><code>docker run</code>&#x3059;&#x308B;&#x3068;&#x304D;&#x306B;<code>--rm</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x6307;&#x5B9A;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x6B8B;&#x308A;&#x7D9A;&#x3051;&#x308B;
+<ul>
+<li>&#x4E0D;&#x8981;&#x306A;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x6B8B;&#x3089;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B;&#x6CE8;&#x610F;&#x3059;&#x308B;</li>
+</ul>
+</li>
+<li><code>docker container prune</code>
+<ul>
+<li>&#x505C;&#x6B62;&#x3057;&#x3066;&#x3044;&#x308B;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x3059;&#x3079;&#x3066;&#x307E;&#x3068;&#x3081;&#x3066;&#x524A;&#x9664;&#x3067;&#x304D;&#x308B;</li>
+</ul>
+</li>
+<li><code>docker image prune</code>
+<ul>
+<li>&#x3069;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3082;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x306A;&#x3044;&#x3059;&#x3079;&#x3066;&#x306E;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3092;&#x524A;&#x9664;&#x3067;&#x304D;&#x308B;</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="46-docker%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81">4.6 Docker&#x306E;&#x307E;&#x3068;&#x3081;</h2>
+
+<ol>
+<li>&#x30D0;&#x30C3;&#x30AF;&#x30B0;&#x30E9;&#x30A6;&#x30F3;&#x30C9;&#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3068;&#x304D;&#x306F;<code>-d</code>&#xFF0C;&#x30AD;&#x30FC;&#x30DC;&#x30FC;&#x30C9;&#x64CD;&#x4F5C;&#x3059;&#x308B;&#x306A;&#x3089;<code>-it</code>
+<ul>
+<li>&#x307E;&#x3068;&#x3081;&#x3066;<code>-dit</code>&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3068;&#x4E21;&#x65B9;&#x3067;&#x304D;&#x308B;</li>
+</ul>
+</li>
+<li>&#x30ED;&#x30B0;&#x306F;&#x6A19;&#x6E96;&#x51FA;&#x529B;&#x306B;&#x8868;&#x793A;&#x3055;&#x308C;&#x308B;
+<ul>
+<li>&#x30A2;&#x30BF;&#x30C3;&#x30C1;&#x4E2D;: &#x753B;&#x9762;&#x306B;&#x51FA;&#x529B;</li>
+<li>&#x30C7;&#x30BF;&#x30C3;&#x30C1;&#x4E2D;: <code>docker logs</code>&#x3067;&#x78BA;&#x8A8D;&#x3067;&#x304D;&#x308B;</li>
+</ul>
+</li>
+<li><code>-v</code>&#x3067;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x30DE;&#x30A6;&#x30F3;&#x30C8;
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306F;&#x5236;&#x4F5C;&#x8005;&#x306B;&#x3088;&#x3063;&#x3066;&#x300C;&#x3042;&#x308B;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x3092;&#x7F6E;&#x304F;&#x300D;&#x3053;&#x3068;&#x3084;&#x300C;&#x3042;&#x308B;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x57FA;&#x6E96;&#x306B;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;&#x3059;&#x308B;&#x300D;&#x3053;&#x3068;&#x304C;&#x6C7A;&#x307E;&#x3063;&#x3066;&#x3044;&#x308B; (&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x306B;&#x8A18;&#x8F09;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;)</li>
+<li><code>-v</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x6307;&#x5B9A;&#x3057;&#x3066;&#xFF0C;&#x305D;&#x306E;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;Docker&#x30DB;&#x30B9;&#x30C8;&#x306E;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x5272;&#x308A;&#x5F53;&#x3066;&#x3066;&#x51E6;&#x7406;&#x3059;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+<li><code>-p</code>&#x3067;&#x30DD;&#x30FC;&#x30C8;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;
+<ul>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306F;&#x5236;&#x4F5C;&#x8005;&#x306B;&#x3088;&#x3063;&#x3066;&#x3069;&#x306E;&#x30DD;&#x30FC;&#x30C8;&#x756A;&#x53F7;&#x3092;&#x4F7F;&#x3046;&#x304B;&#x304C;&#x6C7A;&#x307E;&#x3063;&#x3066;&#x3044;&#x308B;&#xFF0E;</li>
+<li><code>-p</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x6307;&#x5B9A;&#x3057;&#x3066;&#xFF0C;&#x305D;&#x306E;&#x30DD;&#x30FC;&#x30C8;&#x3092;Docker&#x30DB;&#x30B9;&#x30C8;&#x306E;&#x30DD;&#x30FC;&#x30C8;&#x306B;&#x5272;&#x308A;&#x5F53;&#x3066;&#x3066;&#x51E6;&#x7406;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x3059;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x65E2;&#x5B9A;&#x306E;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30E0;&#x304C;&#x7D42;&#x4E86;&#x3057;&#x305F;&#x3089;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3082;&#x7D42;&#x4E86;&#x3059;&#x308B;</li>
+<li>&#x5B9F;&#x884C;&#x4E2D;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x5185;&#x3092;&#x64CD;&#x4F5C;&#x3057;&#x305F;&#x3044;&#x3068;&#x304D;&#x306F;<code>docker exec</code></li>
+<li>&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306F;&#x65E2;&#x5B9A;&#x3067;&#x306F;&#xFF0C;&#x7D42;&#x4E86;&#x3057;&#x3066;&#x3082;&#x524A;&#x9664;&#x3055;&#x308C;&#x306A;&#x3044;
+<ul>
+<li>&#x7D42;&#x4E86;&#x3068;&#x540C;&#x6642;&#x306B;&#x524A;&#x9664;&#x3057;&#x305F;&#x3044;&#x306A;&#x3089;&#xFF0C;<code>--rm</code>&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#xFF0E;</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>&#x4E0A;&#x8A18;&#x306B;&#x52A0;&#x3048;&#xFF0C;&#x74B0;&#x5883;&#x5909;&#x6570;&#x306E;&#x8A2D;&#x5B9A;&#x3092;&#x7406;&#x89E3;&#x3059;&#x308C;&#x3070;&#xFF0C;Docker&#x306E;&#x64CD;&#x4F5C;&#x306F;&#x307B;&#x307C;&#x8DB3;&#x308A;&#x308B;&#xFF0E;</li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
