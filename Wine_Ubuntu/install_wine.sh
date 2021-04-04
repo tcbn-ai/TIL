@@ -3,13 +3,13 @@
 # Written by A.Tachibana, 2021/4/1
 
 # Objective
-## To install wine in Ubuntu 18
+## To install wine in Ubuntu 18 or 20
 
 # Reference
 ## https://www.kkaneko.jp/tools/server/wine.html
 
 ############ To execute ############
-# execute after install FAudio
+# execute after install FAudio (Ubuntu 18)
 # chmod 755 install_wine.sh
 # ./install_wine.sh
 ####################################
