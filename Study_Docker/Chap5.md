@@ -281,3 +281,253 @@
         - コンテナを破棄しても設定がDockerホストに残るので，設定そのままでコンテナの差し替えも実施できる
 
 ## 5.3 バインドマウントとボリュームマウント
+- バインドマウント
+    - Dockerホストにあらかじめディレクトリを作っておき，それをマウントする方法
+### 5.3.1 ボリュームマウント
+- ボリュームマウント
+    - Docker Engine上で確保した領域をマウントする方法
+    - 確保した場所を「(データ)ボリューム」という．
+    - ボリュームは，あらかじめ```docker volume create```コマンドを使って作成する．
+
+        |サブコマンド|意味|
+        | ---- | ----|
+        |```create```| ボリュームを作成する |
+        | ```inspect``` | ボリュームの詳細情報を確認する |
+        | ```ls``` | ボリューム一覧を参照する |
+        | ```prune``` | コンテナからマウントされていないボリュームをすべて削除する |
+        | ```rm``` | ボリュームを削除する |
+
+#### ボリュームマウントの利点
+- ボリュームの保存場所がDocker Engineで管理されるので，物理的な位置を意識する必要がなくなる
+
+### 5.3.2 バインドマウントとボリュームマウントの使い分け
+#### バインドマウントのほうが良い場面
+- バインドマウントの利点
+    - Dockerホストの物理的な位置にマウントできる
+        - Dockerホストのファイルをコンテナに見せたいときはバウンドマウントを使う．
+
+1. 設定ファイルの受け渡し
+    - Dockerホスト上に設定ファイルを置いたディレクトリを用意して，それをコンテナに渡したい場合
+2. 作業ディレクトリの変更を即座にDockerコンテナから参照したいとき
+    - Dockerホスト上のエディタからDockerコンテナ内のファイルを直接編集できる
+#### ボリュームマウントのほうがよい場面
+- Dockerコンテナが扱うデータをブラックボックスとして扱い，コンテナを破棄してもデータが残るようにしたいだけの場面
+    - 例: データベースを構成するコンテナにおいて，データベースのデータを保存する場所
+        - データベースのデータは通常，ひとまとめのブラックボックスとして扱い，それぞれのファイルをDockerホストから編集することはない．
+            - そうしたらデータベースが壊れる
+        - Dockerホストから不用意にデータを書き換えたくない場面
+
+- 各自のPCでDockerを使う場合はバインドマウントが便利
+### 5.3.3 MySQLコンテナを使った例
+- データベースコンテナとしてMySQL5.7を取り上げる
+    - バージョン名: mysql:5.7
+    - MySQLのバージョン8以降は，デフォルトの認証方式が変わっているため，別のコンテナと組み合わせたときに，デフォルトの設定だとうまく利用できないことがある．
+    - https://hub.docker.com/_/mysql
+#### マウントすべきディレクトリ
+- データベースのデータは，```/var/lib/mysql```ディレクトリに保存される
+    - ここをボリュームマウント (or バインドマウント) することで，コンテナを破壊しても，データベースの内容が失われないようにする．
+#### rootユーザのユーザ名，パスワード，既定のデータベース名などの指定方法
+- データベースにアクセスする際のrootユーザのユーザ名，パスワード，既定のデータベースなどは，環境変数として引き渡す
+
+    | 環境変数名 | 意味 |
+    | ---- |  ---- |
+    | ```MYSQL_ROOT_PASSWORD``` | MySQLのrootユーザのパスワード |
+    | ```MYSQL_DATABASE``` | デフォルトのデータベース名 |
+    | ```MYSQL_USER``` | データベースにアクセスできる一般ユーザ名．このユーザは```MYSQL_DATABASE```に指定したデータベースを利用できる． |
+    | ```MYSQL_PASSWORD``` | 上記ユーザのパスワード |
+    | ```MYSQL_ALLOW_EMPTY_PASSWORD``` | rootパスワードを空欄にできるかどうか．yesを設定すると空にする． |
+    | ```MYSQL_RANDOM_ROOT_PASSWORD``` | yesに設定するとランダムなパスワードを設定する |
+    | ```MYSQL_ONETIME_PASSWORD``` | yesに設定すると，rootユーザが初回ログインしたときにパスワードの変更を要求される |
+    - ```MYSQL_ROOT_PASSWORD``` (もしくは```MYSQL_ALLOW_EMPTY_PASSWORD```か```MYSQL_RANDOM_ROOT_PASSWORD```) のみ必須で，残りはオプション．
+        - ```docker run```するときに，```-e```オプションで指定．
+
+### 5.3.4 ボリュームを作成する
+- ボリュームの作成
+    ```
+    docker volume create --name [volume name]
+    ```
+    - ボリューム名に```/```から始まる名前を付けることはできない．
+#### ボリュームを作成する
+1. ボリュームを作成する
+    ```
+    docker volume create mysqlvolume
+    ```
+2. 作成したボリュームを確認する
+    ```
+    ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker volume ls
+    DRIVER    VOLUME NAME
+    local     mysqlvolume
+    ```
+    - DRIVERは，ボリュームを構成するドライバ
+### 5.3.5 ボリュームマウントしたコンテナを作成する
+#### MySQL5.7のコンテナを起動する
+1. MySQL5.7のコンテナを起動する
+    - ```docker run```コマンドを使って，MySQL5.7のコンテナを起動する．
+    - このとき，今作成したボリュームを```/var/lib/mysql```ディレクトリにマウントする
+        ```
+        docker run --name db01 -dit -v mysqlvolume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=mypassword mysql:5.7
+        ```
+2. 起動を確認する
+    ```
+    ubuntu@ip-172-31-39-72:~$ docker ps
+    CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS                 NAMES
+    432af1986c58   mysql:5.7   "docker-entrypoint.s…"   26 seconds ago   Up 24 seconds   3306/tcp, 33060/tcp   db01
+    ```
+### 5.3.6 データベースに書き込んだ内容が破棄されないことを確認する
+#### データベースに書き込んだ内容が破棄されないことを確認する
+1. コンテナ内に入る
+    - ```docker exec```コマンドを使ってシェルを起動し，コンテナ内に入る．
+        ```
+        ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker exec -it db01 /bin/bash
+        root@432af1986c58:/# 
+        ```
+2. mysqlコマンドを実行する
+    - パスワードを入力するために，```-p```オプションをつけて```mysql```コマンドを実行
+        ```
+        root@432af1986c58:/# mysql -p
+        Enter password: 
+        Welcome to the MySQL monitor.  Commands end with ; or \g.
+        Your MySQL connection id is 2
+        Server version: 5.7.33 MySQL Community Server (GPL)
+
+        Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+        Oracle is a registered trademark of Oracle Corporation and/or its
+        affiliates. Other names may be trademarks of their respective
+        owners.
+
+        Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+        mysql> 
+        ```
+3. データベースを作成する
+    - exampledbというデータベースを作成する
+        ```
+        mysql> CREATE DATABASE exampledb;
+        Query OK, 1 row affected (0.00 sec)
+        ```
+4. テーブルを作成する
+    - exampletableというテーブルを作成する
+        ```
+        mysql> use exampledb;
+        Database changed
+        mysql> CREATE TABLE exampletable (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(50), PRIMARY KEY(id));
+        Query OK, 0 rows affected (0.02 sec)
+        ```
+5. データを挿入する
+    ```
+    mysql> INSERT INTO exampletable (name) VALUES ('user01');
+    Query OK, 1 row affected (0.01 sec)
+
+    mysql> INSERT INTO exampletable (name) VALUES ('user02');
+    Query OK, 1 row affected (0.00 sec)
+    ```
+6. データを確認する
+    ```
+    mysql> SELECT * FROM exampletable;
+    +----+--------+
+    | id | name   |
+    +----+--------+
+    |  1 | user01 |
+    |  2 | user02 |
+    +----+--------+
+    2 rows in set (0.00 sec)
+    ```
+7. mysqlコマンドを終了する
+    ```
+    mysql> \q
+    Bye
+    root@432af1986c58:/# 
+    ```
+8. コンテナから出る
+    - ```exit```
+9. コンテナを破棄する
+    - コンテナを停止して破棄する
+10. マウントせずに新しいコンテナを作って確認する
+    - ```-v```オプションを指定せず，マウントせずに新しいコンテナを作って確認する．
+        ```
+        docker run --name db01 -dit -e MYSQL_ROOT_PASSWORD=mypassword mysql:5.7
+        ```
+    - シェルに入り，```mysql```コマンドを実行する
+        ```
+        ubuntu@ip-172-31-39-72:~$ docker exec -it db01 /bin/bash
+        root@c1ec52473cc5:/# mysql -p
+        Enter password: 
+        Welcome to the MySQL monitor.  Commands end with ; or \g.
+        ...
+        mysql> 
+        ```
+    - ```use```で```exampledb```に切り替えようとするとエラーが出る
+        ```
+        mysql> use exampledb
+        ERROR 1049 (42000): Unknown database 'exampledb'
+        ```
+    - ```-q```で終了し，```exit```でコンテナを抜ける
+11. コンテナを破棄してマウントした新しいコンテナを作る
+    - いまのコンテナを破棄して，```-v```オプションを付けてマウントする
+        ```
+        ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker stop db01
+        db01
+        ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker rm db01
+        db01
+        ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker run --name db01 -dit -v mysqlvolume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=mypassword mysql:5.7
+        ```
+    - ```use exampledb```で切り替えられる
+        ```
+        ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker exec -it db01 /bin/bash
+        root@bdba10f4271c:/# mysql -p
+        Enter password: 
+        Welcome to the MySQL monitor.  Commands end with ; or \g.
+        ...
+
+        mysql> use exampledb;
+        Reading table information for completion of table and column names
+        You can turn off this feature to get a quicker startup with -A
+
+        Database changed
+        mysql> 
+        ```
+    - SERECT文を実行すると，先ほど追加したレコードが存在することも確認できる．
+        ```
+        mysql> SELECT * FROM exampletable;
+        +----+--------+
+        | id | name   |
+        +----+--------+
+        |  1 | user01 |
+        |  2 | user02 |
+        +----+--------+
+        2 rows in set (0.01 sec)
+        ```
+    - ```-q```で終了し，```exit```でコンテナを抜ける．
+12. 後始末
+    - コンテナから出て終了し，破棄．
+### 5.3.7 mountオプションを使ったマウントの設定
+- これまでは```-v```オプションを用いたが，```--mount```オプションを使う方法もある．
+    ```
+    --mount type=[type of the mount],src=[mount source],dst=[destination of the mount]
+    ```
+    - マウントの種類
+        - バインドマウント: ```bind```
+            ```
+            -v /home/ubuntuweb01data:/usr/local/apache2/htdocs:/usr/local/apache2/htdocs
+            ```
+            は
+            ```
+            --mount type=bind,src=/home/ubuntu/web01data,dst=/usr/local/apache2/htdocs
+            ```
+            と等価
+        - ボリュームマウント: ```volume```
+            ```
+            -v mysqlvolume:/var/lib/mysql
+            ```
+            は
+            ```
+            --mount type=volume,src=mysqlvolume,dst=/var/lib/mysql
+            ```
+    - Dockerバージョン17.06からサポート
+        - ```--mount```の方が推奨
+1. バインドマウントかボリュームマウントかわかりにくい
+    - マウント元が```/```から始まるときはバインドマウント
+    - そうでないときはボリュームマウント
+2. ボリュームが存在しないときに新規に作成される
+    - ボリューム名をタイプミスしたときに致命的な問題になりがち
