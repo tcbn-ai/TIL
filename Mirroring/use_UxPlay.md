@@ -18,3 +18,14 @@
 - PC側
     - 画面を閉じる
     - UxPlay起動時のターミナルでCtrl+C
+
+## 追記 (4/14)
+- 何故かうまくミラーリングできないってことがあった
+    ```
+    tcbn@tcbn-N14xZU:~/UxPlay/build$ ./uxplay 
+    Initialized server socket(s)
+    *** WARNING *** The program 'uxplay' uses the Apple Bonjour compatibility layer of Avahi.
+    *** WARNING *** Please fix your application to use the native API of Avahi!
+    *** WARNING *** For more information see <http://0pointer.de/blog/projects/avahi-compat.html>
+    ```
+    - 原因が分かり次第なんとかしたい．
