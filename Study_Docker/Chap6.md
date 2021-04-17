@@ -152,3 +152,233 @@
     ```
 7. 後始末
     - ```exit```で終了
+
+## 6.3 ネットワークを新規に作成して通信を分ける
+- それぞれのコンテナは割り当てられたIPアドレスを介して互いに通信できる
+- IPアドレスの代わりにコンテナ名を使って通信することはできない
+    - コンテナに対してどのようなIPアドレスが割り当てられるかはコンテナを起動するまでわからない
+    - コンテナを破棄して作り直せばIPアドレスが変わる恐れがある
+- IPアドレスではなくてコンテナ名で通信相手を特定できるほうが望ましい
+    - Dockerネットワークを新規に作成する方法
+    - ```--link```オプションを指定する方法 (非推奨)
+### 6.3.1 Dockerネットワーク
+- Dockerでは任意のネットワークを作ることができる
+    - ネットワークを作ることで，別々のネットワークに接続することもできる
+    - ネットワークを作ると，その数だけDockerホスト上にはbr-XXXXXX (XXXXXX: DockerのネットワークIDの先頭) という名前のネットワークインタフェースが作られる
+
+![docker_network](./fig/docker_network.png "Dockerネットワーク")
+
+- 新たにDockerネットワークを作ってそこにコンテナを参加させる場合は，```--name```で指定したコンテナ名で互いに通信できる
+
+### 6.3.2 Dockerネットワークを作る
+- Dockerネットワークは，```docker network create```コマンドを使って作る
+    ```
+    docker network create [network name]
+    ```
+    - IPアドレス範囲を明示的に指定したいときは```--subnet```や```--iprange```などのオプションを指定することもできる (必須ではない)．
+        - 省略したときは，既存のネットワークと重複しない適当なIPアドレス範囲が使われる．
+
+#### Dockerネットワークを作成する
+1. Dockerネットワークを作成する
+    ```
+    docker network create mydockernet
+    ```
+2. 作成されたネットワークを確認する
+    ```
+    ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker network ls
+    NETWORK ID     NAME          DRIVER    SCOPE
+    470a2dc530d0   bridge        bridge    local
+    eea371a81d9a   host          host      local
+    8eefa9b57e17   mydockernet   bridge    local
+    ecb1fa9b5b68   none          null      local
+    ```
+3. IPアドレスの設定を確認しておく
+    ```
+    ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker network inspect mydockernet
+    [
+        {
+            "Name": "mydockernet",
+            "Id": "8eefa9b57e1704d08020ae06e6fac97555d4513fa271f97edeb0e388fddaf462",
+            "Created": "2021-04-17T05:58:30.946953053Z",
+            "Scope": "local",
+            "Driver": "bridge",
+            "EnableIPv6": false,
+            "IPAM": {
+                "Driver": "default",
+                "Options": {},
+                "Config": [
+                    {
+                        "Subnet": "172.18.0.0/16",
+                        "Gateway": "172.18.0.1"
+                    }
+                ]
+            },
+            "Internal": false,
+            "Attachable": false,
+            "Ingress": false,
+            "ConfigFrom": {
+                "Network": ""
+            },
+            "ConfigOnly": false,
+            "Containers": {},
+            "Options": {},
+            "Labels": {}
+        }
+    ]
+    ```
+
+### 6.3.3 Dockerネットワークにコンテナを作る
+- 可動しているweb01コンテナ，web02コンテナを一旦破棄し，今作成したmydockernetに接続するようにして新たに作り直す．
+- ネットワークに参加させるには，```docker run```するときに，```--net```オプションを指定する．
+
+#### 接続先のネットワークを指定してコンテナを起動する
+1. 現在のコンテナを停止・破棄する
+    ```
+    docker stop web01 web02
+    docker rm web01 web02
+    ```
+2. mydockernetに接続してコンテナを作成
+    ```
+    docker run -dit --name web01 -p 8080:80 --net mydockernet httpd:2.4
+    docker run -dit --name web02 -p 8081:80 --net mydockernet httpd:2.4
+    ```
+3. ネットワーク接続を確認する
+    ```
+    ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker network inspect mydockernet
+    [
+        {
+            "Name": "mydockernet",
+            "Id": "8eefa9b57e1704d08020ae06e6fac97555d4513fa271f97edeb0e388fddaf462",
+            "Created": "2021-04-17T05:58:30.946953053Z",
+            "Scope": "local",
+            "Driver": "bridge",
+            "EnableIPv6": false,
+            "IPAM": {
+                "Driver": "default",
+                "Options": {},
+                "Config": [
+                    {
+                        "Subnet": "172.18.0.0/16",
+                        "Gateway": "172.18.0.1"
+                    }
+                ]
+            },
+            "Internal": false,
+            "Attachable": false,
+            "Ingress": false,
+            "ConfigFrom": {
+                "Network": ""
+            },
+            "ConfigOnly": false,
+            "Containers": {
+                "114c87c0a8fdb7fcc25d33e9398b2d1eb54204fc2f0796945ca5ad258635fdff": {
+                    "Name": "web01",
+                    "EndpointID": "c25ef6ebd64de0eac2aa80b2bb4ae2436c68764d5cce57faa1326046a1704500",
+                    "MacAddress": "02:42:ac:12:00:02",
+                    "IPv4Address": "172.18.0.2/16",
+                    "IPv6Address": ""
+                },
+                "21755ec6f7220dcbdb2f953afaab9a6a762fc3f376aece04267b83ee3a1799a7": {
+                    "Name": "web02",
+                    "EndpointID": "d1009d823369c18571abe85c9a29bc7620390d8711a863c63cf60a1791225499",
+                    "MacAddress": "02:42:ac:12:00:03",
+                    "IPv4Address": "172.18.0.3/16",
+                    "IPv6Address": ""
+                }
+            },
+            "Options": {},
+            "Labels": {}
+        }
+    ]
+    ```
+
+### 6.3.4 名前を使った通信ができることを確認する
+#### 名前を使った通信ができることを確認する
+1. 第3のコンテナを作る
+    - ```--net mydockernet```を付けて，mydockernetに接続する
+        ```
+        ubuntu@ip-xxx-xxx-xxx-xxx:~$ docker run --rm -it --net mydockernet ubuntu /bin/bash
+        root@fb973493aa8b:/# 
+        ```
+2. 必要なソフトのインストール
+    ```
+    root@fb973493aa8b:/# apt update
+    root@fb973493aa8b:/# apt -y upgrade
+    root@fb973493aa8b:/# apt -y install iproute2 iputils-ping curl
+    ```
+3. 名前で疎通確認する
+    ```
+    root@fb973493aa8b:/# ping -c 4 web01
+    PING web01 (172.18.0.2) 56(84) bytes of data.
+    64 bytes from web01.mydockernet (172.18.0.2): icmp_seq=1 ttl=64 time=0.090 ms
+    64 bytes from web01.mydockernet (172.18.0.2): icmp_seq=2 ttl=64 time=0.065 ms
+    64 bytes from web01.mydockernet (172.18.0.2): icmp_seq=3 ttl=64 time=0.061 ms
+    64 bytes from web01.mydockernet (172.18.0.2): icmp_seq=4 ttl=64 time=0.070 ms
+
+    --- web01 ping statistics ---
+    4 packets transmitted, 4 received, 0% packet loss, time 3080ms
+    rtt min/avg/max/mdev = 0.061/0.071/0.090/0.011 ms
+    ```
+4. コンテンツが取得できることを確認する
+    ```
+    root@fb973493aa8b:/# curl http://web01/
+    <html><body><h1>It works!</h1></body></html>
+    ```
+5. DNSサーバの確認
+    ```
+    root@fb973493aa8b:/# cat /etc/resolv.conf
+    search ap-northeast-3.compute.internal
+    nameserver 127.0.0.11
+    options edns0 ndots:0
+    ```
+6. 終了
+    - ```exit```コマンド
+
+### 6.3.5 Dockerネットワークの削除
+- 利用中のコンテナが存在するときは，ネットワークを削除できない
+    - コンテナを破棄せずにネットワークを削除することもできる
+        - ```docker network disconnect```コマンド
+#### Dockerネットワークの削除
+1. ネットワークを利用しているコンテナを停止・破棄する
+    ```
+    docker stop web01 web02
+    docker rm web01 web02
+    ```
+2. ネットワークを削除する
+    ```
+    docker network rm mydockernet
+    ```
+3. 削除されたことを確認する
+    ```
+    ubuntu@ip-172-31-39-72:~$ docker network ls
+    NETWORK ID     NAME      DRIVER    SCOPE
+    470a2dc530d0   bridge    bridge    local
+    eea371a81d9a   host      host      local
+    ecb1fa9b5b68   none      null      local
+    ```
+
+## 6.4 hostネットワークとnoneネットワーク
+### 6.4.1 hostネットワーク
+- hostネットワーク
+    - IPマスカレードを使わずにコンテナがホストのIPアドレスを共有する
+    - ```-p```オプションを指定することはできず，すべてのポートがDockerコンテナに流れる．
+    - hostネットワークを指定するには，```docker run```の後に```--net host```を指定する．
+        - もしくは，あとから```docker network connect```でhostネットワークを指定する
+    - Dockerコンテナは個別のIPアドレスを持たない
+        - 同じポート番号を使う複数のコンテナを利用することはできない．
+        - 全通信ポートを転送する高々1個もしくは数個のDockerコンテナを起動するときに使われる
+
+![host_network](./fig/host_network.png "hostネットワーク")
+
+### 6.4.2 noneネットワーク
+- noneネットワーク
+    - コンテナをネットワークに接続しない設定
+    - ```docker run```の際に```--net none```を指定する．
+        - もしくは```docker network disconnect```でネットワークから切断
+    - セキュリティを高めたいなどの理由で，ネットワーク通信からコンテナを完全に隔離したいとき
+
+## 6.5 まとめ
+1. Dockerホスト同士はIPアドレスで通信できる
+2. 名前で通信したいときはDockerネットワークを作る
+3. コンテナ間の通信では```-p```オプションは関係ない
+4. hostネットワークとnoneネットワーク
