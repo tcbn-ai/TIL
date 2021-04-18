@@ -3,7 +3,7 @@
 - https://qiita.com/Y-Kanoh/items/94b3ea3df97fcd1546ce
 - https://qiita.com/yagince/items/deba267f789604643bab
 - https://stackoverflow.com/questions/65644782/how-to-install-pip-for-python-3-9-on-ubuntu-20-04
-- 
+- https://biomedicalhacks.com/2020-12-01/docker-jupyter/
 ## 前提
 - Dockerが導入済み
 ## 1. sshキー作成用のコンテナの準備
@@ -79,6 +79,7 @@
     ```
 
 ## 3. コンテナイメージの作成とVSCodeの利用
+- 参考: https://biomedicalhacks.com/2020-12-01/docker-jupyter/
 1. dockerfileと同じ階層に```.ssh```ディレクトリを配置して，Dockerイメージを作成する．
 2. dockerfileがあるディレクトリで```code ./```．
 3. VSCodeの拡張機能としてRemote Containersをインストール．
@@ -94,3 +95,4 @@
     ```
     とすると，自分のリポジトリをVSCodeで開ける．
 - Jupyter NotebookのようなGUIの操作もできた．
+- VSCodeの拡張機能でgit pushやpullもできる．
