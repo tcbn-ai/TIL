@@ -1,0 +1,12 @@
+############ Requirements Packages ############
+pylint
+numpy
+scipy
+sympy
+matplotlib
+statsmodels
+sklearn
+pandas
+networkx
+ipykernel
+jupyter
