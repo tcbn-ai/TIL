@@ -1,0 +1,63 @@
+\documentclass[dvipdfmx]{jsarticle}
+\input {../../preamble.tex}
+\title{統計的学習理論 第4章 補足資料}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+スライドに載せていない証明の部分の補足資料となっている．
+
+\paragraph{定理4.2の証明}
+定理4.2を示すために，次の補題を示す．
+\begin{lemm}\label{lemm:1}
+  Hermite行列$A, B$が非負定値であれば，Hadamard積$A \circ B$も非負定値である．
+\end{lemm}
+
+\begin{proof}
+  $A, B \in \mathbb{C}^{n \times n}$とする．
+  $A, B$はHermiteより，固有値をそれぞれ$\lambda_i, \mu_i \ (i = 1, \ldots, n)$，固有ベクトルをそれぞれ$u_i, v_i \ (i = 1, \ldots, n)$とすると，$\lambda_i, \mu_i \in \mathbb{R}$であり，$u_i$ (および$v_i$) は互いに直交するようにとれる．このとき，
+  \begin{align}
+    A = \sum_{i = 1}^n \lambda_i u_i u_i^{*}, \ B = \sum_{j = 1}^n \mu_j v_j v_j^{*} \nonumber
+  \end{align}
+  とスペクトル分解できる ($u_i^{*}, v_j^{*}$は$u_i, v_j$の共役転置)．ここで，
+  \begin{align}
+    (u_i u_i^{*}) \circ (v_j v_j^{*}) = (u_{i,k} \bar{u}_{i, l} \cdot v_{j,k} \bar{v}_{j,l})_{k,l} = (u_{i,k}v_{j,k} \cdot \bar{u}_{i,l}\bar{v}_{j,l})_{k, l}
+    = (u_i \circ v_j) (u_i \circ v_j)^{*} \nonumber
+  \end{align}
+  が成立する．
+  よって，
+  \begin{align}
+    A \circ B = \sum_{i = 1}^n \sum_{j = 1}^n \lambda_i \mu_j (u_i u_i^{*}) \circ (v_j v_j^{*})
+    = \sum_{i = 1}^n \sum_{j = 1}^n \lambda_i \mu_j (u_i \circ v_j) (u_i \circ v_j)^{*} \nonumber
+  \end{align}
+  が成立する．
+  $A, B$は非負定値より，$\lambda_i \geq 0, \mu_i \geq 0 \ (i = 1, \ldots, n)$であり，行列$(u_i \circ v_j) (u_i \circ v_j)^{*}$は非負定値である．
+  よって，$\forall x \in \mathbb{C}^{n \times n}$に対して，
+  \begin{align}
+    x^{*} (A \circ B) x = \sum_{i = 1}^n \sum_{j = 1}^n \lambda_i \mu_j x^{*} (u_i \circ v_j) (u_i \circ v_j)^{*}  x \geq 0 \nonumber
+  \end{align}
+  が成り立ち，$A \circ B$が非負定値であることが示される．
+\end{proof}
+
+この結果を用いて，定理4.2を証明する．
+\begin{proof}
+  \subparagraph{1の証明}
+  カーネル関数の定義において$n = 1$とすると，定義より明らか．
+
+  \subparagraph{2の証明}
+  $a k_1 + b$, $k_1 + k_2$の対称非負定値性は容易に分かる．
+  カーネル関数の積$k = k_1 \cdot k_2$について考える．$x_1, \ldots, x_n \in \mathcal{X}$に対してカーネル関数$k_i$から定義されるグラム行列を$K_i$とする．このとき，$K = (k(x_i, x_j))$は，
+  $K = K_1 \circ K_2$と，非負定値行列のHadamard積を用いて表される．定理\ref{lemm:1}より，$K$が非負定値であることが示され，$k_1 \cdot k_2$がカーネル関数であることが示される．
+
+  \subparagraph{3の証明}
+  極限$k_{\infty}$の対称性は明らか．ここで，各$\ell$に対して$k_{\ell}$がカーネル関数より，各$\ell$に対して
+  $\sum_{i = 1}^n \sum_{j = 1}^n c_i c_j k_{\ell}(x_i, x_j) \geq 0$が成り立つ．
+  よって，$\ell \to \infty$として
+  $\sum_{i = 1}^n \sum_{j = 1}^n c_i c_j k_{\infty}(x_i, x_j) \geq 0$
+  が示され，$k_{\infty}$の非負定値性が示される．
+  よって，$k_{\infty}$がカーネル関数であることが示される．
+\end{proof}
+
+
+
+\end{document}
