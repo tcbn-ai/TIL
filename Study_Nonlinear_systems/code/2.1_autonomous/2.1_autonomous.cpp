@@ -1,4 +1,3 @@
-/* geometrics.cpp */
 /* vector field */
 /* dx/dt = y, dy/dt = -x */
 /* compile: g++ 2.1_autonomous.cpp */

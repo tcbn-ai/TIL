@@ -7,6 +7,14 @@ footer: 'Kosuke Toda ([@SeeKT](https://github.com/SeeKT))'
 size: 16:9
 ---
 <!-- paginate: true -->
+
+<style>
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+</style>
+
 # 基礎からの力学系 (第2章)
 #### 参考文献
 - [小室，基礎からの力学系，サイエンス社，2002](https://www.saiensu.co.jp/book_support/sgc-17/)
@@ -68,7 +76,7 @@ ODE (2.5) において，写像$g$が時間$t$を陽に含むか含まないか�
 ###### Def 2.2 (自律系)
 1. $\boldsymbol{x} \coloneqq (x_1, \ldots, x_n) \in \mathbb{R}^n$とする．$f: D \ (\subset \mathbb{R}^n) \to \mathbb{R}$を，
     $$
-    f(\boldsymbol{x}) = (f_1(\boldsymbol{x}), \ldots, \boldsymbol{x})^{\mathrm{T}} \ \ (2.6)
+    f(\boldsymbol{x}) = (f_1(\boldsymbol{x}), \ldots, f_n(\boldsymbol{x}))^{\mathrm{T}} \ \ (2.6)
     $$
     とする．このとき，ODE
     $$
@@ -105,4 +113,138 @@ ODE (2.5) において，写像$g$が時間$t$を陽に含むか含まないか�
     を満たすならば，$\varphi$はODE (2.7)の流れ (flow) であるという (ベクトル場(2.9)の流れとも呼ばれる)．
 
 ---
-###### 例 2.1
+###### 例 2.1 (2次元自律系ODE)
+1. $\boldsymbol{x} = (x, y)$, $f: \mathbb{R}^2 \to \mathbb{R}^2$を
+    $$
+    f(\boldsymbol{x}) = (f_1(x, y), f_2(x, y)) = (y, -x) \ \ (2.12)
+    $$
+    で定義．このとき，
+    $$
+    \begin{cases}
+        \dot{x} = y \\
+        \dot{y} = -x
+    \end{cases} \ \ (2.13)
+    $$
+    は$f$によって与えられる自律系のODE．
+2. ベクトル場は，$(x, y) \mapsto (y, -x)$である．相空間は$\mathbb{R}^2$．
+
+---
+![center](../code/2.1_autonomous/2.1_autonomous.svg "例2.1のベクトル場")
+
+---
+
+3. 曲線$\boldsymbol{x}: \mathbb{R} \to \mathbb{R}^2$を
+    $$
+    \boldsymbol{x}(t) = (x_0 \cos t + y_0 \sin t, -x_0 \sin t + y_0 \cos t) \ \ (2.14)
+    $$
+    で定義すれば，$\boldsymbol{x}$は初期値$(x_0, y_0)$を持つ解曲線となる．
+4. $\varphi: \mathbb{R} \times \mathbb{R}^2 \to \mathbb{R}^2$を
+    $$
+    \varphi(t, x_0, y_0) = (x_0 \cos t + y_0 \sin t, -x_0 \sin t + y_0 \cos t) = (x_t, y_t) \ \ (2.15)
+    $$
+    と定義．$\varphi$は上のODEの流れである．
+
+---
+
+###### Def 2.3 (非自律系)
+1. $g: I \times D \to \mathbb{R}^n$とする．
+    - $I \subset \mathbb{R}$, $D \subset \mathbb{R}^n$
+    $$
+    g(t, \boldsymbol{x}) = (g_1(t, \boldsymbol{x}), \ldots, g_n(t, \boldsymbol{x}))^{\mathrm{T}} = (g_1(t, x_1, \ldots, x_n), \ldots, g_n(t, x_1, \ldots, x_n))^{\mathrm{T}} \ \ (2.19)
+    $$
+    このとき，ODE
+    $$
+    \dot{\boldsymbol{x}} = g(t, \boldsymbol{x}) \ \ (2.20) \Longleftrightarrow \begin{cases}
+        \dot{x}_1 = g_1(t, x_1, \ldots, x_n) \\
+        \cdots \\
+        \dot{x}_n = g_n(t, x_1, \ldots, x_n)
+    \end{cases} \ \ (2.21)
+    $$
+    を非自律系 (non-autonomous system) という．
+
+---
+2. $I \times D$: 拡大相空間．
+    $$
+    (t, \boldsymbol{x}) \mapsto (1, g(t, \boldsymbol{x})) \ \ (2.22)
+    $$
+    をベクトル場という．
+3. 曲線$\boldsymbol{x}: I \to \mathbb{R}^n$が
+    $$
+    \dot{\boldsymbol{x}} = g(t, \boldsymbol{x}(t)) \ \ (2.23)
+    $$
+    を満たすとき，$\boldsymbol{x}$はODE (2.20) の解 (解曲線) という．$\boldsymbol{x}(t_0)$: 初期値．
+4. $\varphi: \mathbb{R} \times \mathbb{R} \times \mathbb{R}^n \to \mathbb{R}^n$が$\varphi(t_0, t_0, \boldsymbol{x}_0) = \boldsymbol{x}_0$を満たし，各$(t_0, \boldsymbol{x}_0) \in I \times D$を固定するとき
+    $$
+    \frac{d \varphi(t, t_0, \boldsymbol{x}_0)}{dt} = g(t, \varphi(t, t_0, \boldsymbol{x}_0)) \ \ (2.24)
+    $$
+    を満たすならば，$\varphi$はODE (2.20) の流れであるという．
+
+---
+###### 例2.2 (1次元非自律系ODE)
+1. $(t, x) \in \mathbb{R} \times \mathbb{R}$, $g: \mathbb{R} \times \mathbb{R} \to \mathbb{R}$を
+    $$
+    g(x, t) = xt \ \ (2.25)
+    $$
+    で定義．このとき，
+    $$
+    \dot{x} = g(t, x) = xt \ \ (2.26)
+    $$
+    は$g$によって与えられる非自律系のODE．
+2. ベクトル場は$(t, x) \mapsto (1, xt)$．拡大相空間は$\mathbb{R} \times \mathbb{R}$．
+
+---
+![center](../code/2.2_non_autonomous/2.2_non_autonomous.svg "例2.2のベクトル場")
+
+---
+3. 曲線$\boldsymbol{x}: \mathbb{R} \to \mathbb{R}$を
+    $$
+    \boldsymbol{x}(t) = x_0 \exp\left(\frac{1}{2}(t^2 - t_0^2) \right) \ \ (2.27)
+    $$
+    で定義すれば，$\boldsymbol{x}$は$t = t_0$のとき，$x_0$を初期値とする解曲線となる．
+4. 写像$\varphi: \mathbb{R} \times \mathbb{R} \times \mathbb{R} \to \mathbb{R}$を，
+    $$
+    \varphi(t, t_0, x_0) = x_0 \exp\left( \frac{1}{2}(t^2 - t_0^2) \right) \ \ (2.28)
+    $$
+    で定義．この$\varphi$は上のODEの流れである．
+
+---
+### 離散時間力学系 ― 写像 ―
+
+
+###### Def 2.4
+1. $\boldsymbol{x} = (x_1, \ldots, x_n)^{\mathrm{T}} \in \mathbb{R}^n$, $f: \mathbb{R}^n \to \mathbb{R}^n$: 連続写像.
+    $$
+    f(\boldsymbol{x}) = (f_1(\boldsymbol{x}), \ldots, f_n(\boldsymbol{x}))^{\mathrm{T}} = (f_1(x_1, \ldots, x_n), f_n(x_1, \ldots, x_n))^{\mathrm{T}} \ \ (2.30)
+    $$
+    このとき，離散時間差分方程式
+    $$
+    \boldsymbol{x}(t + 1) = f(\boldsymbol{x}(t)), \ \ (t = 0, 1, 2, \ldots) \ \ (2.31) \\
+    \Longleftrightarrow \begin{cases}
+        x_1(t + 1) = f_1(x_1(t), \ldots, x_n(t)) \\
+        \cdots \\
+        x_n(t + 1) = f_n(x_1(t), \ldots, x_n(t))
+    \end{cases} \ \ (2.32)
+    $$
+    を離散時間力学系という．単に写像ということもある．
+
+---
+
+2. 点$\boldsymbol{x}_0 \in \mathbb{R}^n$に対して，
+    $$
+    \boldsymbol{x}_{t + 1} = f(\boldsymbol{x}_t), \ \ (t = 0, 1, 2, \ldots)
+    $$
+    で与えられる$\{\boldsymbol{x}_t: \ t = 0, 1, 2, \ldots\}$を点$\boldsymbol{x}_0$を通る正の半軌道という．
+3. $f$が同相写像 (逆写像$f^{-1}$が存在し，逆写像も連続) であるとき，可逆系といい，そうでないとき，非可逆系という．
+    可逆系の場合には，時間の負の時間方向 (過去) への軌道も考えることができる．
+    点$\boldsymbol{x}_0 \in \mathbb{R}^n$に対して，
+    $$
+    \boldsymbol{x}_{t - 1} = f^{-1}(\boldsymbol{x}_t) \ \ (t = 0, -1, -2, \ldots) \ \ (2.34)
+    $$
+    で与えられる点列$\{\boldsymbol{x}_t: \ t = -1, -2, \ldots\}$を$\{\boldsymbol{x}_t: \ t = 0, 1, 2\}$に加えて得られる点列$\{\boldsymbol{x}_t: \ t = 0, \pm 1, \pm 2, \ldots\}$を$\boldsymbol{x}_0$を通る軌道という．
+
+---
+### ポアンカレ写像
+連続時間力学系における周期軌道の解析は，1次元低い次元の空間における離散時間力学系の解析に帰着されることがある．
+$\rightsquigarrow$ ポアンカレ写像
+
+#### 自律系のポアンカレ写像
