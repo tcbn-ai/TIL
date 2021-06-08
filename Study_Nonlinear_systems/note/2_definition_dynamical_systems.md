@@ -20,6 +20,8 @@ img[alt~="center"] {
 - [小室，基礎からの力学系，サイエンス社，2002](https://www.saiensu.co.jp/book_support/sgc-17/)
 #### Table of contents
 - 連続時間力学系
+- 離散時間力学系
+- ポアンカレ写像
 
 ---
 ### 連続時間力学系 ― ベクトル場 ―
@@ -248,3 +250,68 @@ ODE (2.5) において，写像$g$が時間$t$を陽に含むか含まないか�
 $\rightsquigarrow$ ポアンカレ写像
 
 #### 自律系のポアンカレ写像
+3次元自律系ベクトル場
+$$
+\dot{\boldsymbol{x}} = f(\boldsymbol{x}), \ \ \boldsymbol{x} \in \mathbb{R}^3
+$$
+を考える．このベクトル場が周期軌道$\Gamma$を持つとする．
+このとき，$\Gamma$と1点$\boldsymbol{p}$で横断的に交わる2次元平面$\Sigma$をとる．
+$\rightsquigarrow$ $\boldsymbol{p}$は流れ$\varphi$に沿って動く時，再び$\Sigma$上の点$\boldsymbol{p}$を打つ．
+$\rightsquigarrow$ $\boldsymbol{p}$に十分近い$\Sigma$上の点$\boldsymbol{q}$が流れに沿って動くとき，$\boldsymbol{p}$の近くの点$\boldsymbol{q}^{\prime}$を打つと考えられる ($\because$ 解の連続性，$\Sigma$が$\Gamma$に横断的であること)．
+
+---
+上記のようにして，$\Sigma$上の$\boldsymbol{p}$の近傍$U$から$\Sigma$への写像が定義できる．
+
+###### Def 2.5 
+$U$: $\Sigma$における$\boldsymbol{p}$の近傍．$\boldsymbol{q} \in U$に対して，$\boldsymbol{q}^{\prime}$を流れ$\varphi$によって
+$$
+\boldsymbol{q}^{\prime} = \varphi(T, \boldsymbol{q}), \ \ T = \min\{t > 0 \, | \, \varphi(t, \boldsymbol{q}) \in \Sigma  \} \ \ (2.36)
+$$
+で定義する．この写像
+$$
+P: U \ni \boldsymbol{q} \mapsto \boldsymbol{q}^{\prime} \in \Sigma \ \ (2.37)
+$$
+を自律系ベクトル場のポアンカレ写像といい，$\Sigma$をポアンカレ断面という．
+
+---
+###### Remark
+- ポアンカレ写像は有界な領域$U$で定義された写像
+    $\rightsquigarrow$ $\boldsymbol{q}$に対して$P$で繰り返し変換すると，像が$U$の外に出てしまうことがある．
+    $\rightsquigarrow$ 自律系のポアンカレ写像は，局所的に定義された離散時間力学系．
+- ポアンカレ写像を使用する場面
+    - パラメータを持つベクトル場の周期軌道の安定性の変化や分岐を調べるとき
+        $\rightsquigarrow$ 周期軌道の安定性や分岐は，ポアンカレ写像の不動点$\boldsymbol{p}$の安定性や分岐に帰着される
+        - あらかじめ定めたポアンカレ断面がパラメータのどの範囲で有効に働くかは，ベクトル場や周期軌道の性質に依存する
+
+---
+
+### 非自律系のポアンカレ写像
+時間に関して周期$T$の周期性を持つ2次元の非自律ベクトル場を考える．
+$$
+\dot{\boldsymbol{x}} = g(t, \boldsymbol{x}), \ \ \boldsymbol{x} \in \mathbb{R}^2 \ \ (2.38) \\
+g(t, \boldsymbol{x}) = g(t + T, \boldsymbol{x}) \ \ (2.39)
+$$
+このベクトル場の流れを，$\varphi: \mathbb{R} \times \mathbb{R} \times \mathbb{R}^2 \to \mathbb{R}^2$とする．
+
+###### Def 2.6
+$\boldsymbol{x} \in \mathbb{R}^2$に対して，$\varphi(T, 0, \boldsymbol{x}) \in \mathbb{R}^2$を対応させる写像
+$$
+P: \mathbb{R}^2 \ni \boldsymbol{x} \mapsto \varphi(T, 0, \boldsymbol{x}) \in \mathbb{R}^2 \ \ (2.40)
+$$
+を非自律系のポアンカレ写像 (ストロボ写像) という．
+
+---
+ベクトル場の解$\boldsymbol{x}: \mathbb{R} \to \mathbb{R}^2$が$t = 0$のとき$\boldsymbol{x} = \boldsymbol{x}_0$を初期値とし，
+$$
+\boldsymbol{x}(t) = \boldsymbol{x}(t + T), \ \ t \in \mathbb{R}  \ \ (2.41)
+$$
+を満たすとき，，$\boldsymbol{x}(0) = \boldsymbol{x}_0$はポアンカレ写像$P$の不動点となる ($P(\boldsymbol{x}_0) = \boldsymbol{x}_0$)．
+
+また，解$\boldsymbol{x}: \mathbb{R} \to \mathbb{R}^2$が$t = 0$のとき，$\boldsymbol{x} = \boldsymbol{x}_0$を初期値とし，
+$$
+\boldsymbol{x}(t) \neq \boldsymbol{x}(t + T) \ \ (2.43) \\
+\boldsymbol{x}(t) = \boldsymbol{x}(t + 2T) \ \ (2.44)
+$$
+を満たすとき，$\boldsymbol{x}(0) = \boldsymbol{x}_0$はポアンカレ写像$P$の2周期点となる．
+
+$\rightsquigarrow$ 非自律系ベクトル場の基本周期$T$の整数倍の周期を持つ解曲線の解析を，ポアンカレ写像の周期点の解析に帰着させることができる．
