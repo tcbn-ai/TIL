@@ -1,7 +1,14 @@
 /* fall mass */
+/* 
+    execute: ./a.out choice_dynamics choice_process > [file name]
+    - choice_dynamics
+        - 1: non-resistance, 2: resistance
+    - choice_process
+        - 1: vector field, 2: numerical integration
+*/
 #include <iostream>
 #include <cmath>
-#include "RungeKutta.hpp"
+#include "../RungeKutta.hpp"
 #define MAXITER 1000
 #define G 9.8
 #define GAMMA 5.0
@@ -105,8 +112,8 @@ int main(int argc, char *argv[]) {
 
     if (choice_process == 1) {
         /* 
-            Vector field of Dynamics system
-            execute: ./a.out 1 1 > nonresistane or ./a.out 2 1 > resistance
+            Vector field of Dynamical system
+            execute: ./a.out 1 1 > nonresistance or ./a.out 2 1 > resistance
             gnuplot: (nonresistance)
                 set xrange [-5.5:5.5]
                 set yrange [-5.5:5.5]
