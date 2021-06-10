@@ -249,3 +249,257 @@ _footer: '拡大相空間の軌道'
 -->
 ![bg 100%](../code/3.3_duffing/3.3_expand_flow_1.svg "1の場合の軌道") 
 ![bg 100%](../code/3.3_duffing/3.3_expand_flow_2.svg "2の場合の軌道")
+
+---
+### 1階微分方程式
+$x$を独立変数，$y$を未知関数とする1階微分方程式が
+$$
+\frac{dy}{dx} = \frac{f(x, y)}{g(x, y)} \ \ (3.33)
+$$
+で与えられているとする．
+$\rightsquigarrow$ $x \rightarrow t$とすると，1次元非自律ベクトル場が得られる．
+$$
+\frac{dy}{dt} = \frac{f(t, y)}{g(t, y)}
+$$
+$\rightsquigarrow$ 別の見方をする．
+
+---
+
+$x, y$が媒介変数$t$の関数であることを考えると，
+$$
+\frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}} \ \ (3.35)
+$$
+が成り立つ．
+$\rightsquigarrow$ 2次元の自律ベクトル場
+$$
+\begin{cases}
+  \frac{dx}{dt} = g(x, y) \\
+  \frac{dy}{dt} = f(x, y)
+\end{cases} \ \ (3.36)
+$$
+を考えると，解曲線$(x(t), y(t))$はODE (3.33) の解となる．
+
+---
+###### 変数分離形微分方程式
+$$
+\frac{dy}{dx} = \frac{f(x)}{g(y)} \ \ (3.37)
+$$
+を変数分離形という．一般解は
+$$
+\int g(y) dy = \int f(x) dx + c \ \ (3.38)
+$$
+で与えられる．
+
+$$
+\frac{dy}{dx} = \frac{-(1 - x)y}{(1 - y)x} \ \ (3.39)
+$$
+は変数分離形である．これは，次の2次元自律ベクトル場で表現される．
+$$
+\begin{cases}
+  \frac{dx}{dt} = (1 - y)x \\
+  \frac{dy}{dt} = -(1 - x)y
+\end{cases} \ \ (3.40)
+$$
+
+---
+<!--
+_footer: '1. 変数分離形'
+-->
+![bg 100%](../code/3.5_1st_order/3.5_vector_field_1.svg "ベクトル場") 
+![bg 100%](../code/3.5_1st_order/3.5_flow_1.svg "流れ")
+
+---
+
+###### 同次形微分方程式
+$$
+\frac{dy}{dx} = f\left( \frac{x}{y} \right) \ \ (3.41)
+$$
+変数変換
+$$
+\frac{y}{x} = v \ \ (3.42)
+$$
+で変数分離形になる．
+
+$$
+\frac{dy}{dx} = \frac{-y^2}{x(x - y)} \ \ (3.43)
+$$
+は同次形．これは次の2次元自律ベクトル場で表現される．
+$$
+\begin{cases}
+  \frac{dx}{dt} = x(x - y) \\
+  \frac{dy}{dt} = -y^2
+\end{cases} \ \ (3.44)
+$$
+
+---
+<!--
+_footer: '2. 同次形'
+-->
+![bg 100%](../code/3.5_1st_order/3.5_vector_field_2.svg "ベクトル場") 
+![bg 100%](../code/3.5_1st_order/3.5_flow_2.svg "流れ")
+
+---
+
+###### 線形微分方程式
+$$
+\frac{dy}{dx} + P(x)y = Q(x) \ \ (3.45)
+$$
+一般解は，
+$$
+y = e^{-\int P dx} \left(\int Q e^{\int P dx} dx + c \right) \ \ (3.46)
+$$
+$$
+\frac{dy}{dx} = \frac{\cos^2 x + y \sin x}{\cos x} \ \ (3.47)
+$$
+は線形微分方程式．これは次の2次元自律ベクトル場で表現できる．
+$$
+\begin{cases}
+  \frac{dx}{dt} = \cos x \\
+  \frac{dy}{dt} = \cos^2 x + y \sin x
+\end{cases} \ \ (3.48)
+$$
+
+---
+
+<!--
+_footer: '3. 線形微分方程式'
+-->
+![bg 100%](../code/3.5_1st_order/3.5_vector_field_3.svg "ベクトル場") 
+![bg 100%](../code/3.5_1st_order/3.5_flow_3.svg "流れ")
+
+---
+
+###### ベルヌーイの微分方程式
+$$
+\frac{dy}{dx} + P(x)y = Q(x)y^n \ (n \neq 0, 1) \ \ (3.49)
+$$
+変数変換
+$$
+z = y^{1 - n} \ \ (3.50)
+$$
+によって線形微分方程式になる．
+$$
+\frac{dy}{dx} = \frac{-y + x^3 y^3}{x} \ \ (3.51)
+$$
+はベルヌーイの微分方程式．これは次の2次元自律ベクトル場として表現される．
+$$
+\begin{cases}
+  \frac{dx}{dt} = x \\
+  \frac{dy}{dt} = -y + x^3 y^3
+\end{cases} \ \ (3.52)
+$$
+
+---
+
+<!--
+_footer: '4. ベルヌーイ'
+-->
+![bg 100%](../code/3.5_1st_order/3.5_vector_field_4.svg "ベクトル場") 
+![bg 100%](../code/3.5_1st_order/3.5_flow_4.svg "流れ")
+
+---
+###### 完全微分方程式
+$$
+P(x, y)dx + Q(x, y)dy = 0 \ \ (3.53)
+$$
+の左辺がある関数$u(x, y)$の全微分$du = u_x dx + u_y dy$になっているとき，完全微分方程式という．一般解は，
+$$
+\int_a^x P(x, y) dx + \int_b^y Q(x, y)dy = c \ \ (3.54)
+$$
+で与えられる．$a,b$: 定数，$c$: 任意定数．
+$$
+\frac{dy}{dx} = \frac{-x^3 -2xy - y}{y^3 + x^2 + x} \ \ (3.55)
+$$
+は完全微分方程式．これは次の2次元自律ベクトル場で表現される．
+$$
+\begin{cases}
+  \frac{dx}{dt} = y^3 + x^2 + x \\
+  \frac{dy}{dt} = -x^3 - 2xy - y
+\end{cases} \ \ (3.56)
+$$
+
+---
+
+<!--
+_footer: '5. 完全微分方程式'
+-->
+![bg 100%](../code/3.5_1st_order/3.5_vector_field_5.svg "ベクトル場") 
+![bg 100%](../code/3.5_1st_order/3.5_flow_5.svg "流れ")
+
+---
+### 2階微分方程式
+$x$を独立変数，$y$を未知関数とする2階微分方程式が
+$$
+\frac{d^2y}{dx^2} = \frac{f(x, y, y^{\prime})}{g(x, y, y^{\prime})} \ \ (3.57)
+$$
+で与えられているとする．$x, y$が媒介変数$t$の関数であると考えると，
+$$
+\frac{dy^{\prime}}{dx} = \frac{\frac{dy^{\prime}}{dt}}{\frac{dx}{dt}} \ \ (3.58) \\
+\frac{dy}{dx} = y^{\prime} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}} \ \ (3.59)
+$$
+が成り立つ．
+
+---
+3次元のベクトル場
+$$
+\begin{cases}
+  \frac{dx}{dt} = g(x, y, y^{\prime}) \\
+  \frac{dy}{dt} = y^{\prime}g(x, y, y^{\prime}) \\
+  \frac{dy^{\prime}}{dt} = f(x, y, y^{\prime})
+\end{cases} \ \ (3.60)
+$$
+を考えると，解曲線$(x(t), y(t), y^{\prime}(t))$は微分方程式(3.60)の解となる．
+
+---
+###### 例 (1)
+$$
+\frac{d^2y}{dx^2} = -y \ \ (3.61)
+$$
+は，$dy/dx = z$とおくことで，次の3次元自律ベクトル場に表現される．
+$$
+\begin{cases}
+  \frac{dx}{dt} = 1 \\
+  \frac{dy}{dt} = z \\
+  \frac{dz}{dt} = -y
+\end{cases} \ \ (3.62)
+$$
+
+(3.61)の一般解は，
+$$
+y = A \cos x + B \sin x \ \ (3.63)
+$$
+で与えられる．
+
+---
+
+![center](../code/3.6_2nd_order/3.6_flow_1.svg)
+
+---
+
+### ストレンジアトラクタを持つ3次元自律ベクトル場
+- アトラクタ
+  - 力学系の相空間で，周囲の軌道を引き寄せて逃さない性質を持つ不変集合
+  - 点アトラクタ，周期アトラクタ，準周期アトラクタ
+- ストレンジアトラクタ
+  - 1960年代にコンピュータの発達・普及により従来知られていなかったアトラクタが多く見つかった．
+
+---
+###### ローレンツアトラクタ
+$$
+\begin{cases}
+  \frac{dx}{dt} = -\sigma (x - y) \\
+  \frac{dy}{dt} = -y - xz + rx \\
+  \frac{dz}{dt} = xy - bz
+\end{cases} \ \ (3.68)
+$$
+
+温度差のある上下の境界を持つ容器に入った流体の流れをモデル化したもの．
+- $x$: 流れの関数をフーリエ展開したときの係数に対応．対流の強さを表す．
+- $y$: 上昇流と下降流の温度差
+- $z$: 上下方向の温度差
+- $\sigma$: ブランドル数，$r$: レイリー数，$b$: 容器の高さと幅の比から定まる数
+
+$\rightsquigarrow (\sigma, r, b) = (10, 28, 8/3)$のとき，ローレンツアトラクタ．
+
+---
+![center](../code/3.7_strange_attractor/3.7_lorenz.svg)
