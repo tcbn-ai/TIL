@@ -4,7 +4,7 @@ FROM python:3.8.10-buster
 
 ########### update and install packages ###########
 RUN apt-get update && \
-    apt-get upgrade && \
+    apt-get -y upgrade && \
     apt-get install -y vim git && \
     rm -rf /var/lib/apt/lists*
 ###################################################
