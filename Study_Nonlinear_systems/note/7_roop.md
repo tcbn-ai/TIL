@@ -265,3 +265,144 @@ _footer: '$(x, f(x, \mu))$-平面での軌道の変化'
 ---
 
 ### 2次元写像のナイマルク―サッカー分岐
+Jacobi行列
+$$
+A = \left(
+  \begin{array}{cc}
+    (f_1)_x & (f_1)_y \\
+    (f_2)_x & (f_2)_y
+  \end{array}
+  \right)(\boldsymbol{0}, 0) \ \ (7.31)
+$$
+が絶対値$1$の複素共役固有値を持つ場合について述べる．
+
+2次元写像
+$$
+\left(
+  \begin{array}{c}
+    x \\
+    y
+  \end{array}
+  \right) \mapsto \left(
+      \begin{array}{c}
+        f_1(x, y, \mu) \\
+        f_2(x, y, \mu)
+      \end{array}
+    \right) \ \ (7.32)
+$$
+に極座標変換
+$$
+\begin{cases}
+  x = r \cos \theta \\
+  y = r \sin \theta
+\end{cases} \ \ (7.33)
+$$
+
+---
+を施したとき，
+$$
+\left(
+  \begin{array}{c}
+    r \\
+    \theta
+  \end{array}
+  \right) \mapsto \left(
+      \begin{array}{c}
+        g(r) \\
+        h(r, \theta)
+      \end{array}
+    \right) = \left(
+        \begin{array}{c}
+          r + d \mu r + a r^3 \\
+          \theta + c_0 + c_1 \mu + b r^2
+        \end{array}
+      \right) \ \ (7.34)
+$$
+で与えられる写像を考える ($a, b, c_0, c_1, d$: 定数)．
+$g(0) = 0$より，$\boldsymbol{x} = (0, 0)$は不動点．不動点$\boldsymbol{0} = (0, 0)$におけるJacobi行列
+$$
+A(\mu) = \left(
+    \begin{array}{cc}
+      (f_1)_x & (f_1)_y \\
+      (f_2)_x & (f_2)_y
+    \end{array}
+  \right)(\boldsymbol{0}, \mu) \ \ (7.35)
+$$
+は，
+$$
+A(\mu) = (1 + d \mu) \left(
+    \begin{array}{cc}
+      \cos (c_0 + c_1 \mu) & -\sin (c_0 + c_1 \mu) \\
+      \sin (c_0 + c_1 \mu) & \cos (c_0 + c_1 \mu)
+    \end{array}
+  \right) \ \ (7.36)
+$$
+で与えられる．
+
+---
+
+$A(\mu)$の固有値は，
+$$
+(1 + d \mu)\exp(\pm(c_0 + c_1 \mu)i) = (1 + d \mu) (\cos(c_0 + c_1 \mu) \pm i \sin (c_0 + c_1 \mu)) \ \ (7.37)
+$$
+である．$d > 0, a < 0$のとき，写像は次の特徴を持つ．
+
+1. $\mu < 0$かつ$|\mu| \ll 1$
+    - $\boldsymbol{x} = (0, 0)$に絶対値$1 + d \mu < 1$の複素共役固有値$(1 + d \mu)\exp(\pm (c_0 + c_1 \mu)i)$を持つ安定平衡点が存在する．
+2. $\mu = 0$
+    - $\boldsymbol{x} = (0, 0)$に絶対値$1$の複素共役固有値$\exp(\pm c_0 i)$を持つ平衡点が存在する．線形化行列は，
+    $$
+    \left(
+        \begin{array}{cc}
+          \cos (c_0) & - \sin (c_0) \\
+          \sin (c_0) & \cos (c_0)
+        \end{array}
+      \right)
+    $$
+
+---
+
+3. $\mu > 0$かつ$|\mu| \ll 1$
+    - $\boldsymbol{x} = (0, 0)$に絶対値$1 + d \mu > 1$の複素共役固有値$(1 + d \mu) \exp(\pm (c_0 + c_1 \mu)i)$を持つ不安定平衡点が存在する．その周囲に，半径$r = \sqrt{- d \mu/a}$の不変円を持つ．不変円は，周囲の店を近づけるという意味で安定である．
+
+
+一般に，複素共役固有値を持つ安定不動点が，パラメータの変化に伴って不安定化し，その周囲に安定な不変円が発生する分岐をナイマルク―サッカー分岐 (Naimark-Sacker) という．また，時間を反転した力学系も考慮に入れて，複素共役固有値を持つ不安定不動点が安定化し，その周囲に不安定な不変円が発生する分岐も同じ名前で呼ばれる．
+
+---
+
+<!--
+_footer: '$g(r)$のグラフの変化'
+-->
+![center](../ipython_notebook/7.7_funcg.svg)
+
+---
+
+<!--
+_footer: '$\boldsymbol{x}$-平面での軌道の変化'
+-->
+![center](../ipython_notebook/7.7_trajectory.svg)
+
+---
+
+### ベクトル場の周期軌道の分岐
+$3$次元ベクトル場に周期軌道$\Gamma$が存在するとする．$\Gamma$と1点$\boldsymbol{p}$で横断的に交わる$2$次元平面をとることにより，ポアンカレ写像が定義できる．
+$\rightsquigarrow$ $3$次元自律ベクトル場の周期軌道の分岐は，ポアンカレ写像の不動点$\boldsymbol{p}$の分岐に帰着される．
+
+###### Def 7.3
+ポアンカレ写像の不動点$\boldsymbol{p}$がサドルノード分岐，トランスクリティカル分岐，ピッチフォーク分岐，周期倍分岐，およびナイマルク―サッカー分岐を起こすとき，周期軌道$\Gamma$は，それぞれ，サドルノード分岐，トランスクリティカル分岐，ピッチフォーク分岐，周期倍分岐，およびナイマルク―サッカー分岐を起こしたという．
+
+---
+次に，時間に関して周期$T$の周期性を持つ$2$次元非自律系ベクトル場
+$$
+\frac{d\boldsymbol{x}}{dt} = g(t, \boldsymbol{x}), \boldsymbol{x} \in \mathbb{R}^2 \ \ (7.39) \\
+g(t, \boldsymbol{x}) = g(t + T, \boldsymbol{x}) \ \ (7.40)
+$$
+の周期軌道の分岐を考える．
+
+このベクトル場の流れを$\varphi: \mathbb{R} \times \mathbb{R} \times \mathbb{R}^2 \to \mathbb{R}^2$とするとき，$\boldsymbol{x} \in \mathbb{R}^2$に対して，$\varphi(T, 0, \boldsymbol{x}) \in \mathbb{R}^2$を対応する写像
+$$
+P: \mathbb{R}^2 \ni \boldsymbol{x} \mapsto \varphi(T, 0, \boldsymbol{x}) \in \mathbb{R}^2 \ \ (7.41)
+$$
+を定義する．これを非自律系のポアンカレ写像，またはストロボ写像という．
+
+$2$次元非自律ベクトル場の周期軌道の分岐は，このポアンカレ写像の不動点および周期点の分岐に帰着される．
