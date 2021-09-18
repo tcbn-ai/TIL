@@ -1,0 +1,179 @@
+---
+title: "Introduction"
+author: "Kosuke Toda"
+date: "9/18/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 0. はじめに
+この資料は，[^1]を参考にモンテカルロ法について勉強した資料である．
+
+[^1]: 鎌谷, [モンテカルロ統計計算](https://kkamatani.github.io/MonteCarloText/), 講談社, 2020.
+
+## 1.1 確率と条件付き確率
+- ベイズの公式
+
+#### ベイズの公式
+2つの出来事 $A, B$ があるとする．出来事 $A$ が起きたもとで出来事 $B$ が起こる条件付き確率は，
+$$ \mathbb{P}(B | A) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)}  $$
+で与えられる ($\mathbb{P}(A) > 0$ を仮定する)．
+
+$K$ を $2$ 以上の整数とし，出来事 $A_1, \ldots, A_K$ は互いに背反である, i.e., 
+$$ A_i \cap A_j = \emptyset, \ \ 1 \leq i, j \leq K, i \neq j  $$
+とし，
+$$ \mathbb{P}(A_1 \cup A_2 \cup \cdots \cup A_K) = 1  $$
+とする．
+
+条件付き期待値の定義より，出来事 $B$ に対して，
+$$ \mathbb{P}(B) = \sum_{k = 1}^K \mathbb{P}(B \cap A_k) = \sum_{k = 1}^K \mathbb{P}(B | A_k) P(A_k)  $$
+が成り立つので，$B$ が起きたときの $A_k$ の条件付き確率は，
+$$ \mathbb{P}(A_k | B) = \frac{\mathbb{P}(A_k \cap B)}{\mathbb{P}(B)} = \frac{\mathbb{P}(B | A_k) \mathbb{P}(A_k)}{\sum_{\ell = 1}^K \mathbb{P}(B | A_{\ell}) \mathbb{P}(A_{\ell})} $$
+で計算できる．
+
+次に，出来事が量的変数であるときを考える．このとき，$\theta$ が与えられた下での $x$ の確率密度関数を
+$$p(x | \theta)$$
+と書く．このとき，出来事 $x$ の条件の下での $\theta$ の確率密度関数は，
+$$ p(\theta | x) = \frac{p(x | \theta)p(\theta)}{\int_{\vartheta \in \Theta} p(x | \vartheta)p(\vartheta) d\vartheta} $$
+となる．
+
+## 1.2 個人確率とベイズ統計学
+- ベイズの公式で求めた確率は「頭の中の確率」であること
+
+#### 事後分布
+
+ベイズの公式によって求まった確率は，実際の現象を表現するものではなく，我々の認識を表現したものと考えるのが自然である (個人確率 / 主観確率)．
+
+- **ベイズ統計学 (Bayesian statistics)**
+  - すでに起きた確実な事実もそれを確定的に知ることができない限り不確実とする考え方を体系的にまとめたもの
+- **主観的ベイズ統計学 (Subjective Bayesian statistics)**
+  - 個人確率をもとにした統計学
+  
+以降，ベイズ統計学に必要な計算のテクニックについて学ぶ．
+
+#### 考え方と用語
+観測 $x$ は未知の要素 $\theta$ に起因することが知られており，確率密度関数 / 確率関数 $p(x | \theta)$ を持つ確率分布に従うとする．
+
+$\rightsquigarrow$ 観測 $x$ が得られた下で，未知の要素 $\theta$ の情報を知りたい．
+
+- $\theta$: パラメータ
+- $\Theta$: パラメータ空間
+
+とする．
+
+- **尤度関数 (likelihood function)**
+  - 観測が与えられた下で，$\theta$ の関数としての $p(x | \theta)$
+  - 尤度のみから観測 $x$ の下でのパラメータ $\theta$ に関する確率は得られない．
+
+- **事前分布 (prior distribution)**
+  - パラメータ $\theta$ が従う確率分布
+  - 確率密度関数 $p(\theta)$ を持つ確率分布に従うとする
+  - 個人確率では事前分布は事前情報のこと．
+  - ベイズ統計学では事前分布は必ずしも事前情報を表さない．
+    - 不確実性の定量化のために，技術的に導入したり，客観的に導入したりする．
+
+- **事後分布 (posterior distribution)**
+  - パラメータ $\theta$ と観測 $x$ の確率分布が定まった後，ベイズの公式により計算された，$x$ の条件の下での $\theta$ の確率分布
+  - 事後分布の確率密度関数
+  $$ p(\theta | x) = \frac{p(x | \theta)p(\theta)}{\int_{\Theta} p(x | \theta) p(\theta) d\theta}  $$
+  を**事後密度関数 (posterior density function)** と呼ぶ．
+    - 分母は変数 $x$ の**周辺密度関数 (marginal posterior density)** または正規化定数と呼ばれ，$p(x)$ と書く．
+  - ベイズ統計学においては，すべての統計解析は事後分布を通じて行う．e.g. **事後平均 (posterior mean)**
+  $$ \int_{\Theta} \theta p(\theta) d\theta  $$
+
+- **事後確率 (posterior probability)**
+  - 事後分布を使って計算した確率
+
+- **事前確率 (prior probability)**
+  - 事前分布を使って計算した確率
+
+- $X \sim P$
+  - 確率変数 $X$ が，ある確率分布 $P$ に従う
+
+- $Y$ で条件付けた，$X$ の**条件付き分布 (conditional distribution)**
+  - $Y$ が与えられた下で $X$ が従う確率分布
+  - $X | Y \sim P(Y)$ と書く ($P(Y)$: 条件付き分布)．
+  - $X_1, \ldots, X_N | Y \sim P(Y)$: $X_1, \ldots, X_N$ は $Y$ で条件付けてすべて独立で，$X_n | Y \sim P(Y), n = 1, \ldots, N$
+
+#### 正規モデルの事後分布
+- **共役事前分布 (conjugate prior distribution)**
+  - ある尤度関数に対し，事前分布と事後分布が同じ種類の確率分布になる事前分布
+
+事後分布の導出には周辺密度関数の計算は必ずしも必要ではない (事後分布は分子の形状で一意に定まるため)．
+
+#### 多変数の事後分布
+- **結合分布 (joint probability distribution)**
+  - 1次元の変数 $d$ 個 $\theta_1, \ldots, \theta_d$ をまとめた多次元の確率分布
+- **周辺分布 (marginal probability distribution)**
+  - $d$ 個のうちの長さ $m (\leq d)$ の部分列 $\theta_{i_1}, \ldots, \theta_{i_m} (i_1, \ldots, i_m = 1, \ldots, d)$
+ をまとめた分布
+
+結合分布が事後分布であったとき，その周辺分布を **周辺事後分布 (marginal posterior distribution)** という．
+
+## 1.3 ベイズ統計学の基本
+#### 信用集合
+**信用集合 (credible set)** は，事後分布の不確実性を伝える有効な手段の1つ．
+
+$\Theta$ をパラメータ空間とし，実数 $0 < \alpha < 1$ に対し，
+$$ \int_C p(\theta | x) d \theta \geq \alpha  $$
+となる $\Theta$ の部分集合 $C$ を，確率 $\alpha$ の信用集合という．特に，$C$ が区間であるときは **信用区間 (credible interval)** という．
+
+定義から，信用集合は一意に定まらない．パラメータ空間が実数の集合 $\mathbb{R}$ に含まれており，なおかつ $1/2 < \alpha < 1$ のときは，
+$$ \int_{-\infty}^{c_{(1 - \alpha)/2}} p(\theta | x) d\theta \leq (1 - \alpha)/2, \ \int_{c_{(1 + \alpha)/2}}^{\infty} p(\theta | x) d \theta \leq (1 - \alpha)/2  $$
+となる実数 $c_{(1 - \alpha)/2}, c_{(1 + \alpha)/2}$ を選び， $C = [c_{(1 - \alpha)/2}, c_{(1 + \alpha)/2}]$ とすることが多い．
+
+他のアプローチとして，**HPD (Highest Posterior Density)-信用集合 (区間)** を使う方法がある．HPD-信用集合 $C$ は，ある実数 $c$ によって，
+$$C = \{\theta \in \Theta : p(\theta | x) > c \}$$
+と書ける．ただし，HPD-信用区間の導出はしばしば困難である．
+
+#### 事後予測
+予測の不確実性 = 現在の不確実性 + 将来の不確実性
+
+ベイズ統計学の将来予測の状況
+
+- 観測 $x_1, \ldots, x_N$ は独立同分布，将来の観測 $x^*$ も同じ構造から生成される, i.e., 観測 $x^*$ の従う確率分布は確率密度関数または確率関数
+$$ p(x^* | \theta)  $$
+を持つ．
+- パラメータ $\theta$ は未知だが，観測 $x_1, \ldots, x_N$ から，パラメータ $\theta$ の情報，事後分布が存在するので，$\theta$ はある程度わかる．
+- 観測 $x^*$ の，データから予測される確率分布は，未知のパラメータ部分を事後分布で積分することで得られる．
+$$p(x^* | x^N) = \int_{\Theta} p(x^{*}|\theta) p(\theta | x^N) d \theta$$
+  - 上記のようにして得られた確率分布を **事後予測分布 (posterior predictive distribution)** という．
+  
+#### 客観的ベイズ統計学
+事前分布の選択について．
+
+- 客観的事前分布
+  - 共通認識の定式化
+  - 誰もが異を唱えにくい，自然な事前分布を使えば，それを用いた結論は多くの人にも意味がある
+  - ラプラス (一様分布を事前分布とする)
+    - $\Theta = (0, \infty)$ の一様分布は確率分布として定義できない (非正則)．
+
+- **客観的ベイズ統計学 (Objective Bayesian statistics)**
+  - 客観的事前分布に基づく統計学
+    - ラプラスによる客観事前分布のアイデアは，変数変換に対して不変ではない．
+
+$\rightsquigarrow$ **不変性 (Invariance)** がある (パラメータ変換でも変わらない) 事前分布こそ客観事前分布と呼ぶべきであるという考え方．
+
+不変性のある事前分布の例: **ジェフリーズ事前分布 (Jeffreys' prior distribution)**
+
+観測 $x$ は確率密度関数または確率関数 $p(x | \theta)$ を持つ確率分布に従うとする．ただし，$\theta = (\theta_1, \ldots, \theta_d)$ は未知パラメータ．対数尤度 $\log p(x | \theta)$ の $\theta$ による偏微分
+$$ \left( \frac{\partial}{\partial \theta_i} \log p(x | \theta) \right)_{i = 1, \ldots, d}  $$
+を**スコア関数 (score function)** という．
+
+また，$p(x | \theta)$ が確率密度関数ならば
+$$ I_{ij}(\theta) = \int \left( \frac{\partial}{\partial \theta_i} \log p(x | \theta) \right) \left( \frac{\partial}{\partial \theta_j} \log p(x | \theta) \right)p(x | \theta) dx  $$
+確率関数であれば
+$$ I_{ij}(\theta) = \sum_x \left( \frac{\partial}{\partial \theta_i} \log p(x | \theta) \right) \left( \frac{\partial}{\partial \theta_j} \log p(x | \theta) \right) p(x | \theta)  $$
+で定義される $I(\theta) = (I_{ij}(\theta))_{i, j = 1, \ldots, d}$ を **フィッシャー情報行列 (Fisher's information matrix)** という．このとき，
+$$ p(\theta) \propto \sqrt{\mathrm{det} I(\theta)}  $$
+となる密度関数を持つ事前分布がジェフリーズ事前分布である．ジェフリーズ事前分布も通常，非正則である．
+
+ジェフリーズ事前分布は，データと尤度のみから決めることができないことに注意する (パラメータが既知かどうかという付随する情報に左右されるため)．
+
+## 1.4 モデル事後確率
+確率分布の候補が複数ある場合がある．観測 $x$ の従う分布の候補として，確率密度関数もしくは確率関数の列
+$$ p(x | \theta_1, 1), \ldots, p(x | \theta_M, M)  $$
+があるとする．各 $m = 1, \ldots, M$ で $\theta_m$ はパラメータ空間 $\Theta_m$ (次元は $m$ に依存して良い) の要素である．このとき，ベイズ統計学の立場で，観測 $x$ からどのモデルがもっともらしいかを計算したい．
