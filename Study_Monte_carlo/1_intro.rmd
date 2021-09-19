@@ -177,3 +177,42 @@ $$ p(\theta) \propto \sqrt{\mathrm{det} I(\theta)}  $$
 確率分布の候補が複数ある場合がある．観測 $x$ の従う分布の候補として，確率密度関数もしくは確率関数の列
 $$ p(x | \theta_1, 1), \ldots, p(x | \theta_M, M)  $$
 があるとする．各 $m = 1, \ldots, M$ で $\theta_m$ はパラメータ空間 $\Theta_m$ (次元は $m$ に依存して良い) の要素である．このとき，ベイズ統計学の立場で，観測 $x$ からどのモデルがもっともらしいかを計算したい．
+
+#### モデル事後確率
+$M$ 個のモデルのパラメータ $\theta_1, \ldots, \theta_M$ それぞれに対して事前分布の確率密度関数列 $p(\theta_1 | 1), \ldots, p(\theta_M | M)$ が与えられているとする．
+
+$\rightsquigarrow$ それぞれの確率分布と事前分布のペアを合わせてモデルと呼び，モデル $\mathcal{M}_1, \ldots, \mathcal{M}_M$ の事後確率を計算する問題と捉える．
+
+モデル $\mathcal{M}_m \ (m = 1, \ldots, M)$ の事前確率を $p(1), \ldots, p(M)$ と書くと，$p(m) \geq 0, \ \sum_{m = 1}^M p(m) = 1$ である．
+ 
+$\rightsquigarrow$ $\theta_m$ とモデル $\mathcal{M}_m$ への事前分布の確率密度関数は，
+$$ p(\theta_m, m) = p(\theta_m | m) p(m)  $$
+と表せる．観測 $x$ に対する事後分布の確率密度関数は，
+$$ p(\theta_m, m | x) \propto p(x | \theta_m, m) p(\theta_m | m) p(m)  $$
+となる．正規化定数も書くと，
+$$ p(\theta_m, m | x) = \frac{p(x | \theta_m, m) p(\theta_m | m) p(m)}{\sum_{m = 1}^M \int_{\Theta_m} p(x | \theta_m, m) p(\theta_m | m) p(m) d \theta_m}  $$
+となる．よって，モデル $\mathcal{M}_m$ の事後確率は，両辺を $\theta_m$ に関して積分して，
+$$ p(m | x) = \frac{\int_{\Theta_m}p(x | \theta_m, m) p(\theta_m | m) p(m) d\theta_m}{\sum_{m = 1}^M \int_{\Theta_m} p(x | \theta_m, m) p(\theta_m | m) p(m) d \theta_m}  $$
+となる．これが**モデルの事後確率 (model posterior probability)** である．この値を用いてモデルの妥当性を評価する．
+
+分子に出てくる周辺密度関数を，
+$$ p(x | m) = \int_{\Theta_m} p(x | \theta_m, m) p(\theta_m | m) d \theta_m  $$
+と書くと，モデル事後確率は，
+$$ p(m | x) = \frac{p(x | m)p(m)}{\sum_{m = 1}^M p(x|m)p(m)}  $$
+と書ける．
+
+#### ベイズ因子
+ベイズ統計学ではモデルの妥当性を事後確率を用いて評価する (有意水準ではなく確率評価に帰着されるので，意味が明瞭)．
+
+モデル事後確率の解釈のための基準として，**ベイズ因子 (Bayes factor)** がある．
+
+2つのモデル，$\mathcal{M}_i, \mathcal{M}_j$ があるとする．モデル $\mathcal{M}_i$ の，モデル $\mathcal{M}_j$ に対するベイズ因子は
+$$ B_{ij} = \frac{p(i | x)/p(i)}{p(j|x)/p(j)} = \frac{p(x | i)}{p(x | j)} = \frac{\int_{\Theta_i} p(x | \theta_i, i) p(\theta_i | i) d \theta_i}{\int_{\Theta_j} p(x | \theta_j, j) p(\theta_j | j) d \theta_j}  $$
+で定義される．この値が $1$ より大きければ，$\mathcal{M}_i$ が $\mathcal{M}_j$ より妥当であることが示唆される．
+
+H.ジェフリーズの基準によると，$B_{ij}$ の $10$ を底とする対数をとり，その値に応じて次のように呼ぶ．
+
+- $0$ から $0.5$ ならばモデル $\mathcal{M}_i$ の証拠は弱い．
+- $0.5$ から $1$ ならばモデル $\mathcal{M}_i$ の重要な証拠である．
+- $1$ から $2$ ならばモデル $\mathcal{M}_i$ の強力な証拠である．
+- $2$ より大きければモデル $\mathcal{M}_i$ は疑いの余地がない．

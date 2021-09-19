@@ -340,6 +340,27 @@ pre code {
 <div id="モデル事後確率" class="section level2">
 <h2>1.4 モデル事後確率</h2>
 <p>確率分布の候補が複数ある場合がある．観測 <span class="math inline">\(x\)</span> の従う分布の候補として，確率密度関数もしくは確率関数の列 <span class="math display">\[ p(x | \theta_1, 1), \ldots, p(x | \theta_M, M)  \]</span> があるとする．各 <span class="math inline">\(m = 1, \ldots, M\)</span> で <span class="math inline">\(\theta_m\)</span> はパラメータ空間 <span class="math inline">\(\Theta_m\)</span> (次元は <span class="math inline">\(m\)</span> に依存して良い) の要素である．このとき，ベイズ統計学の立場で，観測 <span class="math inline">\(x\)</span> からどのモデルがもっともらしいかを計算したい．</p>
+<div id="モデル事後確率-1" class="section level4">
+<h4>モデル事後確率</h4>
+<p><span class="math inline">\(M\)</span> 個のモデルのパラメータ <span class="math inline">\(\theta_1, \ldots, \theta_M\)</span> それぞれに対して事前分布の確率密度関数列 <span class="math inline">\(p(\theta_1 | 1), \ldots, p(\theta_M | M)\)</span> が与えられているとする．</p>
+<p><span class="math inline">\(\rightsquigarrow\)</span> それぞれの確率分布と事前分布のペアを合わせてモデルと呼び，モデル <span class="math inline">\(\mathcal{M}_1, \ldots, \mathcal{M}_M\)</span> の事後確率を計算する問題と捉える．</p>
+<p>モデル <span class="math inline">\(\mathcal{M}_m \ (m = 1, \ldots, M)\)</span> の事前確率を <span class="math inline">\(p(1), \ldots, p(M)\)</span> と書くと，<span class="math inline">\(p(m) \geq 0, \ \sum_{m = 1}^M p(m) = 1\)</span> である．</p>
+<p><span class="math inline">\(\rightsquigarrow\)</span> <span class="math inline">\(\theta_m\)</span> とモデル <span class="math inline">\(\mathcal{M}_m\)</span> への事前分布の確率密度関数は， <span class="math display">\[ p(\theta_m, m) = p(\theta_m | m) p(m)  \]</span> と表せる．観測 <span class="math inline">\(x\)</span> に対する事後分布の確率密度関数は， <span class="math display">\[ p(\theta_m, m | x) \propto p(x | \theta_m, m) p(\theta_m | m) p(m)  \]</span> となる．正規化定数も書くと， <span class="math display">\[ p(\theta_m, m | x) = \frac{p(x | \theta_m, m) p(\theta_m | m) p(m)}{\sum_{m = 1}^M \int_{\Theta_m} p(x | \theta_m, m) p(\theta_m | m) p(m) d \theta_m}  \]</span> となる．よって，モデル <span class="math inline">\(\mathcal{M}_m\)</span> の事後確率は，両辺を <span class="math inline">\(\theta_m\)</span> に関して積分して， <span class="math display">\[ p(m | x) = \frac{\int_{\Theta_m}p(x | \theta_m, m) p(\theta_m | m) p(m) d\theta_m}{\sum_{m = 1}^M \int_{\Theta_m} p(x | \theta_m, m) p(\theta_m | m) p(m) d \theta_m}  \]</span> となる．これが<strong>モデルの事後確率 (model posterior probability)</strong> である．この値を用いてモデルの妥当性を評価する．</p>
+<p>分子に出てくる周辺密度関数を， <span class="math display">\[ p(x | m) = \int_{\Theta_m} p(x | \theta_m, m) p(\theta_m | m) d \theta_m  \]</span> と書くと，モデル事後確率は， <span class="math display">\[ p(m | x) = \frac{p(x | m)p(m)}{\sum_{m = 1}^M p(x|m)p(m)}  \]</span> と書ける．</p>
+</div>
+<div id="ベイズ因子" class="section level4">
+<h4>ベイズ因子</h4>
+<p>ベイズ統計学ではモデルの妥当性を事後確率を用いて評価する (有意水準ではなく確率評価に帰着されるので，意味が明瞭)．</p>
+<p>モデル事後確率の解釈のための基準として，<strong>ベイズ因子 (Bayes factor)</strong> がある．</p>
+<p>2つのモデル，<span class="math inline">\(\mathcal{M}_i, \mathcal{M}_j\)</span> があるとする．モデル <span class="math inline">\(\mathcal{M}_i\)</span> の，モデル <span class="math inline">\(\mathcal{M}_j\)</span> に対するベイズ因子は <span class="math display">\[ B_{ij} = \frac{p(i | x)/p(i)}{p(j|x)/p(j)} = \frac{p(x | i)}{p(x | j)} = \frac{\int_{\Theta_i} p(x | \theta_i, i) p(\theta_i | i) d \theta_i}{\int_{\Theta_j} p(x | \theta_j, j) p(\theta_j | j) d \theta_j}  \]</span> で定義される．この値が <span class="math inline">\(1\)</span> より大きければ，<span class="math inline">\(\mathcal{M}_i\)</span> が <span class="math inline">\(\mathcal{M}_j\)</span> より妥当であることが示唆される．</p>
+<p>H.ジェフリーズの基準によると，<span class="math inline">\(B_{ij}\)</span> の <span class="math inline">\(10\)</span> を底とする対数をとり，その値に応じて次のように呼ぶ．</p>
+<ul>
+<li><span class="math inline">\(0\)</span> から <span class="math inline">\(0.5\)</span> ならばモデル <span class="math inline">\(\mathcal{M}_i\)</span> の証拠は弱い．</li>
+<li><span class="math inline">\(0.5\)</span> から <span class="math inline">\(1\)</span> ならばモデル <span class="math inline">\(\mathcal{M}_i\)</span> の重要な証拠である．</li>
+<li><span class="math inline">\(1\)</span> から <span class="math inline">\(2\)</span> ならばモデル <span class="math inline">\(\mathcal{M}_i\)</span> の強力な証拠である．</li>
+<li><span class="math inline">\(2\)</span> より大きければモデル <span class="math inline">\(\mathcal{M}_i\)</span> は疑いの余地がない．</li>
+</ul>
+</div>
 </div>
 <div class="footnotes">
 <hr />
