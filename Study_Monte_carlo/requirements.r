@@ -3,7 +3,8 @@ install.packages(c("latex2exp",
     "MASS",
     "ggplot2",
     "plotly",
-    "xaringan"))
+    "xaringan",
+    "microbenchmark"))
 
 # install dependencies of yuima
 install.packages(c("cubature",

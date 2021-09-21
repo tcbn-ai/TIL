@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(plotly)
+library(microbenchmark)
 ```
 
 ## 2.1 一様乱数
@@ -93,7 +94,7 @@ plot_ly(x=x, y=y, z=z, type="scatter3d", mode="markers", size=0.1)
 2次元平面に整列している様子が見て取れる．
 
 - Mersenne-Twister 法は線形合同法ではなく，長い周期 $2^{19937} - 1$ を持つ．
-- 正しい擬似乱数は存在せず，どの手法も確率的要素のない単なる長い自数列である．
+- 正しい擬似乱数は存在せず，どの手法も確率的要素のない単なる長い実数列である．
 - よく使われる擬似乱数は，それを確率的な乱数と捉えることによる弊害が稀にしか生じない数列．
 
 以下，理論的な記述の際は乱数を扱い，実際の計算では擬似乱数を用いるが，擬似乱数も乱数と表記する．
@@ -112,4 +113,104 @@ $$ \mathbb{P}(Y \leq x) = \mathbb{P}\left( X \leq \frac{x - b}{a - b}  \right) =
 ## 2.2 逆変換法
 
 ### 連続な確率分布の生成
+一様乱数をもとに，与えられた1次元の確率分布 $P$ に従う乱数を生成する．
 
+累積分布関数を $F$ とすると，
+$$ \mathbb{P}(X \leq x) = F(x) \ (-\infty < x < \infty)  $$
+となるような $X$ を生成すればよい．
+
+連続な確率分布であれば，任意の $u \in (0, 1)$ に対して，$F(x) = u$ となる $x$ がただ1つに決まる．
+
+$\rightsquigarrow$ $F^{-1}(u) = x$ で逆関数 $F^{-1}$ が定義できる．このとき，一様乱数 $U$ により，
+$$ X = F^{-1}(U)  $$
+で $P$ に従う確率変数を作れる．
+
+$$\because \mathbb{P}(X \leq x) = \mathbb{P}(F^{-1}(U) \leq x) = \mathbb{P}(U \leq F(x)) = F(x)  $$
+このようにして確率分布 $P$ に従う乱数を生成する方法を **逆変換法 (inversion method)** という．
+
+#### 指数乱数の生成
+$\lambda > 0$ とする．指数分布 $\mathcal{E}(\lambda)$ の累積分布関数は，
+$$ F(x) = 1 - e^{-\lambda x}  $$
+である．したがって，一様乱数 $U$ を用いて
+$$ F^{-1}(U) =  - \frac{\log (1 - U)}{\lambda} $$
+によって指数乱数が発生できる．ここで，$1 - U \sim \mathcal{U}[0, 1]$ より，$-\log(U)/\lambda$ によっても指数乱数を生成できる．
+
+R 言語で実装する．パラメータ $\lambda$ を $\lambda = 2.0$ とする．
+
+```{r}
+set.seed(1)
+lambda <- 2.0 
+u <- runif(3)
+-log(u)/lambda
+```
+
+組み込み関数 `rexp` でも生成する．
+```{r}
+set.seed(1)
+lambda <- 2.0 
+rexp(3, rate=lambda)
+```
+同じ seed を用いても異なる値が出力されていることから，異なった実装がなされているようである．
+
+計算時間の比較を行う．
+```{r}
+lambda <- 2.0
+n <- 1e5 
+microbenchmark(A <- -log(runif(n))/lambda, times=100)
+microbenchmark(B <- rexp(n, rate=lambda), times=100)
+```
+
+実行時間に大きな差はないようである．
+
+#### コーシー分布の生成
+実数 $\mu$ と，正の実数 $\sigma$ に対し，**コーシー分布 (Cauchy distribution)** $\mathcal{C}(\mu, \sigma)$ は，確率密度関数
+$$ p(x; \mu, \sigma) = \frac{1}{\pi \sigma \left( 1 + \frac{(x - \mu)^2}{\sigma^2} \right)} \ (-\infty < x < \infty) $$
+を持つ．$\mu = 0, \sigma = 1$ としたコーシー分布 $\mathcal{C}(0, 1)$ に注目する．累積分布関数は，
+$$ F(x) = \int_{-\infty}^x \frac{1}{\pi (1 + y^2)}dy  $$
+となる．学部の解析学を思い出すと，この積分は，
+$$F(x) = \frac{\mathrm{arctan} x}{\pi} + \frac{1}{2}$$
+となる．よって，
+$$F^{-1}(u) = \tan \left( \pi u - \frac{\pi}{2} \right)$$
+を得る．したがって，一様乱数 $U$ を用いて，
+$$X = \tan (\pi U - \pi/2)$$
+でコーシー乱数を生成できる．
+
+また，コーシー分布は独立な2つの標準正規乱数 $X_1, X_2$ の比
+$$\frac{X_2}{X_1} \tag{2.2}$$
+の分布と等しい．以下で，逆変換法，(2.2)の方法，組み込み関数の3つの計算時間を比較する．
+
+```{r}
+n <- 1e5
+microbenchmark(A <- tan(pi*runif(n)-pi/2), times=100)
+microbenchmark(B <- rnorm(n)/rnorm(n), times=100)
+microbenchmark(C <- rcauchy(n), times=100)
+```
+
+
+### 離散の確率分布の生成
+上述の逆変換法では，累積分布関数 $F$ の逆関数 $F^{-1}$ が存在することを仮定した．
+
+離散の場合は逆関数を持たないが，一般に累積分布関数 $F(x) = \mathbb{P}((-\infty, x])$ は次の性質を持つことを思い出す．
+
+- $F$ は右連続である．
+- $F$ は単調非減少である．
+- 以下を満たす．
+$$  \lim_{x \to - \infty} F(x) = 0, \ \lim_{x \to \infty} F(x) = 1$$
+
+逆に，上記の性質を満たす関数 $F$ は $\mathbb{R}$ 上のある確率分布の累積分布関数である．
+
+ここで，関数 $F$ が単調非減少で右連続のとき，
+$$F^{-}(u) = \inf \{x \in \mathbb{R}: u \leq F(x) \}$$
+によって広義の逆関数 $F^{-}: \mathbb{R} \to \mathbb{R}$ を定める．広義の逆関数 $F^{-}$ に対しては，$F^{-}(F(x)) = x$ や $F(F^{-}(u)) = u$ は必ずしも成り立たないが，次が成り立つ．
+
+$x \in \mathbb{R}, u \in [0, 1]$ に対して，
+$$F^{-}(F(x)) \leq x$$
+$$ F(F^{-}(u)) \geq u  $$
+
+確率分布 $P$ の累積分布関数 $F$ の広義の逆関数 $F^{-}$ を用いることで，連続の場合と同様に $U \sim \mathcal{U}[0, 1]$ から $F^{-}(U)$ を計算することで，$P$ に従う乱数を生成できる．
+
+有限集合 $-\infty < x_1 < \cdots < x_n < \infty$ にのみ値をとる確率分布を考える．この分布の累積分布関数 $F$ の広義の逆関数 $F^{-}$ は，
+$$ F^{-}(u) = \begin{cases} x_1 & \text{if} \ \ 0 \leq u \leq F(x_1) \\ x_2 & \text{if} \ \ F(x_1) < u \leq F(x_2) \\ \vdots \\ x_n & \text{if} \ \ F(x_{n - 1}) < u \leq 1 \end{cases}  $$
+である．可算無限集合でも同様．
+
+#### 幾何分布の生成
