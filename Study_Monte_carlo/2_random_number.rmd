@@ -1,0 +1,115 @@
+---
+title: "Random number"
+author: "Kosuke Toda"
+date: "2021/9/21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(plotly)
+```
+
+## 2.1 一様乱数
+- 計算機で乱数の生成を試みる．
+  - 計算機で生成する乱数は確率的ではなく，確定的 $\rightsquigarrow$ 擬似乱数
+
+計算機で一様擬似乱数を生成する．
+
+#### 一様分布
+実数 $a < b$ に対し，区間 $[a, b]$ 上の **一様分布 (uniform distribution)** とは，確率密度関数
+$$p(x) = \begin{cases} 0 & \text{if} \ \ x < a \\ \frac{1}{b - a} & \text{if} \ \ a \leq x \leq b \\ 0 & \text{if} \ \ x > b \end{cases}\tag{2.1}$$
+を持つ確率分布．$\mathcal{U}[a, b]$ と書く．区間を指定せずに一様分布というと，$\mathcal{U}[0, 1]$ を指す．
+
+```{r}
+set.seed(1) # seedの設定
+runif(3)  # 長さ3の一様擬似乱数
+```
+
+関数 `runif` の出力は一様乱数と認識しても問題ないか？
+
+$\rightsquigarrow$ **スペクトル (Spectral) 検定**，**コルモゴロフ・スミルノフ (Kolmogorov-Smirnov) 検定** を適用．
+
+- スペクトル検定
+  - 擬似乱数の空間一様性のテスト
+- コルモゴロフ・スミルノフ検定
+  - 擬似乱数から計算される経験累積分布関数と，与えられた累積分布関数の最大値の差を評価する．
+
+```{r}
+# スペクトル検定
+set.seed(1)
+x <- runif(1000)
+y <- runif(1000)
+z <- runif(1000)
+
+plot_ly(x=x, y=y, z=z, type="scatter3d", mode="markers", size=0.1)
+```
+
+立方体に均等に分布しているように見える．
+
+```{r}
+# コルモゴロフ・スミルノフ検定
+set.seed(1)
+u <- runif(1000)
+ks.test(u, punif)
+```
+
+一様分布から乖離しているのであれば，$p$-値は小さくなるはずであるが，ここでは一様擬似乱数を観測として見たときの $p$-値は小さくない．
+
+$\rightsquigarrow$ 一様擬似乱数 (初期設定はMersenne-Twister法) は一様分布からの独立な乱数列と見ても顕著な差が見られない．
+
+#### 線形合同法
+- **線形合同法 (linear congruential generators)**
+  - 一様擬似乱数生成の古典的な手法
+
+$a, b, y_0, n$: 事前に決める整数．
+
+$$ y_m = (a y_{m - 1} + b) \mod n \ (m = 1, 2, \ldots)  \\ x_m = \frac{y_m}{n}$$
+として$\{ x_m: m = 1, 2, \ldots  \}$ を出力する．
+
+- 線形合同法は再現性を持ち，計算時間も高速．
+- 構成上，周期は高々 $n$．多次元に均等配列しない．
+
+```{r}
+u <- numeric(3*1e3)
+y <- 1234
+n <- 2^31 - 1 
+a <- 65539
+b <- 0
+for(i in 1:length(u)){
+  y <- (a*y + b) %% n
+  u[i] <- y/n
+}
+
+u_mat <- matrix(u, nrow=3)
+x <- u_mat[1,]
+y <- u_mat[2,]
+z <- u_mat[3,]
+
+plot_ly(x=x, y=y, z=z, type="scatter3d", mode="markers", size=0.1)
+```
+
+2次元平面に整列している様子が見て取れる．
+
+- Mersenne-Twister 法は線形合同法ではなく，長い周期 $2^{19937} - 1$ を持つ．
+- 正しい擬似乱数は存在せず，どの手法も確率的要素のない単なる長い自数列である．
+- よく使われる擬似乱数は，それを確率的な乱数と捉えることによる弊害が稀にしか生じない数列．
+
+以下，理論的な記述の際は乱数を扱い，実際の計算では擬似乱数を用いるが，擬似乱数も乱数と表記する．
+
+ここで，$\mathcal{U}[0, 1]$ からの一様乱数が生成できるとする．$X \sim \mathcal{U}[0, 1]$ に対して，線形変換
+
+$$ Y = b + (a - b) X  $$
+を施すことで，$\mathcal{U}[a, b]$ に従う乱数が生成できる．
+
+$\because$ $\mathcal{U}[a, b]$ は累積分布関数
+$$ F(x) = \frac{x - a}{b - a} \ (a \leq x \leq b) $$
+を持つが，線形変換してできた $Y$ の従う分布も
+$$ \mathbb{P}(Y \leq x) = \mathbb{P}\left( X \leq \frac{x - b}{a - b}  \right) = \frac{x - b}{a - b} = F(x) \ (a \leq x \leq b)  $$
+となり，同じ累積分布関数を持つため．
+
+## 2.2 逆変換法
+
+### 連続な確率分布の生成
+
