@@ -214,3 +214,257 @@ $$ F^{-}(u) = \begin{cases} x_1 & \text{if} \ \ 0 \leq u \leq F(x_1) \\ x_2 & \t
 である．可算無限集合でも同様．
 
 #### 幾何分布の生成
+幾何分布 $\mathcal{Ge}(p)$ は，パラメータ $0 < p < 1$ に対し，確率関数
+$$ q(n) = p(1 - p)^n  \ (n = 0, 1, \ldots)$$
+を持つ．累積分布関数は，
+$$ F(n) = \sum_{m = 0}^n q(m) = \sum_{m = 0}^n p(1 - p)^m = 1 - (1 - p)^{n + 1} \ (n = 0, 1, \ldots)  $$
+である．非負の整数 $n$ に対し，任意の $n \leq x < n + 1$ となる実数 $x$ は
+$$ F(x) = F(n) = 1 - (1 - p)^{n + 1}  $$
+を満たす．よって，$x$ の整数部分を $[x]$ と書くと，累積分布関数は
+$$ F(x) = \begin{cases} 1 - (1 - p)^{[x + 1]} & \text{if} \ x \geq 0 \\ 0 & \text{if} \ x < 0 \end{cases}  $$
+で与えられる．よって，$F^{-}(u) = x$ となるのは，
+$$ 1 - (1 - p)^x < u \leq 1 - (1 - p)^{x + 1}  $$
+となるときである．よって，$F^{-}(u)$ は，$u > 1 - (1 - p)^x$ を満たす最大の整数なので，
+$$ F^{-}(u) = [\log (1 - u) / \log (1 - p)]  $$
+と書ける．したがって，$U \sim \mathcal{U}[0, 1]$ であれば，$[\log (1 - U)/ \log(1 - p)]$ は幾何分布に従う．
+
+```{r}
+p <- 0.2 
+n <- 3 
+as.integer(log(runif(n))/log(1 - p))  # as.integer: 実数の整数部分を取り出す
+rgeom(n, prob=p)
+
+n <- 1e5
+microbenchmark(A <- as.integer(log(runif(n))/log(1 - p)), times=100)
+microbenchmark(B <- rgeom(n, prob=p), times=100)
+```
+
+逆変換法の方が組み込み関数よりも効率的であった．
+
+#### ポアソン分布の生成
+ポアソン分布 $\mathcal{P}(\lambda)$ を生成する．幾何分布と同様に，一様乱数 $U$ および $n = 0, 1, \ldots$ に対し，
+$$ F(n - 1) < U \leq F(n) \Longrightarrow X = n   \tag{2.3}$$
+とすれば良い．ただし，形式的に $F(-1) = 0$ とする．幾何分布と異なり，累積分布関数は有限和
+$$ F(n) = \sum_{m = 0}^n \frac{\lambda^n}{m!} e^{-\lambda}  $$
+の形でしか書くことができない．
+
+$\rightsquigarrow$ 逐次的な条件分岐が必要．$x = 0, X = x$ として，
+$$ U > F(x) \Longrightarrow x \leftarrow x + 1 $$
+なる `while` ループをする．$U \leq F(x)$ となったときに `while` ループを抜け出し，$X = x$ を出力する．
+
+```{r}
+lambda <- 2
+rpoisf <- function(n, lambda) {
+  c <- exp(-lambda)
+  res <- numeric(n)
+  
+  for (i in 1:n) {
+    x <- 0 
+    q <- c
+    F <- c
+    u <- runif(1)
+    
+    while(u > F) {
+      x <- x + 1 
+      F <- F + q*lambda/x
+    }
+    res[i] <- x
+  }
+  return(res)
+}
+
+n <- 100
+microbenchmark(A <- rpoisf(n, lambda), times=100)
+microbenchmark(B <- rpois(n, lambda), times=100)
+```
+
+`while` 文を使うため，組み込み関数 `rpois` よりもかなり遅い．関数 `rpoisf` の出力を $X$ とすると，平均的には $\mathbb{E}[X + 1] = \lambda + 1$ 回の分岐を行うことになる．
+
+### 近似累積分布関数による乱数生成
+逆変換法の有用性は，逆関数の計算のしやすさで決まる．
+
+$\rightsquigarrow$ 逆関数の計算コストが高い場合，逆関数を近似で置き換える方法は有効．
+
+ここまでをまとめる．実数上の確率分布 $P$ の累積分布関数を $F$ とし，累積分布関数の (一般化された) 逆関数，またはその近似を $F^{-}$ とすると，以下のようにして $P$ に従う乱数を生成できる．
+
+- $U \sim \mathcal{U}[0, 1]$
+- $X \leftarrow F^{-}(U)$
+
+## 2.3 変数変換法
+変数変換法: 既存の乱数を変数変換して新たな乱数を得る方法
+
+変数変換法は一般の次元に適用できる．以下に変数変換法の考え方を示す．
+
+逆変換法では，一様乱数 $U$ を関数 $F^{-1}$ で変換することで，累積分布関数 $F$ をもつ確率分布に従う乱数を生成した．より一般に，多次元の乱数 $Y$ を $S^{-1}$ で変換した $S^{-1}(Y)$ が目的となる確率分布に従うようにデザインする．
+
+確率変数 $Y$ が，確率密度関数 $q(y)$ をもつ確率分布 $Q$ に従うとする．また，関数 $S$ が，微分可能で一対一の写像であるとする．さらに，関数 $S$ の Jacobian を
+$$ J_S(x) = \text{det} \left[ \frac{\partial S}{\partial x}  \right]  $$
+と書く．このとき，確率変数 $X = S^{-1}(Y)$ に従う確率分布 $P$ は，正則性の条件の下，
+$$ p(x) = q(S(x)) |J_S(x)|  \tag{A}$$
+で定義される確率密度関数を持つ．
+
+$\because$ 変数変換の公式より，開集合 $\mathcal{O}$ を含む領域で Jacobian matrix が非退化であれば，
+$$ \mathbb{P}(X \in \mathcal{O}) = \mathbb{P}(S^{-1}(Y) \in \mathcal{O}) \\ = \int_{S^{-1}(y) \in \mathcal{O}} q(y) dy \\ = \int_{x \in \mathcal{O}} q(S(x)) |J_S(x)| dx  $$
+と書くことができる．
+
+よって，(A) が満たされていれば，確率分布 $P$ に従う乱数を，確率分布 $Q$ に従う乱数 $Y$ から生成できる．この事実を利用した乱数生成法が **変数変換法 (general transformation method)** である．具体的には，以下のように乱数を生成する．
+
+- $Q$ に従う乱数 $Y$ を生成する．
+- $X = S^{-1}(Y)$ とする．
+
+所望の分布に従う乱数を生成するために，(A) を満たすような $Q, S$ を見つける必要があるが，見つけ方には自由度がある．
+
+$\rightsquigarrow$ 以下の性質を利用する．
+
+> 実数値確率変数 $Y_1, Y_2$ は独立で，それぞれ確率密度関数 $q_1, q_2$ をもつ確率分布に従うとする．このとき，$X_1 = Y_1 + Y_2$ の従う分布は，確率密度関数
+> $$ q_1 * q_2 (x) = \int q_1(x - y) q_2(y) dy  $$
+> を持つ．
+
+$\because$ 関数 $S$ を，$X = (X_1, X_2) = S^{-1}(Y) = (Y_1 + Y_2, Y_2)$ で定める．よって，$x = (x_1, x_2)$ に対して，$S(x) = (x_1 - x_2, x_2)$ である．$S$ の Jacobian は，
+$$ J_S(x) = \text{det} \left( \begin{array}{cc} \frac{\partial S_1}{\partial x_1} & \frac{\partial S_1}{\partial x_2} \\ \frac{\partial S_2}{\partial x_1} & \frac{\partial S_2}{\partial x_2} \end{array}  \right) \\ = \text{det} \left( \begin{array}{cc} 1 & -1 \\ 0 & 1 \end{array} \right) = 1 $$
+であり，$Y_1, Y_2$ が独立であることと(A) より，$X$ の従う分布は，
+$$ p(x_1, x_2) = q(S(x))|J_S(x)| = q_1(x_1 - x_2) q_2(x_2)  $$
+なる確率密度関数を持つ．したがって，$x_2$ で積分して，$X_1 = Y_1 + Y_2$ の従う分布の確率密度関数
+$$ p(x_1) = \int_{x_2} p(x_1, x_2) dx_2 = \int q_1(x_1 - x_2) q_2(x_2) dx_2  $$
+を得る．
+
+以下では，代表的な変数変換法による乱数生成をいくつかまとめる．証明等は省略している．
+
+### ガンマ，ベータ分布の生成
+逆変換法により，指数分布に従う乱数を生成できる．ここでは，指数分布に従う確率変数列を用いて，ガンマ分布，ベータ分布に従う乱数を生成する．
+
+#### ガンマ分布の生成
+$\alpha$ は正の実数，$N$ は正の整数とする．$X_1, \ldots, X_N \overset{\text{i.i.d.}}{\sim} \mathcal{E}(1)$ とする．このとき，
+$$ Y = \alpha^{-1} \sum_{n = 1}^N X_n  $$
+はガンマ分布 $\mathcal{G}(N, \alpha)$ に従う．特に，$\alpha = 1/2$ とすれば，$Y$ は自由度 $2N$ のカイ二乗分布 $\chi_{2N}^2$ に従う．
+
+よって，逆変換法での指数乱数の生成と合わせると，以下のようにすると $\mathcal{G}(N, \alpha)$ に従う乱数 $X$ を生成できる．
+
+- $U_1, U_2, \ldots, U_N \sim \mathcal{U}[0, 1]$
+- $X \leftarrow -\alpha \log (U_1U_2\cdots U_N)$
+
+```{r}
+alpha <- 2 
+N <- 10
+-1/alpha*log(prod(runif(N)))
+```
+
+#### ベータ分布の生成
+正の実数 $p, q, \alpha$ に対し，$X, Y$ は独立でそれぞれ $\mathcal{G}(p, \alpha), \mathcal{G}(q, \alpha)$ に従うとする．このとき，
+$$ Z = \frac{X}{X + Y}  $$
+はベータ分布 $\mathcal{Be}(p, q)$ に従う．
+
+逆変換法での指数乱数の生成および上のガンマ乱数の生成と合わせると，以下のように $X \sim \mathcal{Be}(N_1, N_2) \ (N_1, N_2 \in \mathbb{N})$を生成できる．
+
+- $U_1, \ldots, U_{N_1 + N_2} \sim \mathcal{U}[0, 1]$
+- $X \leftarrow \log (U_1 \cdots U_{N_1})/\log(U_1 \cdots U_{N_1 + N_2})$
+
+```{r}
+n1 <- 10
+n2 <- 15
+u <- runif(n1 + n2)
+sum(log(u[1:n1]))/sum(log(u))
+```
+
+### 正規分布と関連した分布の生成
+#### ボックス・ミュラー法
+以下の正規乱数生成法を **ボックス・ミュラー (Box-Muller) 法** という．
+
+$U_1, U_2$ は独立で，$\mathcal{U}[0, 1]$ に従う．このとき，
+$$ (X_1, X_2) = S^{-1}(U_1, U_2) = (\sqrt{-2 \log U_1} \cos(2 \pi U_2), \sqrt{-2 \log U_1} \sin(2 \pi U_2)  )   $$
+は2次元の標準正規分布に従う．
+
+```{r}
+u <- runif(2)
+sqrt(-2*log(u[1]))*c(cos(2*pi*u[2]), sin(2*pi*u[2]))
+```
+
+Box-Muller法のアイデアは極座標表示から来ている．2つの正規乱数 $X_1, X_2$ をベクトル $X = (X_1, X_2)$ と捉えると，ベクトルの長さの2乗 $R^2 = X_1^2 + X_2^2$ は自由度 2 のカイ二乗分布に従う．また，原点から見たベクトルの方向 $\xi := R^{-1/2} X$ は単位円周上の一様分布に従い，$R$ と $\xi$ は独立だと考えられる．
+
+$\rightsquigarrow$ 逆に，単位円周上の一様分布に従う確率変数として $\xi = (\cos(2 \pi U_2), \sin (2 \pi U_2))$ を構成し，$R^2 = -2 \log U_1$ とすれば，$X = (X_1, X_2) = R^{1/2} \xi$ は独立に標準正規分布に従う．
+
+```{r}
+n <- 1e5
+RNGkind(normal.kind = 'default')
+microbenchmark(A <- rnorm(n), times=100)
+RNGkind(normal.kind = 'Box-Muller')
+microbenchmark(B <- rnorm(n), times=100)
+```
+
+私の環境では，Box-Muller 法の方が逆変換法より計算効率が良かった．
+
+#### コーシー乱数
+$X_1, X_2$ は独立な標準正規乱数とする．このとき，
+$$X_2/X_1$$
+はコーシー分布 $\mathcal{C}(0, 1)$ に従う．
+
+```{r}
+X <- rnorm(2)
+X[2]/X[1]
+```
+
+#### $t$乱数
+正の実数 $\nu$，標準正規乱数 $X$, 自由度 $\nu$ のカイ二乗乱数 $Y$ に対し，
+$$ Z = X/\sqrt{Y/\nu}  $$
+は $\mathcal{T}(0, 1)$ に従う．
+
+```{r}
+nu <- 2.5
+X <- rnorm(1)
+Y <- rchisq(n=1, df=nu)
+X/sqrt(Y/nu)
+```
+
+### 混合分布の生成
+整数の集合 $\{1, \ldots, K\}$ に定義された確率分布 $G$ は確率関数 $g(k)$ をもつとする．また，$(E, \mathcal{E})$ 上に確率分布 $F_1, \ldots, F_K$ が定義されているとする．このとき，下記で定まる確率分布を **有限混合分布 (finite mixture distribution)** という．
+$$ P(dx) = \sum_{k = 1}^K g(k) F_k(dx)  $$
+
+次の方法で有限混合分布に従う乱数を発生させることができる．
+
+- $Y \sim G$
+- $X|Y \sim F_Y$
+
+
+#### 有限混合正規分布
+確率分布の列が，正規分布 $F_k = \mathcal{N}(\mu_k, \sigma_k^2) \ (k = 1, \ldots, K)$ であるとき， $P$ を **有限混合正規分布 (finite normal mixture distribution)** という．確率分布 $P$ の平均および分散を求める．
+
+$$F_k(dx) = \frac{1}{\sqrt{2 \pi \sigma_k^2}} \exp\left( - \frac{(x - \mu_k)^2}{2}  \right) dx $$
+であるので，
+$$ P(dx) = \sum_{k = 1}^K g(k) \frac{1}{\sqrt{2 \pi \sigma_k^2}} \exp\left( - \frac{(x - \mu_k)^2}{2}  \right) dx $$
+である．よって，平均は，
+$$ \bar{\mu} = \int x P(dx) = \int x \sum_{k = 1}^K g(k) \frac{1}{\sqrt{2 \pi \sigma_k^2}} \exp\left( - \frac{(x - \mu_k)^2}{2}  \right) dx \\ = \sum_{k = 1}^K \int x\frac{1}{\sqrt{2 \pi \sigma_k^2}} \exp\left( - \frac{(x - \mu_k)^2}{2}  \right) dx \\ = \sum_{k = 1}^K g(k) \mu_k   $$
+である．分散は，
+$$ \int (x - \bar{\mu})^2 P(dx) = \sum_{k = 1}^K \int (x - \bar{\mu})^2 \frac{1}{\sqrt{2 \pi \sigma_k^2}} \exp\left( - \frac{(x - \mu_k)^2}{2}  \right) dx \\ = \sum_{k = 1}^K g(k) (\mu_k^2 + \sigma_k^2 - 2 \bar{\mu} \mu_k + \bar{\mu}^2) \\ = \sum_{k = 1}^K g(k) \sigma_k^2 + \sum_{k = 1}^K g(k) (\mu_k - \bar{\mu})^2  $$
+である．
+
+#### 一般の混合分布
+
+一般の混合分布を考える．ある状態空間 $(Y, \mathcal{Y})$ 上の確率分布 $G$ と，$y \in Y$ をパラメータに持つ $(E, \mathcal{E})$ 上の確率分布の族 $F_y$ が定義されているとする．また，$A \in \mathcal{E}$ に対し，$y \mapsto F_y(A)$ が $\mathcal{Y}$-可測とする．
+
+$\rightsquigarrow$ 混合割合 $G$ の**混合分布 (mixture distribution)** が
+$$ P(dx) = \int_y G(dy) F_y(dx)  $$
+で定義される．混合分布 $P$ に従う乱数を発生させる手順は，有限混合分布のときと同じである．
+
+#### 負の二項分布
+パラメータ $(M, \theta) \ (M \in \mathbb{N}, \theta \in (0, 1))$ の**負の二項分布 (negative binomial distribution)** $\mathcal{NB}(M, \theta)$ の確率関数は，
+$$ p(x; M, \theta) = \frac{\Gamma(M + x)}{\Gamma(n)x!} \theta^M (1 - \theta)^x = \binom{M + x - 1}{M - 1} \theta^M (1 - \theta)^x \ (x = 0, 1, \ldots)  $$
+と書くことができる．負の二項分布は，
+$$ G = \mathcal{G}(M, \theta/(1 - \theta)), \ F_y = \mathcal{P}(y)  $$
+としたときの有限混合分布である．
+
+負の二項分布は，逆変換法をもとにした方法でも生成できる．
+
+確率変数列 $U_1, \ldots, U_M \overset{i.i.d.}{\sim} \mathcal{U}[0, 1]$ とする．このとき，$0 \leq \theta \leq 1$ に対し， 
+$$ \sum_{m = 1}^M ([\log(U_m) / \log(1 - \theta)] - 1)  $$ 
+は負の二項分布 $\mathcal{NB}(M, \theta)$ に従う．
+
+#### 分散混合正規分布
+$F_Y = \mathcal{N}(0, Y^{-2}) $ とする．$G$ は $\mathbb{R}_{+}$ 上の確率分布とする．このとき，次で定まる確率分布を，**分散混合正規分布 (normal variance mixture distribution)** という．
+$$ P(dx) = \int_{y = 0}^{\infty} \frac{1}{\sqrt{2 \pi y}} \exp \left( - \frac{x^2}{2y}  \right) G(dy) dx  $$
+
+また，$P$ に従う乱数は以下の手順で生成される．
+
+- $Y \sim G$
+- $X | Y \sim \mathcal{N}(0, Y)$
+
+ここで，$t$-分布は，$Y \sim \mathcal{G}^{-1}(\nu/2, \nu/2)$ とした分散混合正規分布である．
