@@ -79,6 +79,26 @@ $\rightsquigarrow$ $\mathcal{E}$ に対して correctness property が成立．
 $$D(k, E(k, m)) = D(k, k \oplus m) = k \oplus (k \oplus m) \\ = (k \oplus k) \oplus m = 0^L \oplus m = m, \; \; \forall k, m \in \{0, 1\}^L.$$
 
 ---
+##### Ex. 2.2 A variable length one-time pad
+- Shannon cipher $\mathcal{E} = (E, D)$ で，鍵長が $L$ で，メッセージと暗号文の長さが高々 $L$ であるもの．
+
+$\rightsquigarrow$ $\mathcal{E}$ は $(\mathcal{K}, \mathcal{M}, \mathcal{C})$ 上で定義され，あるパラメータ $L$ に対して
+$$\mathcal{K} \coloneqq \{0, 1\}^L, \; \; \mathcal{M} \coloneqq \mathcal{C} \coloneqq \{0, 1\}^{\leq L}$$
+となるもの．
+- $\{0, 1\}^{\leq L}$: 長さが $L$ 以下のすべてのビット列 (空列も含む)．
+
+---
+- 暗号化関数
+    $\forall k \in \{0, 1\}^L, \forall m \in \{0, 1\}^{\ell} \subset \{0, 1\}^{\leq L},$
+    $$E(k, m) \coloneqq k[0, \ldots, \ell - 1] \oplus m.$$
+- 復号化関数
+    $\forall k \in \{0, 1\}^L, \forall c \in \{0, 1\}^{\ell} \subset \{0, 1\}^{\leq L},$
+    $$D(k, c) \coloneqq k[0, \ldots, \ell - 1] \oplus m.$$
+- $k[0, \ldots, \ell - 1]$: $k$ の先頭 $\ell$ ビット．
+
+$\rightsquigarrow$ correctness property を満たす (one-time pad と同様)．
+
+---
 
 ### 2.1.2 Perfect security
 ここでは，"secure" な cipher を数学的に定義する．
@@ -122,6 +142,15 @@ One-time pad は，perfectly secure Shannon cipher である．
 $(\mathcal{K}, \mathcal{M}, \mathcal{C})$ 上で定義された Shannon cipher $\mathcal{E} = (E, D)$ が one-time pad であるとする．ただし，$\mathcal{K} \coloneqq \mathcal{M} \coloneqq \mathcal{C} \coloneqq \{0, 1\}^L$ とする．このとき，
 $$\forall m \in \{0, 1\}^L, \forall c \in \{0, 1\}^L, \exists k \in \{0, 1\}^L \ \text{s.t.} \ k \oplus m = c,$$
 つまり，$k \coloneqq m \oplus c$ である．つまり，$\mathcal{E}$ は Th. 2.1 の条件2を満たす ($N_c = 1 \ \forall c \in \mathcal{C}$)． 
+
+---
+##### Ex. 2.5
+variable length one-time pad (Ex. 2.2) は，perfect security を満たさない．
+
+$m_0$を長さ$1$の任意の列とし，$m_1$を長さ$2$の任意の列とする．また，$c$を長さ$1$の列とし，$\bm{k}$を鍵空間の一様分布からの確率変数とする．このとき，Def 2.1の反例を得る．
+$$\mathrm{Pr}[E(\bm{k}, m_0), c] = \frac{1}{2}, \; \; \mathrm{Pr}[E(\bm{k}, m_1) = c] = 0.$$
+
+直感的には，暗号文が平文の長さを漏らしているため．
 
 ---
 
