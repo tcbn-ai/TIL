@@ -261,3 +261,87 @@ $(\mathcal{K}, \mathcal{M}, \mathcal{C})$ 上で定義された $\mathcal{E} = (
 
 (証明略)
 
+---
+
+Th. 2.7 の証明は，次の事実に基づいている:
+
+- Attack Game 2.2 で $\mathcal{E}$ に攻撃する任意の efficient な MR adversary $\mathcal{A}$ に対して，Attack Game 2.1 で $\mathcal{E}$ に攻撃する efficient な SS adversary $\mathcal{B}$ が存在し，以下を満たす．
+  $$MR\mathrm{adv}[\mathcal{A}, \mathcal{E}] \leq SS\mathrm{adv}[\mathcal{B}, \mathcal{E}]$$
+
+もう少し単純に書くと，semantically secure $\Rightarrow$ secure against message recovery を証明するために，以下を示す．
+
+- message recovery を破る efficient adversary を semantic security を破る efficient adversary にどのように変換するか．
+
+---
+
+上記の adversary $\mathcal{B}$ は **elementary wrapper** around $\mathcal{A}$ である．
+
+- $\mathcal{B}$ が elementary wrapper around $\mathcal{A}$ ならば，$\mathcal{A}$ は efficient であり，$\mathcal{B}$ も efficient である．
+- $\mathcal{C}$ が elementary wrapper around $\mathcal{B}$ であり，$\mathcal{B}$ が elementary wrapper around $\mathcal{A}$ ならば，$\mathcal{C}$ は elementary wrapper around $\mathcal{A}$ である．
+
+---
+
+#### 2.2.3.2 Computing individual bits of a message
+encryption scheme が secure であれば...
+
+- whole message を復元するのが難しい
+- message のどのような partial information も計算するのが難しい
+
+ここでは典型的な例を挙げる．
+
+---
+
+$\mathcal{E} = (E, D)$ を $(\mathcal{K}, \mathcal{M}, \mathcal{C})$ 上で定義された暗号とし，$\mathcal{M} = \{0, 1\}^L$ とする．
+$$\mathrm{parity}(m) \coloneqq \begin{cases} 0, & \text{if the number of 1's in } m \text{ is odd,}  \\ 1, & \text{otherwise.} \end{cases}$$
+このとき，$\mathrm{parity}(m)$ は，$m$ の全ての individual bits に対する exclusive-OR である．
+
+$\rightsquigarrow$ $\mathcal{E}$ が semantically secure ならば，random message $m$ の encryption $c$ に対して，$\mathrm{parity}(m)$ を予測するのが困難である．
+(どの efficient adversary も random guessing より良く推測できない)
+
+---
+まず，$\mathrm{parity}(m)$ を確率 $1$ で予測できる efficient adversary $\mathcal{A}$ が存在すると仮定する ($\mathcal{E}$ が semantically secure とした下で (?))．
+$\rightsquigarrow$ $\forall m \in \mathcal{M}, \forall k \in \mathcal{K}, \forall c = E(k, m)$ に対して，$\mathcal{A}$ に 暗号文 $c$ を与えると $m$ の parity を出力する． 
+$\rightsquigarrow$ $\mathcal{A}$ を，SS adversary $\mathcal{B}$ を構成するために使うことができる．
+
+- adversary が 任意に $\mathrm{parity}(m_0) = 0, \mathrm{parity}(m_1) = 1$ を満たす $m_0, m_1$ を選択する．
+- これら2つのメッセージを own SS challenger に手渡し，暗号文 $c$ を得て $\mathcal{A}$ に渡す．
+- $c$ の受け取り後，$\mathcal{A}$ は bit $\hat{b}$ を出力し，$\mathcal{B}$ も同じ bit $\hat{b}$ を出力する．
+
+---
+
+$\rightsquigarrow$ $\mathcal{B}$ の SS advantage はちょうど1である：
+
+- SS challenger が $m_0$ を暗号化するならば常に $0$ を出力し，SS challenger が $m_1$ を暗号化するならば常に $1$ を出力する．
+
+$\rightsquigarrow$ $\mathcal{E}$ が semantically secure ならば，parity を確率 $1$ で予測できる efficient adversary は存在しない．
+($\because$ $\mathcal{E}$ が semantically secure であることに矛盾するから (?))
+
+これよりもっと強いことが言える．
+
+- $\mathcal{E}$ が semantically secure であれば，$1/2$ より高い確率で parity を予測できるような efficient adversary は存在しない．
+
+---
+###### Attack Game 2.3 (parity prediction)
+$(\mathcal{K}, \mathcal{M}, \mathcal{C})$ 上で定義された暗号 $\mathcal{E} = (E, D)$ に対して，attack game は以下のように進行する．
+
+- Challenger は，$m \overset{R}{\leftarrow} \mathcal{M}, k \overset{R}{\leftarrow} \mathcal{K}, c \overset{R}{\leftarrow} E(k, m)$ を計算し，$c$ を adversary に送る．
+- Adversary は，$\hat{b} \in \{0, 1\}$ を出力する．
+
+$W$: $\hat{b} = \mathrm{parity}(m)$ となる事象．
+$\rightsquigarrow$ $\mathcal{E}$ に関する $\mathcal{A}$ の **parity prediction advantage** を以下で定義．
+$$\mathrm{Parityadv}[\mathcal{A}, \mathcal{E}] \coloneqq \left| \mathrm{Pr}[W] - 1/2\right|.$$
+
+---
+
+###### Def. 2.4 (parity prediction)
+
+cipher $\mathcal{E}$ が **secure against parity prediction** であるとは，任意の efficient adversaries $\mathcal{A}$ に対して $\mathrm{Parityadv}[\mathcal{A}, \mathcal{E}]$ が negligible であることである．
+
+###### Th. 2.8
+$\mathcal{E} = (E, D)$ を $(\mathcal{K}, \mathcal{M}, \mathcal{C})$ 上で定義された cipher とし，$\mathcal{M} = \{0, 1\}^L$ とする．$\mathcal{E}$ が semantically secure ならば，$\mathcal{E}$ は secure against prediction である．
+
+(証明略)
+
+---
+
+#### 2.2.4 Consequences of semantic security
