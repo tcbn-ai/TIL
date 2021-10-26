@@ -342,6 +342,3 @@ $\mathcal{E} = (E, D)$ を $(\mathcal{K}, \mathcal{M}, \mathcal{C})$ 上で定�
 
 (証明略)
 
----
-
-#### 2.2.4 Consequences of semantic security
