@@ -12,7 +12,9 @@ WSL ではなく VirtualBox を使った理由:
 - 勉強用だからそれほどマシンスペックが必要ない
 - 変なコマンド打って壊しても影響が出ないように隔離したかった
 
-### インストール
+また，自宅の Ubuntu にも KVM で Ubuntu 20.04 と CentOS 7 を入れた．
+
+### インストール (Windows)
 ISO ファイルを [公式サイト](https://jp.ubuntu.com/download) から入手し，VirtualBox の仮想マシン作成時にこの ISO ファイルを指定し，あとは指示に従ってインストールする．
 
 #### 名前解決の問題の解消
@@ -171,3 +173,18 @@ Host ubuntu_vbox
 ssh ubuntu_vbox
 ```
 で接続できる．
+
+### 補足 (KVM のインストール)
+Ubuntu では，VirtualBox の代わりに Linux に最適化された仮想化機能である KVM を使うことにする．
+
+KVM はコマンドラインからインストール可能である．
+
+```
+sudo apt -y install virt-manager qemu-system
+```
+
+使用時は root 権限で起動する．
+
+```
+sudo virt-manager
+```
