@@ -188,3 +188,6 @@ sudo apt -y install virt-manager qemu-system
 ```
 sudo virt-manager
 ```
+
+- 最初のネットワーク設定を NAT にする
+- KVM だと IP 固定したらネットワークにつながらなくなった
