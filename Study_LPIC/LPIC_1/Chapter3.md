@@ -216,3 +216,275 @@ export VAR=lpic
 ###### Remark
 - 定義には `$` は不要．
 - 参照には `$` が必要．
+
+<div style="page-break-before:always"></div>
+
+### 3.1.4 環境変数 `PATH`
+- プロンプトが表示されている状態でコマンドを入力すると，シェルはそのコマンド (プログラム) を実行する．
+- コマンドには，**内部コマンド** と **外部コマンド** がある．
+    - 内部コマンド: シェル自体に組み込まれているもの
+    - 外部コマンド: 独立したプログラムとして存在するもの
+
+e.g. 
+- `ls`: `/bin/ls` が実行される外部コマンド
+- `cd`: シェルに組み込まれている内部コマンド
+
+外部コマンドの場合，シェルはそのコマンドがどこに置かれているかを，環境変数 `PATH` に指定されたディレクトリを順に調べて見つけ出す．
+
+- コマンドが置かれたディレクトリを環境変数 `PATH` に追加することを，「パスを通す」という．
+- パスの通っていない場所に置かれているコマンドやプログラムを実行する場合，絶対パスまたは相対パスを指定する必要がある．
+    - **絶対パス** 表記
+        - 最上位のディレクトリ (`/`) から表記する方法．
+        - システム内のファイル位置を一意に示す．
+    - **相対パス** 表記
+        - カレントディレクトリ (`.`) を基点とした相対位置で表す．
+    
+
+例えば，CentOS 7 の場合，`PATH` 変数に含まれているディレクトリは以下．
+```
+[ai@localhost ~]$ echo $PATH
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/ai/.local/bin:/home/ai/bin
+```
+
+`PATH` 変数に含まれていないディレクトリにコマンドでも，絶対パスを指定すれば実行することができる (コマンドを実行する権限は必要)．
+
+環境変数 `PATH` にパスを追加するには，`~/.bash_profile` などの環境設定ファイルの `PATH` 設定を修正するか，以下のコマンドを使用する．
+```
+PATH=$PATH:追加するディレクトリ名
+```
+
+e.g. `/opt/bin` ディレクトリを環境変数 `PATH` の末尾に追加:
+```
+[ai@localhost ~]$ PATH=$PATH:/opt/bin
+[ai@localhost ~]$ echo $PATH
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/ai/.local/bin:/home/ai/bin:/opt/bin
+```
+
+- シェルは，環境変数 `PATH` の先頭から順にディレクトリを検索する．
+    - 同名のプログラムがあった場合は，環境変数 `PATH` の先頭に近い方のディレクトリに置かれているプログラムが実行される．
+
+例えば，次のようにしてしまうとパスが通っているディレクトリが `/opt/bin` のみになり，外部コマンドが使えなくなる． 
+```
+PATH=/opt/bin
+```
+
+通常，セキュリティ上の理由から，環境変数 `PATH` にはカレントディレクトリを含めない．カレントディレクトリにあるプログラムを実行するには，カレントディレクトリを意味する `./` を明示する．
+
+<div style="page-break-before:always"></div>
+
+### 3.1.5 コマンドの実行
+コマンドラインは次のような要素から成り立っている．
+```
+コマンド オプション 引数
+```
+- コマンド
+    - 実行可能なプログラムまたはスクリプト
+- オプション
+    - コマンドに対して動作を指示するスイッチ
+    - ハイフン (`-` もしくは `--`) に続けて指定する．例外的にハイフンを必要としないコマンドもある．
+- 引数
+    - コマンドに渡す値．
+    - 引数の有無で動作が変わるコマンド，引数を取らないコマンド，複数の引数が必要なコマンドなどがある．
+
+コマンドは，1行に複数並べて実行できる．
+
+複数のコマンドの実行制御:
+|コマンド|説明|
+|----|----|
+|`コマンド1; コマンド2`|コマンド1に続いてコマンド2を実行する|
+|`コマンド1 && コマンド2`|コマンド1が正常に終了したときのみコマンド2を実行する|
+|`コマンド1 || コマンド2`|コマンド1が正常に終了しなかった場合のみコマンド2を実行する|
+|`(コマンド1; コマンド2)`|コマンド1とコマンド2を，ひとまとまりのコマンドグループとして実行する|
+|`{ コマンド1; コマンド2; }`|現在のシェル内でコマンド1とコマンド2を実行する|
+
+実行例:
+```
+[ai@localhost ~]$ ls; ls -a
+LPIC_workspace
+.  ..  .bash_history  .bash_logout  .bash_profile  .bashrc  LPIC_workspace
+
+[ai@localhost ~]$ cat .bash_profile | grep PATH && pwd
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export PATH
+/home/ai <- 正常に終了したので，pwd が実行される．
+
+[ai@localhost ~]$ cat LPIC_workspace && echo $PATH
+cat: LPIC_workspace: Is a directory 
+    <- 正常に終了しなかったので，echo $PATH は実行されない．
+
+[ai@localhost ~]$ cat LPIC_workspace || echo 'This is not a file!'
+cat: LPIC_workspace: Is a directory
+This is not a file! <- 正常に終了しなかったので，echo ... が実行される．
+
+[ai@localhost ~]$ cat .bash_profile | grep PATH || pwd
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export PATH
+    <- 正常に終了したので，pwd は実行されない．
+
+[ai@localhost ~]$ (date; pwd; ls -a)
+2021年 11月 20日 土曜日 15:48:20 JST
+/home/ai
+.  ..  .bash_history  .bash_logout  .bash_profile  .bashrc  LPIC_workspace
+
+[ai@localhost ~]$ { date; pwd; ls -a; }
+2021年 11月 20日 土曜日 15:48:47 JST
+/home/ai
+.  ..  .bash_history  .bash_logout  .bash_profile  .bashrc  LPIC_workspace
+```
+
+<div style="page-break-before:always"></div>
+
+
+### 3.1.6 引用符
+##### 単一引用符 `'`
+単一引用符の中は，全て文字列であると解釈される．
+```
+[ai@localhost ~]$ echo $LANG
+en_US.UTF-8 <- 環境変数 LANG の内容が出力される．
+[ai@localhost ~]$ echo '$LANG'
+$LANG       <- 文字列 $LANG が出力される．
+```
+
+##### 二重引用符 `"`
+二重引用符内も文字列であるとみなされるが，二重引用符内に変数があれば，その変数の内容が展開される．
+また，二重引用符内にバッククオーテーション (``` ` ```) が使われていると，その中も展開される．
+```
+[ai@localhost ~]$ echo $LANG
+en_US.UTF-8
+[ai@localhost ~]$ echo "Locale: $LANG"
+Locale: en_US.UTF-8
+```
+
+展開させたくない場合は，バックスラッシュ (`\`) を使う．バックスラッシュ直後の文字はすべて通常の文字とみなされる．バックスラッシュは **エスケープ文字** と呼ばれる．
+```
+[ai@localhost ~]$ echo "\$LANG: $LANG"
+$LANG: en_US.UTF-8
+```
+
+##### バッククオーテーション ``` ` ```
+- バッククオーテーション内にコマンドがあれば，コマンドを実行した結果が展開される．
+- 変数の場合は，変数に格納されているコマンドを実行した結果が展開される．
+
+```
+[ai@localhost ~]$ echo "The current directory is `pwd`."
+The current directory is /home/ai.
+```
+
+`$(コマンド)` を使ってもよい．バッククオーテーションはシングルクオーテーションと紛らわしいので，こちらの書き方の方が良い．
+```
+[ai@localhost ~]$ echo "The current directory is $(pwd)."
+The current directory is /home/ai.
+```
+
+<div style="page-break-before:always"></div>
+
+### 3.1.7 コマンド履歴
+一度使ったコマンドをもう一度使ったり，一度だけ変更して使いたい場合は，bash の履歴機能を利用することができる．
+
+**history** コマンド
+- コマンド履歴が順に表示される．
+- 古いものから順に番号がついているので，この履歴番号を直接指定して実行することもできる．
+- 履歴番号を指定してコマンドを再度実行するには，`!履歴番号` のようにする．
+- コマンド履歴は，`~/.bash_history` ファイルに保存されている．
+
+```
+[ai@localhost ~]$ history
+    1  exit
+    2  su -
+    3  exit
+    (略)
+   57  echo "The current directory is $(pwd)."
+   58  history
+[ai@localhost ~]$ !57
+echo "The current directory is $(pwd)." <- 実際に実行されるコマンドが表示される．
+The current directory is /home/ai.
+```
+
+bash の履歴機能:
+|コマンド|内容|
+|---|---|
+|`↑ (Ctrl + P)`|1つ前のコマンドを表示する|
+|`↓ (Ctrl + N)`|1つ次のコマンドを表示する|
+|`!文字列`|実行したコマンドの中で，指定した文字列から始まるコマンドを実行する|
+|`!?文字列`|実行したコマンドの中で，指定した文字列を含むコマンドを実行する|
+|`!!`|直前に実行したコマンドを再実行する|
+|`!履歴番号`|履歴番号のコマンドを実行する|
+
+### 3.1.8 マニュアルの参照
+- Linux では，**オンラインマニュアルページ** (**man ページ**) が標準で用意されている．
+    - man ページは，`man` コマンドで表示できる．
+- マニュアルを構成するファイルは，`/usr/share/man` に置かれている．
+    - man ページへの検索ディレクトリは，環境変数 `MANPATH` が参照される．
+        - `MANPATH` に何も指定されていない場合は，`/etc/man.config` (`/etc/man.conf`, `/etc/man_db.conf`, `/etc/manpath.config` 等) に指定されたデフォルトのリストが使われる．
+- `man` コマンドは，環境変数 `PAGER` で指定されたページやプログラム (通常は `less`) で表示を行うが，好みに応じて変更することができる．
+
+```
+man [オプション] [セクション] コマンド名あるいはキーワード
+```
+
+`man` コマンドの主なオプション:
+|オプション|説明|
+|---|---|
+|`-a`|すべてのセクションのマニュアルを表示する|
+|`-f`|指定されたキーワード (完全一致) を含むドキュメントを表示する (`whatis` と同じ)|
+|`-k`|指定されたキーワード (部分一致) を含むドキュメントを表示する (`apropos` と同じ)|
+|`-w`|マニュアルの置かれているディレクトリを表示する|
+
+man ページの見出し:
+|見出し|説明|
+|---|---|
+|`NAME`|コマンドやファイルの名前と簡単な説明|
+|`SYNOPSIS`|書式 (オプションや引数)|
+|`DESCRIPTION`|詳細な説明|
+|`OPTIONS`|指定できるオプションの説明|
+|`FILES`|設定ファイルなど，関連するファイル|
+|`ENVIRONMENT`|関連する環境変数|
+|`NOTES`|その他の注意事項|
+|`BUGS`|既知の不具合|
+|`SEE ALSO`|関連項目|
+|`AUTHOR`|プログラムやドキュメントの著者|
+
+man ページの表示には，`less` コマンドというページャが使われている．
+
+`less` の主なキー操作:
+|キー操作|説明|
+|---|---|
+|`k`, `↑`|上方向に1行スクロール|
+|`j`, `↓`|下方向に1行スクロール|
+|Space, `f`|下方向に1画面スクロール|
+|`b`|上方向に1画面スクロール|
+|`q`|終了|
+|`/検索文字列`|下方向に文字列を検索|
+|`?検索文字列`|上方向に文字列を検索|
+|`h`|ヘルプを表示する|
+
+同一の名前で異なる内容を扱えるようにするため，セクション (章) が設定されている．**セクション** は，ドキュメントの内容による分類であり，Linux では次のようになっている．
+
+セクション:
+|セクション|説明|
+|---|---|
+|1|ユーザコマンド|
+|2|システムコール (カーネルの機能を使うための関数)|
+|3|ライブラリ (C言語の関数)|
+|4|デバイスファイル|
+|5|設定ファイル|
+|6|ゲーム|
+|7|その他|
+|8|システム管理コマンド|
+|9|Linux 独自のカーネル用コマンド|
+
+`whatis` コマンドを使うと，指定した検索キーワードと完全にマッチした一覧が表示される．
+```
+[ai@localhost ~]$ whatis crontab
+crontab (1)          - maintains crontab files for individual users
+crontab (5)          - files used to schedule the execution of programs
+```
+
+`apropos` コマンドを使うと，指定されたキーワードがマニュアルタイトルもしくは NAME 欄に含まれるマニュアルの項目一覧を表示する．
+```
+[ai@localhost ~]$ apropos crontab
+anacrontab (5)       - configuration file for Anacron
+crontab (1)          - maintains crontab files for individual users
+crontab (5)          - files used to schedule the execution of programs
+crontabs (4)         - configuration and scripts for running periodical jobs
+```
