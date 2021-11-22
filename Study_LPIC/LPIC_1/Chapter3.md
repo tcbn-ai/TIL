@@ -410,6 +410,8 @@ bash の履歴機能:
 |`!!`|直前に実行したコマンドを再実行する|
 |`!履歴番号`|履歴番号のコマンドを実行する|
 
+<div style="page-break-before:always"></div>
+
 ### 3.1.8 マニュアルの参照
 - Linux では，**オンラインマニュアルページ** (**man ページ**) が標準で用意されている．
     - man ページは，`man` コマンドで表示できる．
@@ -488,3 +490,602 @@ crontab (1)          - maintains crontab files for individual users
 crontab (5)          - files used to schedule the execution of programs
 crontabs (4)         - configuration and scripts for running periodical jobs
 ```
+
+参考:
+シェルの内部コマンドの説明を表示するには，`man` コマンドではなく `help` コマンドを使う．
+
+<div style="page-break-before:always"></div>
+
+### 3.1.9 ファイル操作コマンド
+
+##### `ls` コマンド
+- ディレクトリを指定した場合，そのディレクトリ内のファイルを表示する．
+- ファイル名を指定した場合，そのファイルの属性を表示する．
+- 引数に何も指定しない場合，カレントディレクトリ内のファイルとサブディレクトリを表示する．
+
+書式:
+```
+ls [option] [ファイル名またはディレクトリ名]
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-a`|`.` から始まるファイルも表示する．|
+|`-A`|`.` から始まるファイルも表示するが，`.` と `..` は表示しない．|
+|`-d`|ディレクトリ自身の情報も表示する．|
+|`-F`|ファイルの種類も表示する．(`/`: ディレクトリ，`*`: 実行ファイル，`@`: シンボリックリンク)|
+|`-i`|iノード番号を表示する．|
+|`-l`|ファイルjの詳細な情報を表示する．|
+|`-t`|日付順に表示する．|
+|`-h`|単位付きで表示する．|
+
+```
+[ai@localhost ~]$ ls -lA
+total 20
+-rw-------. 1 ai ai 1563 11月 20 22:43 .bash_history
+-rw-r--r--. 1 ai ai   18  4月  1  2020 .bash_logout
+-rw-r--r--. 1 ai ai  193  4月  1  2020 .bash_profile
+-rw-r--r--. 1 ai ai  231  4月  1  2020 .bashrc
+-rw-------. 1 ai ai   59 11月 20 16:45 .lesshst
+drwxrwxr-x. 2 ai ai    6 11月 20 15:40 LPIC_workspace
+```
+
+##### `cp` コマンド
+ファイルやディレクトリをコピーする．
+
+書式:
+```
+cp [option] コピー元ファイル名 コピー先ファイル名
+
+cp [option] コピー元ファイル名 コピー先ディレクトリ
+```
+
+option:
+|オプション|説明|
+|----|----|
+|`-f`|コピー先に同名のファイルがあれば上書きする．|
+|`-i`|コピー先に同名のファイルがあれば，上書きするかどうか確認する．|
+|`-p`|コピー元ファイルの属性を保持したままコピーする．|
+|`-r, -R`|ディレクトリ内を再帰的にコピーする (ディレクトリをコピーする)．|
+|`-d`|シンボリックリンクをシンボリックリンクとしてコピーする．|
+|`-a`|できる限り元ファイルの構成と属性をコピー先でも保持する (`-dpR` と同じ)．|
+
+ディレクトリをコピーする場合，必ず `-r` または `-R` オプションをつける．
+
+```
+[ai@localhost LPIC_workspace]$ cp -p ~/.bashrc ./.bashrc.bk
+[ai@localhost LPIC_workspace]$ ls -lA
+total 4
+-rw-r--r--. 1 ai ai 231  4月  1  2020 .bashrc.bk
+```
+
+###### `mv` コマンド
+指定した場所にファイルやディレクトリを移動する．また，ファイル名の変更にも用いられる．
+
+書式:
+```
+mv [option] 移動元ファイルまたはディレクトリ 移動先ファイルまたはディレクトリ
+```
+
+option:
+|オプション|説明|
+|----|----|
+|`-f`|移動先に同名のファイルがあれば上書きする．|
+|`-i`|移動先に同名のファイルがあれば上書きするするかどうか確認する．|
+
+```
+[ai@localhost LPIC_workspace]$ ls -A
+.bashrc.bk
+[ai@localhost LPIC_workspace]$ mv .bashrc.bk .bashrc.bk_20211122
+[ai@localhost LPIC_workspace]$ ls -A
+.bashrc.bk_20211122
+```
+
+##### `mkdir` コマンド
+空のディレクトリを作成する．
+
+書式:
+```
+mkdir [option] ディレクトリ名
+```
+
+option:
+|オプション|説明|
+|----|----|
+|`-m`|指定したアクセス権でディレクトリを作成する．|
+|`-p`|必要なら親ディレクトリも同時に作成する．|
+
+```
+[ai@localhost LPIC_workspace]$ mkdir -m 700 3_dir
+[ai@localhost LPIC_workspace]$ ls -l
+total 0
+drwx------. 2 ai ai 6 11月 22 15:53 3_dir
+```
+
+```
+[ai@localhost LPIC_workspace]$ mkdir top/second/third
+mkdir: cannot create directory ‘top/second/third’: No such file or directory
+[ai@localhost LPIC_workspace]$ mkdir -p top/second/third
+[ai@localhost LPIC_workspace]$ ls
+3_dir  top
+```
+
+##### `rm` コマンド
+ファイルやディレクトリを削除する．
+
+書式:
+```
+rm [option] ファイル名
+```
+
+option:
+|オプション|説明|
+|----|----|
+|`-f`|ユーザへの確認なしに削除する．|
+|`-i`|削除前にユーザに確認する．|
+|`-r, -R`|サブディレクトリも含め，再帰的にディレクトリ全体を削除する．|
+
+```
+[ai@localhost LPIC_workspace]$ ls
+3_dir  top
+[ai@localhost LPIC_workspace]$ rm -rf top/
+[ai@localhost LPIC_workspace]$ ls
+3_dir
+```
+
+##### `rmdir` コマンド
+- 空のディレクトリを削除する．
+    - ディレクトリ内にファイルやサブディレクトリが残っている場合は削除できない．
+
+書式:
+```
+rmdir [option] ディレクトリ名
+```
+
+option:
+|オプション|説明|
+|----|----|
+|`-p`|複数階層の空ディレクトリを削除する．|
+
+```
+[ai@localhost LPIC_workspace]$ ls
+3_dir
+[ai@localhost LPIC_workspace]$ rmdir 3_dir/
+[ai@localhost LPIC_workspace]$ ls
+```
+
+##### `touch` コマンド
+ファイルのタイムスタンプ (アクセス時刻と修正時刻) を現在時刻または指定した日時に変更する．
+
+書式:
+```
+touch [option] ファイル名
+```
+
+option:
+|オプション|説明|
+|----|----|
+|`-t`|タイムスタンプを `[[CC]YY]MMDDhhmm[.SS]` に変更する (デフォルトは現在時刻)．<br> `CC`: 西暦の上2桁 (省略可) <br> `YY`: 西暦の下2桁 (省略可) <br> `MM`: 月 <br> `DD`: 日 <br> `hh`: 時 (24時間表記) <br> `mm`: 分 <br> `SS`: 秒 (省略可，指定しない場合は `00`) |
+|`-a`|アクセス時刻だけ変更する．|
+|`-m`|修正時刻だけ変更する．|
+
+引数で指定したファイルが存在しない場合は，空のファイルを作成する．
+
+```
+[ai@localhost LPIC_workspace]$ touch -t 202111221111 touch_test
+[ai@localhost LPIC_workspace]$ ls -l
+total 0
+-rw-rw-r--. 1 ai ai 0 11月 22 11:11 touch_test
+```
+
+##### `file` コマンド
+ファイルの種類を表示する．
+(プログラムなどのバイナリファイルを `cat` コマンドで開くと文字化けを起こしてしまう)
+
+書式:
+```
+file ファイル名
+```
+
+```
+[ai@localhost LPIC_workspace]$ file ~/.bashrc 
+/home/ai/.bashrc: ASCII text
+```
+
+<div style="page-break-before:always"></div>
+
+### 3.1.10 メタキャラクタの利用
+- メタキャラクタ
+    - ファイル名のパターンを表す特殊な記号
+    - メタキャラクタを使うと，パターンに一致する複数のファイルを一括して扱うことができる．
+
+
+主なメタキャラクタ:
+|メタキャラクタ|説明|
+|---|---|
+|`*`|0文字以上の文字または文字列にマッチする．|
+|`?`|任意の1文字にマッチする．|
+|`[]`|`[]` 内に列挙されている文字のいずれか1文字にマッチする．連続した文字列には `-` が使える．範囲指定の先頭に `!` を使うと，マッチしない範囲を指定できる．|
+|`{}`|`,` で区切られた文字列にマッチする．文字列の生成にも使える．|
+
+ここで，メタキャラクタを通常の文字として使いたい場合は，`\` をメタキャラクタの直前に記述する．
+
+```
+[ai@localhost chapter3]$ ls
+aaa  a.txt  bbb  b.txt  ccc  c.txt
+[ai@localhost chapter3]$ ls *.txt
+a.txt  b.txt  c.txt
+[ai@localhost chapter3]$ ls a*
+aaa  a.txt
+```
+
+<div style="page-break-before:always"></div>
+
+## 3.2 パイプとリダイレクト
+### 3.2.1 標準入出力
+- Linux では，通常のファイルと同等にディスプレイへの出力やキーボードからの入力を扱うことができる．
+    - キーボードからの入力もファイルの読み込みも同等に扱う．
+    - ディスプレイへの出力もファイルへの書き出しも同等に扱う．
+- データの入出力に伴うデータの流れを **ストリーム** と呼ぶ．
+- Linux では，データをストリームとして扱うために，3つの基本的なインタフェースが定められている．
+
+標準入出力:
+|番号|入出力名|デフォルト|
+|---|---|---|
+|0|標準入力|キーボード|
+|1|標準出力|画面 (端末)|
+|2|標準エラー出力|画面 (端末)|
+
+<div style="page-break-before:always"></div>
+
+### 3.2.2 パイプ
+- **パイプ** (パイプライン)
+    - コマンドやプログラムの出力結果を，別のコマンドやプログラムの入力に渡すために使われる．
+        - コマンドの標準出力を次のコマンドの標準入力に渡す．
+    - `|` で表す．
+
+```
+[ai@localhost chapter3]$ ls | wc -l
+6
+```
+
+`ls` コマンドの実行結果 (標準出力) を，`wc` コマンドの標準入力に渡す．
+
+##### `tee` コマンド
+コマンドの実行結果をファイルに保存するとともに，画面上にも表示したい場合，パイプだけでは解決できない．このような場合に `tee` コマンドを使う．
+
+- `tee` コマンド
+    - 標準入力から読み込み，それをファイルと標準出力へとT字型に分岐させる．
+        - 実行結果をファイルに書き込みつつ，次のコマンドへと実行結果を渡すことができる．
+
+書式:
+```
+tee [option] ファイル名
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-a`|ファイルに上書きするのではなく，追記する．|
+
+```
+[ai@localhost chapter3]$ ls -l /usr/bin | tee ls_usr_bin | wc -l
+735
+```
+
+<div style="page-break-before:always"></div>
+
+### 3.2.3 リダイレクト
+コマンドの実行結果を画面上に表示するのではなくファイルに保存したい場合や，コマンドへの入力にあらかじめ用意しておいたファイルを使う場合に役立つ．
+
+リダイレクトとパイプ:
+|書式|説明|
+|----|----|
+|`コマンド > ファイル`|コマンドの標準出力 (実行結果) をファイルに書き込む|
+|`コマンド < ファイル`|ファイルの内容をコマンドの標準入力へ送る|
+|`コマンド >> ファイル`|コマンドの標準出力 (実行結果) をファイルに追記する|
+|`コマンド 2> ファイル`|ファイルに標準エラー出力を書き込む|
+|`コマンド 2>> ファイル`|ファイルに標準エラー出力を追記する|
+|`コマンド > ファイル 2>&1`|ファイルに標準出力と標準エラー出力を書き込む|
+|`コマンド >> ファイル 2>&1`|ファイルに標準出力と標準エラー出力を追記する|
+|`コマンド << 終了文字`|終了文字が現れるまで標準入力へ送る|
+|`コマンド1 | コマンド2`|コマンド1の標準出力をコマンド2の標準入力に渡す|
+|`コマンド1 2>&1 | コマンド2`|コマンド1の標準出力と標準エラー出力を，コマンド2の標準入力に渡す|
+|`コマンド1 | tee ファイル | コマンド2`|コマンド1の標準出力 (実行結果) を，コマンド2の標準入力に渡すとともにファイルに書き込む|
+|`コマンド &> ファイル`|標準出力と標準エラー出力を同じファイルに書き込む|
+
+参考:
+コマンドが出力するメッセージをいっさい画面上に出力したくない場合は，`コマンド > /dev/null 2>&1` とする．`/dev/null` は特殊なファイルで，入力されたすべてのデータを消し去る．
+
+```
+[ai@localhost chapter3]$ ls -l /etc/ > ls_etc
+```
+
+<div style="page-break-before:always"></div>
+
+## 3.3 テキスト処理フィルタ
+Linux では，テキストデータを処理するためのフィルタとなるコマンドが多数ある．シェル上でコマンドを組み合わせることで，強力なデータ処理が可能になる．
+
+参考:
+Linux システムでのフィルタとは，ファイルやテキストデータを読み込んで何らかの処理を行って出力するプログラムのこと．
+
+### 3.3.1 テキストフィルタコマンド
+##### `cat` コマンド
+- ファイルの内容を標準出力に出力する．
+    - シェルのリダイレクトを使って複数のファイルを結合するといった使い方もできる．
+
+書式:
+```
+cat [option] [ファイル名]
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-n`|各行の左端に行番号を付加する|
+
+例えば，`file1` と `file2` を1つの `newfile` にまとめるには，以下のようにする．
+
+```
+cat file1 file2 > newfile
+```
+
+参考:
+`cat` コマンドは引数を省略した場合，標準入力からの入力を受け付けるようになる．
+
+##### `nl` コマンド
+テキストファイルの一部または全部に行番号を付けて表示する．
+
+書式:
+```
+nl [option] [ファイル名]
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-b 形式` |指定した形式で本文に行番号を付加する|
+|`-h 形式` |指定した形式でヘッダに行番号を付加する|
+|`-f 形式` |指定した形式でフッタに行番号を付加する|
+
+|形式|説明|
+|---|---|
+|`a`|全ての行|
+|`t`|空白以外の行|
+|`n`|行以外の付加を中止|
+
+```
+[ai@localhost chapter3]$ nl -b a ~/.bash_logout 
+     1  # ~/.bash_logout
+     2
+```
+
+##### `od` コマンド
+バイナリファイルの内容を8進数や16進数で表す．
+
+書式:
+```
+od [option] [ファイル名]
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-t 出力タイプ`|出力するフォーマットを指定する|
+
+|出力タイプ|説明|
+|---|---|
+|`c`|ASCII 文字|
+|`o`|8進数 (デフォルト)|
+|`x`|16進数|
+
+```
+[ai@localhost chapter3]$ file /etc/localtime 
+/etc/localtime: symbolic link to `../usr/share/zoneinfo/Asia/Tokyo'
+[ai@localhost chapter3]$ od -t x /etc/localtime 
+0000000 66695a54 00000032 00000000 00000000
+0000020 00000000 03000000 03000000 00000000
+0000040 08000000 03000000 08000000 70023ed7
+0000060 f059edd7 70faf8d8 f03bcdd9 f00007db
+0000100 f01daddb f0e2e6dc f0ff8cdd 01000100
+0000120 01000100 a08c0000 00000001 0400907e
+0000140 907e0000 444a0400 534a0054 00000054
+0000160 01000001 66695a54 00000032 00000000
+0000200 00000000 00000000 04000000 04000000
+0000220 00000000 09000000 04000000 0c000000
+0000240 ffffffff 70a4c265 ffffffff 70023ed7
+0000260 ffffffff f059edd7 ffffffff 70faf8d8
+0000300 ffffffff f03bcdd9 ffffffff f00007db
+0000320 ffffffff f01daddb ffffffff f0e2e6dc
+0000340 ffffffff f0ff8cdd 01020103 01020102
+0000360 83000002 00000003 01a08c00 7e000004
+0000400 00080090 00907e00 544d4c08 54444a00
+0000420 54534a00 00000000 00000001 534a0a01
+0000440 0a392d54
+0000444
+```
+
+##### `head` コマンド
+ファイルの先頭部分を表示する．オプションを指定しない場合，先頭から10行目までを表示する．
+
+書式:
+```
+head [option] [ファイル名]
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-n 行数`|先頭から指定された行数分だけ表示する|
+|`-行数`|先頭から指定された行数分だけ表示する (非推奨)|
+|`-c バイト数`|出力するバイト数を指定する|
+
+```
+[ai@localhost chapter3]$ head -n 5 /etc/services 
+# /etc/services:
+# $Id: services,v 1.55 2013/04/14 ovasik Exp $
+#
+# Network services, Internet style
+# IANA services version: last updated 2013-04-10
+```
+
+##### `tail` コマンド
+- ファイルの末尾部分を表示する．
+- デフォルトでは，最終行から10行が表示される．
+- `-f` オプションを使うと，ファイルの末尾に行が追加されるとリアルタイムで表示する．
+
+書式:
+```
+tail [option] [ファイル名]
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-n 行数`|末尾から指定された行数分だけ表示する|
+|`-行数`|末尾から指定された行数分だけ表示する (非推奨)|
+|`-c バイト数`|出力するバイト数を指定する|
+|`-f`|ファイルの末尾に追加された行を表示し続ける|
+
+```
+[root@localhost ~]# tail -n 5 -f /var/log/messages 
+Nov 22 17:33:03 localhost systemd: Started Network Manager Script Dispatcher Service.
+Nov 22 17:33:03 localhost nm-dispatcher: req:1 'dhcp4-change' [eth0]: new request (2 scripts)
+Nov 22 17:33:03 localhost nm-dispatcher: req:1 'dhcp4-change' [eth0]: start running ordered scripts...
+Nov 22 17:45:56 localhost su: FAILED SU (to root) ai on pts/0
+Nov 22 17:46:01 localhost su: (to root) ai on pts/0
+
+```
+
+##### `cut` コマンド
+ファイルの各行から指定したフィールドを取り出す．`-c` オプションで，何文字目から取り出すかを指定する．
+
+書式:
+```
+cut [option] [ファイル名]
+```
+
+option:
+|オプション|説明|
+|----|----|
+|`-c 文字数`|取り出す文字位置を指定する|
+|`-d 区切り文字`|フィールドの区切り文字 (デリミタ) を指定する (デフォルトはタブ)|
+|`-f フィールド`|取り出すフィールドを指定する|
+
+```
+[ai@localhost chapter3]$ cat /etc/resolv.conf 
+# Generated by NetworkManager
+nameserver 192.168.122.1
+[ai@localhost chapter3]$ cut -c 5 /etc/resolv.conf
+n
+s
+[ai@localhost chapter3]$ cut -c 1-7 /etc/resolv.conf
+# Gener
+nameser
+```
+
+**デリミタ**: フィールド間を区切る文字
+
+##### `paste` コマンド
+1つ以上のファイルを読み込んで，行ごとに水平方向に連結する．連結するときの区切り文字は，デフォルトではタブになっている．
+
+書式:
+```
+paste [option] ファイル名1 ファイル名2 ...
+```
+
+option:
+|オプション|説明|
+|----|----|
+|`-d 区切り文字`|区切り文字 (デリミタ) を指定する|
+
+```
+[ai@localhost chapter3]$ cat sample1.txt
+aaaa
+bbbb
+[ai@localhost chapter3]$ cat sample2.txt
+AAAA
+BBBB
+[ai@localhost chapter3]$ paste -d ";" sample1.txt sample2.txt 
+aaaa;AAAA
+bbbb;BBBB
+```
+
+##### `tr` コマンド
+標準入力から読み込まれた文字列を変換したり，削除したりする．
+
+書式:
+```
+tr [option] [文字列1 [文字列2]]
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-d`|`[文字列1]` でマッチした文字列を削除する|
+|`-s`|連続するパターン文字列を1文字として処理する|
+
+|クラス|説明|
+|---|---|
+|`[:alpha:]`|英字|
+|`[:lower:]`|英小文字|
+|`[:upper:]`|英大文字|
+|`[:digit:]`|数字|
+|`[:alnum:]`|英数字|
+|`[:space:]`|スペース|
+
+```
+[ai@localhost chapter3]$ cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+[ai@localhost chapter3]$ cat /etc/hosts | tr 'a-z' 'A-Z'
+127.0.0.1   LOCALHOST LOCALHOST.LOCALDOMAIN LOCALHOST4 LOCALHOST4.LOCALDOMAIN4
+::1         LOCALHOST LOCALHOST.LOCALDOMAIN LOCALHOST6 LOCALHOST6.LOCALDOMAIN6
+```
+
+これは，次のようにクラスを用いて書くこともできる．
+```
+[ai@localhost chapter3]$ cat /etc/hosts | tr [:lower:] [:upper:]
+127.0.0.1   LOCALHOST LOCALHOST.LOCALDOMAIN LOCALHOST4 LOCALHOST4.LOCALDOMAIN4
+::1         LOCALHOST LOCALHOST.LOCALDOMAIN LOCALHOST6 LOCALHOST6.LOCALDOMAIN6
+```
+
+##### `sort` コマンド
+行単位でファイルの内容をソートする．デフォルトでは昇順にソートする．
+
+書式:
+```
+sort [option] [+開始位置 [-終了位置]] [ファイル名]
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-b`|行頭の空白は無視する|
+|`-f`|大文字小文字の区別を無視する|
+|`-r`|降順にソートする|
+|`-n`|数字を文字としてではなく数値として処理する|
+|`-k`|ソートの鍵の列の指定|
+
+```
+[ai@localhost chapter3]$ cat score
+yoshinori kawazu        85
+keiichi oka     70
+toru minemura   100
+[ai@localhost chapter3]$ sort -n -k 3 score
+keiichi oka     70
+yoshinori kawazu        85
+toru minemura   100
+```
+
+##### `split` コマンド
+- 指定されたサイズでファイルを分割する．
+- デフォルトでは，1000行ごとに複数ファイルに分割する．
+- 分割されたファイルには，ファイルの末尾に `aa`, `ab`, `ac`, ... が付加される．
+
+書式:
+```
+split [option] [入力ファイル名 [出力ファイル名]]
+```
+
