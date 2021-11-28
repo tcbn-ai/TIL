@@ -60,7 +60,7 @@ Linux をインストールするためには，少なくとも次の2つのパ�
 - **ブートローダ**
     - ハードディスクなどのストレージからOSを読み込んで起動するプログラム．
     - 代表的な Linux のブートローダは，GRUB．
-
+        - バージョン0.9x系のGRUB Legacyと，バージョン1.9x系のGRUB2がある．
 ### 2.2.1 GRUB のインストール
 GRUB の特徴
 
@@ -73,3 +73,370 @@ GRUB の特徴
 ```
 grub-install /dev/sda
 ```
+
+### 2.2.2 GRUB Legacy の設定
+GRUB Legacy の設定ファイルは，`/boot/grub/menu.lst` である．
+`/boot/grub/menu.lst` の設定パラメータ:
+|パラメータ|説明|
+|---|---|
+|`timeout`|メニューを表示している時間 (秒)|
+|`default`|デフォルトで起動するエントリの番号|
+|`title`|メニューに表示されるエントリ名|
+|`root`|ルートデバイスの指定|
+|`kernel`|起動するカーネルイメージファイルと起動オプションの指定|
+|`makeactive`|ルートパーティションをアクティブ化|
+|`chainloader`|指定されたセクタの読み込みと実行|
+|`hiddenmenu`|起動時に選択メニューを表示しない|
+
+
+<div style="page-break-before:always"></div>
+
+### 2.2.3 GRUB 2 の設定
+GRUB 2 の設定ファイルは，`/boot/grub2/grub.cfg` であるが，GRUB Legacy とは異なり，直接ファイルを編集することはしない．
+`/etc/default/grub` で設定を行い，`grub2-mkconfig` コマンドを実行すると，設定に基づき `/boot/grub2/grub.cfg` が生成される．
+
+`/etc/default/grub` の例:
+```
+[root@localhost default]# cat grub 
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="crashkernel=auto spectre_v2=retpoline rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet"
+GRUB_DISABLE_RECOVERY="true"
+```
+
+注意: `=` の前後にスペースを入れない．
+
+`/etc/default/grub` の主な設定パラメータ:
+|パラメータ|説明|
+|---|---|
+|`GRUB_TIMEOUT`|起動メニューがタイムアウトするまでの秒数|
+|`GRUB_DEFAULT`|起動メニューがタイムアウトしたときに，デフォルトOSとして選択されるエントリ <br> (saved: 保存された選択肢)|
+|`GRUB_CMDLINE_LINUX`|カーネルに渡される起動オプション|
+
+設定後は，`grub2-mkconfig` コマンドを使って，`boot/grub2/grub.cfg` を生成する．
+```
+[root@localhost default]# grub2-mkconfig -o /boot/grub2/grub.cfg 
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.10.0-1160.45.1.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-1160.45.1.el7.x86_64.img
+Found linux image: /boot/vmlinuz-3.10.0-1160.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-1160.el7.x86_64.img
+Found linux image: /boot/vmlinuz-0-rescue-5eeefb94cf964b18b1565579659d5df0
+Found initrd image: /boot/initramfs-0-rescue-5eeefb94cf964b18b1565579659d5df0.img
+done
+```
+
+<div style="page-break-before:always"></div>
+
+### 2.2.4 ブートオプションの指定
+ブードローダ起動時に，システムの動作を指定するためのブートオプションを指定できる．GRUB でブートオプションを指定するためには，起動時の画面で E キーを押す．
+すると，次のような画面が表示される．
+```
+grub append > ro root=/dev/VolGroup00/LogVol00 rhgb quiet
+```
+
+ここでキーボードからオプションを入力できるようになる．
+
+主なブートオプション:
+|パラメータ|説明|
+|---|---|
+|`root=デバイス`|ルートパーティションとしてマウントするデバイス|
+|`nousb`|USBデバイスを使用しない|
+|`single`|シングルユーザモードで起動する|
+|`1` ~ `5`|指定したランレベルで起動する|
+
+注意: `/` ディレクトリが格納されたパーティションをルートパーティションという．
+
+シングルユーザモードで起動したい場合は，ブートオプションとして `single` を追加する．
+
+```
+grub append > ro root=/dev/VolGroup00/LogVol00 rhgb quiet single
+```
+
+入力後に Enter を押すと，指定したパラメータが適用されてシステムが起動する．
+
+<div style="page-break-before:always"></div>
+
+## 2.3 共有ライブラリ管理
+- **ライブラリ**
+    - よく使われる機能をまとめ，他のプログラムから利用できるようにしたもの．
+    - **静的ライブラリ**
+        - プログラムの作成時にその実行ファイル内に組み込まれるライブラリ
+    - **共有ライブラリ**
+        - プログラムの実行時にロードされ，複数のプログラム間で共有されるライブラリ
+
+### 2.3.1 スタティックリンクとダイナミックリンク
+- **リンク**
+    - プログラム本体からライブラリの機能を利用
+    - **スタティックリンク**
+        - コンパイルをする時点で，コンパイラがライブラリを実行ファイルに埋め込む．
+        - 実行ファイル内にライブラリの機能が埋め込まれるということは，よく使われるライブラリの機能が，さまざまな実行ファイルに重複して入ってしまうことになる．
+    - **ダイナミックリンク**
+        - 実行ファイルへライブラリを埋め込むことはせず，実行時にライブラリの機能を呼び出す方法．
+- **共有ライブラリ**
+    - ダイナミックリンクによって呼び出されるライブラリ．
+    - 通常，`/lib` あるいは `/usr/lib` ディレクトリに配置されている．
+    - 共有ライブラリは，`lib*.so*` という名前が付けられている．
+    - 共有ライブラリは通常，`/lib` あるいは `/usr/lib` ディレクトリに配置されている．
+
+<div style="page-break-before:always"></div>
+
+### 2.3.2 必要な共有ライブラリの確認
+実行ファイルが必要としている共有ライブラリは，`ldd` コマンドで調べることができる．
+
+`cat` コマンドが必要とする共有ライブラリ:
+```
+[root@localhost ~]# ldd /bin/cat
+        linux-vdso.so.1 =>  (0x00007ffe38b88000)
+        libc.so.6 => /lib64/libc.so.6 (0x00007f6b7b21a000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f6b7b5e8000)
+```
+
+- プログラムの実行時には，`ld.so` リンカおよびローダが実行時にリンクする共有ライブラリを検索して，必要なライブラリをロードする．
+    - `/lib`, `/usr/lib` ディレクトリ以外のライブラリも検索する場合は，そのリストを `/etc/ld.so.conf` ファイルに記述しておく．
+        - `/etc/ld.so.conf.d` ディレクトリ以下に複数の設定ファイルを配置し，`/etc/ld.so.conf` でそれらを読み込んでいる場合もある．
+    - プログラムを実行する度にこれらのディレクトリを検索するのは非効率なので，実際にはバイナリのキャッシュファイルである `/etc/ld.so.cache` が参照される．
+    - 共有ライブラリを変更した場合は，`ldconfig` コマンドを実行してキャッシュを更新する必要がある．
+        - `ldconfig` コマンドは，`/etc/ld.so.conf` ファイルに基づき，`/etc/ld.so.cache` を再構築する．
+    - その他のディレクトリも検索対象に加えたい場合は，環境変数 `LD_LIBRARY_PATH` にディレクトリリストを記述する．
+    - `ld.so` リンカが共有ライブラリを検索する順序:
+        1. 環境変数 `LD_LIBRARY_PATH`
+        1. キャッシュファイル `/etc/ld.so.cache`
+        1. デフォルトのパス `/lib`, `usr/lib`
+
+<div style="page-break-before:always"></div>
+
+## 2.4 Debian パッケージの管理
+- **パッケージ**
+    - 実行プログラム，設定ファイル，ドキュメントなどを1つのファイルにまとめたもの．
+    - パッケージ管理の方法はディストリビューションによって異なる．
+        - Debian 形式
+            - Debian GNU/Linux などで採用．
+        - RPM 形式
+            - Red Hat Enterprise Linux などで採用．
+
+### 2.4.1 パッケージ管理とは
+- **パッケージ管理システム**
+    - パッケージのインストールやアンインストール，アップデート作業において，どのようなパッケージがどこにインストールされているのかを管理したり，パッケージ間の競合を回避したりする仕組みを提供．
+    - インストール，アンインストール，アップデート作業を容易にする．
+    - パッケージ管理システムは，依存関係や競合関係を監視し，依存関係や競合関係を損なうようなインストールやアンインストールに警告を発する．
+
+- **パッケージの依存関係**
+    - あるパッケージが別のパッケージに依存しているというような関係．
+
+- **パッケージの競合関係**
+    - パッケージ間で互いにぶつかり合うこと．
+
+- Linux のパッケージ管理
+    - **Debian 形式**
+        - Debian 系のディストリビューションで利用されている．
+        - パッケージ管理には，`dpkg` コマンドや APT ツールなどが使われる．
+    - **RPM 形式**
+        - Red Hat 系ディストリビューションを中心に利用されている．
+        - パッケージ管理には，`rpm` コマンドが使われる．
+    - Debian 形式と RPM 形式には互換性がない．
+    - パッケージ管理システムを使って，コンパイル済の状態で配布されるバイナリパッケージを扱う場合，動作環境に依存するようになる．
+        - ディストリビューションやバージョン，CPU アーキテクチャなどの動作環境が一致したパッケージを選択する必要がある．
+
+<div style="page-break-before:always"></div>
+
+### 2.4.2 `dpkg` コマンドを用いたパッケージ管理
+Debian/GNU Linux や Ubuntu などの Debian 系ディストリビューションでは，パッケージ管理方法に Debian 形式 (deb 形式) が使われる．
+
+Debian 形式のパッケージファイル名:
+```
+tree_1.6.0-1_i386.deb
+
+tree: パッケージの名称
+1.6.0: パッケージ番号
+1: Debian リビジョン番号
+i386: アーキテクチャ
+deb: 拡張子
+```
+
+Debian 形式のパッケージを扱うには，`dpkg` コマンドを使う．
+
+書式:
+```
+dpkg [option] action
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-E`|すでに同バージョンがインストールされていればインストールしない|
+|`-G`|すでに新バージョンがインストールされていればインストールしない|
+|`-R` <br> `--recursive`|ディレクトリ内を再帰的に処理する|
+
+action:
+|アクション|説明|
+|---|---|
+|`-i パッケージファイル名` <br> `--install`|パッケージをインストールする|
+|`-r パッケージ名` <br> `--remove`|設定ファイルを残してパッケージをアンインストールする|
+|`-P パッケージ名` <br> `--purge`|設定ファイルも含め，完全にパッケージをアンインストールする|
+|`-l 検索パターン` <br> `--list`|インストール済パッケージを検索して表示する|
+|`-S ファイル名検索パターン` <br> `--search`|指定したファイルがどのパッケージからインストールされたのか，表示する <br> パターンにはワイルドカードが使える|
+|`-L パッケージ名` <br> `--listfiles`|指定パッケージからインストールされたファイルを，一覧表示する|
+|`-s パッケージ名` <br> `--status`|パッケージの情報を表示する|
+|`--configure パッケージ名`|展開されたパッケージを構成する|
+|`--unpack パッケージ名`|パッケージを展開する (インストールはしない)|
+
+パッケージのインストール:
+```
+ai@ai-Standard-PC-Q35-ICH9-2009:~/Downloads$ ls
+discord-0.0.16.deb
+ai@ai-Standard-PC-Q35-ICH9-2009:~/Downloads$ sudo dpkg -i discord-0.0.16.deb
+```
+
+パッケージのアンインストール:
+```
+ai@ai-Standard-PC-Q35-ICH9-2009:~/Downloads$ sudo dpkg --purge discord
+(Reading database ... 164852 files and directories currently installed.)
+Removing discord (0.0.16) ...
+Processing triggers for gnome-menus (3.36.0-1ubuntu1) ...
+Processing triggers for desktop-file-utils (0.24-1ubuntu3) ...
+Processing triggers for mime-support (3.64ubuntu1) ...
+```
+
+インストール済パッケージの表示:
+```
+ai@ai-Standard-PC-Q35-ICH9-2009:~/Downloads$ sudo dpkg -l vim
+Desired=Unknown/Install/Remove/Purge/Hold
+| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
+||/ Name           Version      Architecture Description
++++-==============-============-============-=================================
+un  vim            <none>       <none>       (no description available)
+```
+
+Debian パッケージのインストールでは，インストール時に対話的な設定が行われることがある．
+`dpkg-reconfigure` コマンドを使うと，いつでも対話的な設定を実施することができる．
+
+<div style="page-break-before:always"></div>
+
+### 2.4.3 `apt-get` コマンド
+- `apt-get`
+    - APT (Advanced Packaging Tool) というパッケージ管理ツールに含まれるコマンド
+    - 依存関係を調整しながらパッケージのインストール，アップグレード，アンインストールを行う．
+    - インターネット経由で最新のパッケージの入手からインストールと依存関係の解決までできる．
+
+書式:
+```
+apt-get [option] サブコマンド パッケージ名
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-d`|ファイルをダウンロードする (インストールはしない)|
+|`-s`|システムを変更せず，動作をシミュレートする|
+
+
+サブコマンド:
+|サブコマンド|説明|
+|---|---|
+|`clean`|過去に取得し保持していたパッケージファイルを削除する|
+|`dist-upgrade`|システムを最新にアップグレードする|
+|`install`|パッケージをインストールまたはアップグレードする|
+|`remove`|パッケージをアンインストールする|
+|`update`|パッケージデータベースを更新する|
+|`upgrade`|システムの全パッケージのうち，他のパッケージを削除しないものをアップグレードする|
+
+`apt-get` コマンドでパッケージ管理を始めるには，まず `/etc/apt/sources.list` にパッケージを管理しているサイトの URL を記述する．
+
+書式:
+```
+deb http://jp.archive.ubuntu.com/ubuntu/ focal main restricted
+
+deb: deb (deb パッケージを取得) または deb-src (ソースを取得)
+http://jp.archive.ubuntu.com/ubuntu/: 取得先のURI
+focal: バージョン名
+main restricted:
+    main: 公式にサポートされるソフトウェア
+    universe: コミュニティによってメンテナンスされるソフトウェア
+    restricted: デバイス用のプロプライエタリなドライバ
+    multiverse: 著作権もしくは法的な問題によって制限されたソフトウェア
+    contrib: フリーではない依存関係のあるソフトウェア
+    non-free: 利用と改変再配布に制限のあるソフトウェア
+```
+
+次に，設定したサイトに接続して最新のパッケージ情報を取得する．
+```
+ai@ai-Standard-PC-Q35-ICH9-2009:~$ sudo apt-get update
+```
+
+パッケージをインストールするには，`apt-get install` コマンドを実行する．
+
+```
+ai@ai-Standard-PC-Q35-ICH9-2009:~$ sudo apt-get install vim
+```
+
+これでパッケージがダウンロードされ，インストールされる．
+取得したパッケージは，`/var/cache/apt/archives` 以下に格納される．
+もしインストールしたいパッケージに必要なパッケージがインストールされていなければ，必要なパッケージが自動的にダウンロードされ，インストールされる．
+
+パッケージをアンインストールするには，`apt-get remove` コマンドを実行する．
+
+システムを一括して最新の状態にアップグレードするには，`apt-get dist-upgrade` コマンドを実行する．
+このコマンドは，バージョンアップの際，重要度の高いパッケージをインストールするために既存のパッケージを削除することがある．
+削除を伴わないパッケージのアップグレードを実行するには，`apt-get upgrade` コマンドを実行する．このコマンドは，システムの全パッケージのうち，他のパッケージを削除しないもののみをアップグレードする．
+
+参考:
+Ubuntu では，`do-release-upgrade` コマンドを使うと，メジャーバージョンの異なる大きなアップグレードをかけることができる．
+
+<div style="page-break-before:always"></div>
+
+### 2.4.4 `apt-cache` コマンド
+`apt-cache` は，パッケージ情報を照会・検索するコマンド．照会・検索する対象はインストールされていなくても問題ない．
+
+書式:
+```
+apt-cache サブコマンド
+```
+
+サブコマンド:
+|サブコマンド|説明|
+|---|---|
+|`search キーワード`|指定したキーワードを含むパッケージを検索する|
+|`show パッケージ名`|パッケージについての一般的な情報を表示する|
+|`showpkg パッケージ名`|パッケージについての詳細な情報を表示する|
+|`depends パッケージ名`|指定したパッケージの依存関係情報を表示する|
+
+`apt-get` と `apt-cache` を合わせたようなコマンドが `apt` である．`apt` コマンドの利用が推奨されている．
+
+書式:
+```
+apt [option] サブコマンド
+```
+
+option:
+|オプション|説明|
+|---|---|
+|`-c 設定ファイル`|設定ファイルを指定する <br> デフォルトは `/etc/apt/sources.list`|
+|`-d`|パッケージのダウンロードのみ行う <br> `install` とともに|
+|`-y`|問い合わせに対して自動的に yes と回答する|
+|`--no-install-recommends`|必須ではない推奨パッケージはインストールしない|
+|`--install-suggests`|推奨パッケージもインストールする|
+|`--reinstall`|インストール済のパッケージの再インストールも許可する|
+
+主なサブコマンド:
+|サブコマンド|説明|
+|---|---|
+|`update`|パッケージリストを更新する|
+|`install パッケージ名`|パッケージをインストールする|
+|`remove パッケージ名`|パッケージを削除する (設定ファイルは残す)|
+|`purge パッケージ名`|パッケージを完全に削除する|
+|`upgrade パッケージ名`|システムをアップグレードする (ファイル削除は伴わない)
+|`full-upgrade`|システムのメジャーバージョンを最新にアップグレードする|
+|`show パッケージ名`|指定したパッケージに関する情報を表示する|
+|`list`|パッケージのリストを表示する|
+|`list --installed`|インストールされたパッケージを一覧表示する|
+|`list --upgradable`|アップグレード可能なパッケージを表示する|
+|`search キーワード`|指定したキーワードでパッケージ情報を全文検索する|
+|`depends パッケージ名`|パッケージの依存関係を表示する|
+|`autoremove`|必要とされていないパッケージを自動的に削除する|
+
+
