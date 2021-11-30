@@ -440,3 +440,173 @@ option:
 |`autoremove`|必要とされていないパッケージを自動的に削除する|
 
 
+<div style="page-break-before:always"></div>
+
+## 2.5 RPM パッケージの管理
+RPM は Red Hat 社が開発したパッケージ管理システム．
+
+### 2.5.1 RPM パッケージ
+RPM パッケージのファイル名は以下のようになっている．
+
+書式:
+```
+bash-4.2.46-30.el7.x86_64.rpm
+
+bash: パッケージの名称
+4.2.46: バージョン番号
+30.el7: リリース番号
+x86_64: アーキテクチャ
+rpm: 拡張子
+```
+
+### 2.5.2 `rpm` コマンドの利用
+`rpm` コマンドを使って RPM パッケージをインストールしたり，削除したり，アップデートしたりできる．
+`rpm` コマンドにはいくつかのモードがあり，モードごとに多彩なオプションが用意されている．
+
+- `rpm` コマンドの主なモード
+    - インストール/アップグレードモード
+    - アンインストールモード
+    - 照会モード
+
+インストール/アップグレードモード:
+|オプション|説明|
+|---|---|
+|`-i パッケージ名` <br> `--install`|パッケージをインストールする|
+|`-U パッケージファイル名` <br> `--upgrade`|パッケージをアップグレードする (なければインストールする)|
+|`-F パッケージファイル名` <br> `--freshen`|パッケージがインストールされていればアップグレードする|
+
+インストール/アップグレードモードで併用するオプション:
+|オプション|説明|
+|---|---|
+|`-v`|詳細な情報を表示する|
+|`-h`, `--hash`|進行状況を `#` で表示する|
+|`--nodeps`|依存関係を無視してインストールする|
+|`--force`|既存のファイルを新しいものに置き換える|
+|`--test`|実際にはインストールせずテストを実施する|
+
+アンインストールモード:
+|オプション|説明|
+|---|---|
+|`-e パッケージ名` <br> `--erase`|パッケージをアンインストールする|
+
+アンインストールモードで併用するオプション:
+|オプション|説明|
+|---|---|
+|`--nodeps`|依存関係を無視してアンインストールする|
+
+照会モード:
+|オプション|説明|
+|---|---|
+|`-q パッケージ名`|指定したパッケージがインストールされているか照会する|
+
+照会モードで併用するオプション:
+|オプション|説明|
+|---|---|
+|`-a`, `--all`|インストール済のすべてのパッケージを表示する|
+|`-f ファイル名`|指定したファイルを含むパッケージ名を表示する|
+|`-p パッケージファイル名`|対象としてパッケージファイルを指定する|
+|`-c`, `--configfiles`|設定ファイルのみを表示する|
+|`-d`, `--docfiles`|ドキュメントのみを表示する|
+|`-i`, `--info`|指定したパッケージの情報を表示する|
+|`-l`, `--list`|指定したパッケージに含まれるファイルを表示する|
+|`-R`, `--requires`|指定したパッケージが依存しているファイルなどを表示する|
+|`--changelog`|変更履歴を表示する|
+
+##### パッケージのインストール
+- `-i` オプションを使う．
+    - 経過を分かりやすくするために，`-v` オプションと `-h` オプションも併用するのが一般的．
+
+##### パッケージのアップグレード
+- `-U` オプションまたは `-F` オプションを使う．
+    - 純粋にアップグレードのみを行うのが `-F` オプション．
+
+例 (`~/rpms` ディレクトリ以下にある RPM ファイルをすべてアップグレード):
+```
+rpm -Fvh ~/rpms/*.rpm
+``` 
+
+##### パッケージのアンインストール
+- `-e` オプションを指定する．
+    - `--nodeps` オプションを使うと，依存関係を無視してアンインストールする．
+
+##### パッケージ情報の照会
+- `-q` オプションを指定する．
+
+例:
+```
+[root@localhost ~]# rpm -qa | grep vim
+vim-minimal-7.4.629-8.el7_9.x86_64
+```
+
+- `-qi`
+    - 各パッケージの情報を表示する
+- `-qip`
+    - インストール前のパッケージ情報を表示する
+- `-qf`
+    - 指定したファイルがインストールされたパッケージを表示する
+        ```
+        [root@localhost ~]# rpm -qf /bin/bash
+        bash-4.2.46-34.el7.x86_64
+        ```
+- `-qlp`
+    - パッケージからどのようなファイルがインストールされるのか調べる
+- `-qR`
+    - パッケージの依存関係を調べる
+
+##### パッケージの署名確認
+- `--chacksig` または `-K` オプションを使う．
+
+##### パッケージの展開
+RPM パッケージをインストールせず，その内容を展開するには，`rpm2cpio` コマンドを使う．
+使用時は，アーカイブを展開する `cpio` コマンドと組み合わせて使う．
+
+例:
+```
+rpm2cpio tree-1.6.0-10.el7.x86_64.rpm | cpio -id
+```
+
+<div style="page-break-before:always"></div>
+
+### 2.5.3 YUM
+CentOS や Fedora では，APT ツールに相当するものとして **YUM** (Yellow dog Updater, Modified) がある．
+YUM の設定は，`/etc/yum.conf` と `/etc/yum.repos.d` ディレクトリ以下のファイルで行う．
+
+`/etc/yum.conf`:
+```
+[root@localhost etc]# cat yum.conf 
+[main]
+cachedir=/var/cache/yum/$basearch/$releasever
+keepcache=0
+debuglevel=2
+logfile=/var/log/yum.log
+exactarch=1
+obsoletes=1
+gpgcheck=1
+plugins=1
+installonly_limit=5
+bugtracker_url=http://bugs.centos.org/set_project.php?project_id=23&ref=http://bugs.centos.org/bug_report_page.php?category=yum
+distroverpkg=centos-release
+
+
+#  This is the default, if you make this bigger yum won't see if the metadata
+# is newer on the remote and so you'll "gain" the bandwidth of not having to
+# download the new metadata and "pay" for it by yum not having correct
+# information.
+#  It is esp. important, to have correct metadata, for distributions like
+# Fedora which don't keep old packages around. If you don't like this checking
+# interupting your command line usage, it's much better to have something
+# manually check the metadata once an hour (yum-updatesd will do this).
+# metadata_expire=90m
+
+# PUT YOUR REPOS HERE OR IN separate files named file.repo
+# in /etc/yum.repos.d
+```
+
+`/etc/yum.repos.d` ディレクトリ以下には，リポジトリ情報の設定ファイルが配置される．パッケージの入手先を増やしたい場合は，リポジトリ情報の設定ファイルを追加する．
+
+```
+[root@localhost etc]# ls /etc/yum.repos.d/
+CentOS-Base.repo       CentOS-fasttrack.repo  CentOS-Vault.repo
+CentOS-CR.repo         CentOS-Media.repo      CentOS-x86_64-kernel.repo
+CentOS-Debuginfo.repo  CentOS-Sources.repo
+```

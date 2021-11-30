@@ -4,6 +4,6 @@ services:
         build: .    # 同階層のdockerfileからビルドする
         command: sleep infinity
         volumes: 
-            - ../:/code  # 上階層のディレクトリをDocker Container上のworkdirにマウント
+            - ../:/home/user/code  # 上階層のディレクトリをDocker Container上のworkdirにマウント
         environment: 
             SHELL: /bin/bash
