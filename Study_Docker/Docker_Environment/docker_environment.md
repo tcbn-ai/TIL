@@ -410,9 +410,76 @@ jupyter
 ### 補足 (GPU 環境で pytorch 等を使う場合, Ubuntu)
 ここでは，Ubuntu 20 に Docker を入れ，コンテナで GPU を認識させる方法を簡単にまとめる．
 
+1. NVIDIA Driver のインストール
 1. Docker Engine のインストール
 1. Nvidia Container Toolkit の設定
 1. dockerfile の作成
+1. docker-compose.yml の作成
+
+---
+### NVIDIA Driver のインストール
+
+たぶんここが一番ハマる箇所だと思う (やった記録を残すの忘れた)．
+
+参考: 
+- [Ubuntu 20.04セットアップ](https://qiita.com/kenji-miyake/items/06b8c3807bef0ba5c451)
+- [ubuntuにCUDA、nvidiaドライバをインストールするメモ](https://qiita.com/porizou1/items/74d8264d6381ee2941bd)
+
+(1) 現状入っている CUDA, NVIDIA Driver の確認:
+
+```
+dpkg -l | grep nvidia
+dpkg -l | grep cuda
+```
+
+---
+
+(2) 現状入っている CUDA, NVIDIA Driver の削除:
+```
+sudo apt-get --purge remove nvidia-*
+sudo apt-get --purge remove cuda-*
+```
+
+(3) NVIDIA Driver のインストール:
+```bash
+ubuntu-drivers devices  # 推奨ドライバの確認
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt install nvidia-driver-470  # e.g. 460をインストールする場合
+sudo reboot
+```
+
+(4) 確認: `nvidia-smi` コマンドを実行する．
+
+---
+
+```bash
+tcbn@tcbn-V530-15ICR:~$ nvidia-smi
+Wed Dec  1 18:33:54 2021       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.82.00    Driver Version: 470.82.00    CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ...  Off  | 00000000:01:00.0  On |                  N/A |
+| 30%   43C    P0    N/A /  75W |    319MiB /  4031MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A       985      G   /usr/lib/xorg/Xorg                 35MiB |
+|    0   N/A  N/A      3792      G   /usr/lib/xorg/Xorg                122MiB |
+|    0   N/A  N/A      3931      G   /usr/bin/gnome-shell               32MiB |
+|    0   N/A  N/A      6247      G   ...AAAAAAAAA= --shared-files       39MiB |
+|    0   N/A  N/A      6942      G   ...AAAAAAAAA= --shared-files       78MiB |
++-----------------------------------------------------------------------------+
+```
 
 ---
 #### Docker Engine のインストール
@@ -487,21 +554,37 @@ sudo systemctl restart docker
 sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
 ```
 
-実行して
+実行して次ページのような出力が得られれば問題なく動く．
+
+---
 ```
-Wed Dec  1 08:44:02 2021       
+Wed Dec  1 09:34:41 2021       
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 470.82.00    Driver Version: 470.82.00    CUDA Version: 11.4     |
 |-------------------------------+----------------------+----------------------+
-(以下略)
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ...  Off  | 00000000:01:00.0  On |                  N/A |
+| 30%   42C    P0    N/A /  75W |    316MiB /  4031MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
++-----------------------------------------------------------------------------+
 ```
 
-のような出力が得られれば問題なく動く．
+
 
 ---
 
 ### dockerfile の作成
-イメージファイルを，
+例えば，イメージファイルを，
 ```dockerfile
 FROM nvidia/cuda:11.0.3-devel-ubuntu20.04
 ```
@@ -509,6 +592,46 @@ FROM nvidia/cuda:11.0.3-devel-ubuntu20.04
 
 これでビルドして，GPU を使えるか確認する．
 
+---
+```
+user@5ee05258584f:~/code$ nvcc -V
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2020 NVIDIA Corporation
+Built on Wed_Jul_22_19:09:09_PDT_2020
+Cuda compilation tools, release 11.0, V11.0.221
+Build cuda_11.0_bu.TC445_37.28845127_0
 ```
 
+
+```
+user@5ee05258584f:~/code$ python3
+Python 3.8.10 (default, Jun  2 2021, 10:49:15) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch
+>>> print(torch.cuda.is_available())
+True
+```
+
+---
+
+### docker-compose.yml の作成
+
+```yml
+version: "3"
+services: 
+    python: # ここの名前とdevcontainer.jsonの"service"を一致させる
+        build: .    # 同階層のdockerfileからビルドする
+        command: >
+            sh -c "nvidia-smi && sleep infinity"
+        volumes: 
+            - ../:/home/user/code  # 上階層のディレクトリをDocker Container上のworkdirにマウント
+        environment: 
+            SHELL: /bin/bash
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          capabilities: [gpu]
 ```
