@@ -12,3 +12,4 @@ reference/
 .Rhistory
 .local/
 .config/
+fig_docker/
