@@ -251,7 +251,7 @@ docker run --rm -d -p 8787:8787 -e PASSWORD=[yourpasswordhere] -v [mountdir]:/ho
 
 ---
 
-ブラウザで R を実行できる．
+ブラウザ上で R を実行できる．
 
 ![center height:500](./fig_docker/rocker.png)
 
