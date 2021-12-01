@@ -388,7 +388,26 @@ $\rightarrow$ エラーがなければコンテナ内に入ることができる
 
 ---
 
-### おまけ (GPU 環境で pytorch 等を使う場合, Ubuntu)
+### requirements.txt
+`pip install` するパッケージを記述したファイル．例えば...
+
+```txt
+pylint
+numpy
+scipy
+sympy
+matplotlib
+statsmodels
+sklearn
+pandas
+networkx
+ipykernel
+jupyter
+```
+
+---
+
+### 補足 (GPU 環境で pytorch 等を使う場合, Ubuntu)
 ここでは，Ubuntu 20 に Docker を入れ，コンテナで GPU を認識させる方法を簡単にまとめる．
 
 1. Docker Engine のインストール
@@ -478,3 +497,18 @@ Wed Dec  1 08:44:02 2021
 ```
 
 のような出力が得られれば問題なく動く．
+
+---
+
+### dockerfile の作成
+イメージファイルを，
+```dockerfile
+FROM nvidia/cuda:11.0.3-devel-ubuntu20.04
+```
+にする．あとは 22 - 24 ページと同じ．
+
+これでビルドして，GPU を使えるか確認する．
+
+```
+
+```
