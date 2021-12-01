@@ -470,8 +470,9 @@ sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
 
 実行して
 ```
+Wed Dec  1 08:44:02 2021       
 +-----------------------------------------------------------------------------+
-| NVIDIA-SMI 450.51.06    Driver Version: 450.51.06    CUDA Version: 11.0     |
+| NVIDIA-SMI 470.82.00    Driver Version: 470.82.00    CUDA Version: 11.4     |
 |-------------------------------+----------------------+----------------------+
 (以下略)
 ```
