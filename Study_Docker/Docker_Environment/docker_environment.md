@@ -2,7 +2,7 @@
 marp: true
 theme: gaia
 header: ''
-footer: 'Kosuke Toda ([@SeeKT](https://github.com/SeeKT))'
+footer: '[@SeeKT](https://github.com/SeeKT)'
 
 size: 16:9
 ---
