@@ -237,7 +237,7 @@ rm: イメージファイルを削除する
 ---
 
 ## R 環境
-[rocker/rstudio](https://hub.docker.com/r/rocker/rstudio) を使う．
+[rocker](https://hub.docker.com/r/rocker) を使う．
 
 `mountdir` をマウントしてコンテナに入るには，以下のコマンドを実行する．
 
@@ -407,6 +407,17 @@ jupyter
 
 ---
 
+## まとめ
+
+- Docker Container を使った環境構築
+    - 再現性
+- Docker Desktop のインストール
+- Docker Container の例
+    - R
+    - Python
+
+---
+
 ### 補足 (GPU 環境で pytorch 等を使う場合, Ubuntu)
 ここでは，Ubuntu 20 に Docker を入れ，コンテナで GPU を認識させる方法を簡単にまとめる．
 
@@ -445,7 +456,7 @@ sudo apt-get --purge remove cuda-*
 ubuntu-drivers devices  # 推奨ドライバの確認
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt update
-sudo apt install nvidia-driver-470  # e.g. 460をインストールする場合
+sudo apt install nvidia-driver-470  # e.g. 470をインストールする場合
 sudo reboot
 ```
 
